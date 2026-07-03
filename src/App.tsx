@@ -1,6 +1,5 @@
 import { GridBackground } from './components/ui/GridBackground';
 import { Hero } from './components/Hero';
-import { AskStrip } from './components/AskStrip';
 import { BossBotSpotlight } from './components/BossBotSpotlight';
 import { Philosophy } from './components/Philosophy';
 import { System } from './components/System';
@@ -15,7 +14,6 @@ import { Bob } from './pages/Bob';
 import { Halcyon } from './pages/Halcyon';
 import { Research } from './pages/Research';
 import { Iris } from './pages/Iris';
-import { Ask } from './pages/Ask';
 import { BossBot } from './pages/BossBot';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -29,7 +27,6 @@ function Home({ vibe, setVibe, onTriggerRipple }: {
         <main className={`pt-20 transition-all duration-500 ${vibe === 'brainrot' ? 'intense-glitter' : ''}`}>
             <Hero vibe={vibe} setVibe={setVibe} onTriggerRipple={onTriggerRipple} />
             <BossBotSpotlight vibe={vibe} />
-            <AskStrip vibe={vibe} />
             <Projects vibe={vibe} />
             <Philosophy vibe={vibe} />
             <System vibe={vibe} />
@@ -89,7 +86,6 @@ export default function App() {
                 <Route path="/projects/iris" element={<Iris />} />
                 <Route path="/projects/bossbot" element={<BossBot />} />
                 <Route path="/research" element={<Research vibe={vibe} setVibe={setVibe} />} />
-                <Route path="/ask" element={<Ask />} />
             </Routes>
 
             <footer className="py-12 text-center border-t border-violet/10 bg-void/80 backdrop-blur-md relative z-10 space-y-6">

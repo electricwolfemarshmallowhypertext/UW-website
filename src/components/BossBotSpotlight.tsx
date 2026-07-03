@@ -1,10 +1,8 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Briefcase, Lightbulb, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Briefcase, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export function BossBotSpotlight({ vibe }: { vibe: 'tech' | 'normal' | 'brainrot' }) {
-    const prompt = encodeURIComponent('What problem is BossBot solving for freelancers and job seekers?');
-
     const bullets = vibe === 'brainrot'
         ? [
             'DO THE WORK AND MANAGE THE WORK WITHOUT TWEAKING.',
@@ -67,13 +65,6 @@ export function BossBotSpotlight({ vibe }: { vibe: 'tech' | 'normal' | 'brainrot
                             >
                                 View Project
                                 <ArrowRight size={14} strokeWidth={1.5} />
-                            </Link>
-                            <Link
-                                to={`/ask?q=${prompt}`}
-                                className={`inline-flex items-center gap-3 px-5 py-3 border text-[11px] tracking-[0.25em] uppercase transition-all ${vibe === 'brainrot' ? 'border-violet-neon text-white hover:bg-violet-neon hover:text-void font-black' : 'border-violet/20 text-ethereal/70 hover:border-violet/40 hover:text-ethereal'}`}
-                            >
-                                Ask The Site
-                                <Lightbulb size={14} strokeWidth={1.5} />
                             </Link>
                         </div>
                     </div>
