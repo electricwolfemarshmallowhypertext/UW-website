@@ -1,4 +1,4 @@
-import { Shield, Database, Layers, Network } from 'lucide-react';
+import { ShieldCheck, Palette, Rocket } from 'lucide-react';
 import { Section } from './ui/Section';
 
 const SystemCard = ({ icon: Icon, title, points, vibe }: { icon: any, title: string, points: string[], vibe: 'tech' | 'normal' | 'brainrot' }) => (
@@ -36,76 +36,60 @@ export const System = ({ vibe }: { vibe: 'tech' | 'normal' | 'brainrot' }) => {
 
             <div className="text-center mb-16 space-y-4">
                 <h2 className={`text-sm font-bold tracking-[0.3em] uppercase transition-colors ${vibe === 'brainrot' ? 'text-white animate-bounce' : 'text-violet'}`}>
-                    {vibe === 'brainrot' ? "CURRENT_BRAINROT_MAXING" : "Current Implementation"}
+                    {vibe === 'brainrot' ? "CURRENT_UNICORN_MAXING" : "How We're Built"}
                 </h2>
                 <h3 className={`text-4xl md:text-6xl font-black tracking-tighter transition-all ${vibe === 'brainrot' ? 'text-rainbow scale-125 drop-shadow-[0_0_50px_rgba(255,0,247,0.8)]' : 'text-white'}`}>
-                    PROJECT <span className={vibe === 'brainrot' ? 'text-white' : 'text-transparent bg-clip-text bg-gradient-to-r from-violet to-ethereal'}>{vibe === 'brainrot' ? "GYATT" : "STEVE"}</span>
+                    THREE <span className={vibe === 'brainrot' ? 'text-white' : 'text-transparent bg-clip-text bg-gradient-to-r from-violet to-ethereal'}>{vibe === 'brainrot' ? "HORNS" : "ARMS"}</span>
                 </h3>
                 <p className={`font-mono transition-colors ${vibe === 'brainrot' ? 'text-white font-black text-xl animate-glitch' : 'text-ethereal/50'}`}>
                     {vibe === 'brainrot'
-                        ? "SKIBIDI STATELESS VECTOR ENTITY // BRAINROT V.69.4.20"
-                        : "Stateful Tool-Enabled Vector Entity // Runtime Version 0.9.4"
+                        ? "ONE UNICORN. THREE HORNS. INFINITE GLITTER SUPPLY."
+                        : "Ethical AI Lab // Creative Studio // Applied Incubator"
                     }
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <SystemCard
-                    icon={Shield}
-                    title={vibe === 'brainrot' ? "ABSOLUTE_AURA" : "Authoritative State"}
+                    icon={ShieldCheck}
+                    title={vibe === 'brainrot' ? "GLITTER_GOVERNANCE" : "Ethical AI Lab"}
                     vibe={vibe}
                     points={vibe === 'brainrot' ? [
-                        "DETERMINISTIC GYATT.",
-                        "NO MID SLOP ALLOWED.",
-                        "SCHEMA-RIZZ ACTIVE.",
-                        "COMMIT OR GET MOGGED."
+                        "AI GOVERNANCE, BUT MAKE IT SPARKLE.",
+                        "EVIDENCE-FIRST OR IT DIDN'T HAPPEN.",
+                        "HUMANS KEEP THE KEYS. NO CAP.",
                     ] : [
-                        "Explicit state transitions.",
-                        "Gated memory writes.",
-                        "Schema-constrained execution.",
-                        "Zero silent mutation."
+                        "AI governance research and evidence-first reasoning architectures.",
+                        "Scientific workflows and evaluation systems.",
+                        "Autonomous agents with human oversight, not autopilot.",
                     ]}
                 />
                 <SystemCard
-                    icon={Database}
-                    title={vibe === 'brainrot' ? "RIZZ_VAULT" : "Stratified Memory"}
+                    icon={Palette}
+                    title={vibe === 'brainrot' ? "VIBES DEPARTMENT" : "Creative Studio"}
                     vibe={vibe}
                     points={vibe === 'brainrot' ? [
-                        "CONTEXT MAXING 👹",
-                        "MEMORY WITH RIZZ.",
-                        "VECTOR ISOLATION W."
+                        "GAMES, SATIRE, AND UNHINGED WORLDBUILDING.",
+                        "BRAND VIBES SO STRONG THEY'RE LOAD-BEARING.",
+                        "HARD IDEAS MADE STUPID LEGIBLE. 🦄",
                     ] : [
-                        "Ephemeral behavioral context.",
-                        "Committed factual long-term store.",
-                        "Semantic vs. Tonal vector isolation."
+                        "Games, satire, illustration, and brand worlds.",
+                        "Educational content that makes hard ideas legible.",
+                        "Writing and worldbuilding as a teaching tool.",
                     ]}
                 />
                 <SystemCard
-                    icon={Layers}
-                    title={vibe === 'brainrot' ? "SLAY_CYCLES" : "Consolidation Cycles"}
+                    icon={Rocket}
+                    title={vibe === 'brainrot' ? "MOONSHOT FACTORY" : "Applied Incubator"}
                     vibe={vibe}
                     points={vibe === 'brainrot' ? [
-                        "BRAINROT COMPRESSION 👺",
-                        "DETERMINISTIC W'S.",
-                        "NO CAP ACCUMULATION."
+                        "REAL BUILDS. REAL STAKES. REAL GLITTER.",
+                        "NONPROFITS, RESEARCH, AND STARTUPS GET THE FULL SEND.",
+                        "SHIPPED > SPECULATED. EVERY TIME.",
                     ] : [
-                        "Context compression algorithms.",
-                        "Deterministic thread reconstruction.",
-                        "Preventing runaway accumulation."
-                    ]}
-                />
-                <SystemCard
-                    icon={Network}
-                    title={vibe === 'brainrot' ? "GOAT_ORCHESTRATION" : "Deterministic Orchestration"}
-                    vibe={vibe}
-                    points={vibe === 'brainrot' ? [
-                        "GEMINI MAXING 🦾",
-                        "CRACKED EXECUTION.",
-                        "OPPS CONTROLLED STRICTLY."
-                    ] : [
-                        "Genkit + Gemini 1.5 Pro.",
-                        "Validated execution layers.",
-                        "External dependencies strictly controlled."
+                        "Real builds for nonprofits, research, and startups.",
+                        "Security work and experimental software.",
+                        "Unicorn Warehouse itself is portfolio company #1.",
                     ]}
                 />
             </div>

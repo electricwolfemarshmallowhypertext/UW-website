@@ -2,11 +2,13 @@
 export const GridBackground = () => {
     return (
         <div className="fixed inset-0 pointer-events-none -z-10 bg-void overflow-hidden">
-            {/* Background Image Asset */}
+            {/* Ambient rainbow wash — CSS only, no image asset required */}
             <div
-                className="absolute inset-0 z-0 opacity-20 bg-cover bg-center bg-no-repeat mix-blend-screen"
+                className="absolute inset-0 z-0 opacity-30 mix-blend-screen"
                 style={{
-                    backgroundImage: 'url(/img/Gemini_Generated_Image_yz08jeyz08jeyz08.png)',
+                    backgroundImage: `radial-gradient(circle at 15% 20%, rgba(255,110,199,0.35), transparent 45%),
+                                      radial-gradient(circle at 85% 15%, rgba(154,255,0,0.2), transparent 40%),
+                                      radial-gradient(circle at 50% 90%, rgba(0,210,255,0.25), transparent 50%)`,
                 }}
             />
 
@@ -17,8 +19,8 @@ export const GridBackground = () => {
             <div
                 className="absolute inset-0 opacity-20 z-20"
                 style={{
-                    backgroundImage: `linear-gradient(to right, #6B46C1 1px, transparent 1px),
-                                      linear-gradient(to bottom, #6B46C1 1px, transparent 1px)`,
+                    backgroundImage: `linear-gradient(to right, #FF6EC7 1px, transparent 1px),
+                                      linear-gradient(to bottom, #FF6EC7 1px, transparent 1px)`,
                     backgroundSize: '40px 40px',
                     transform: 'perspective(500px) rotateX(60deg) translateY(-100px) scale(2)',
                     transformOrigin: 'top center',

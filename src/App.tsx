@@ -105,7 +105,7 @@ export default function App() {
                     </a>
                 </div>
                 <p className="text-[10px] text-ethereal/40 uppercase tracking-[0.4em] font-mono hover:text-violet transition-colors duration-300">
-                    © 2026 Recursive Emotion // Continuity Guaranteed
+                    © 2026 Unicorn Warehouse // Glitter Guaranteed
                 </p>
             </footer>
         </div>

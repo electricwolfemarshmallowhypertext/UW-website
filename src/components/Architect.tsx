@@ -17,20 +17,18 @@ export const Architect = ({ vibe }: ArchitectProps) => {
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-12 relative z-10">
-                    {/* Image Column */}
-                    <div className="md:col-span-4 relative h-96 md:h-auto overflow-hidden">
-                        <img
-                            src="/img/bio-image.png"
-                            alt="Bradley Ren Bates"
-                            className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${vibe === 'brainrot' ? 'filter-none scale-110 contrast-150 animate-pulse' : 'filter grayscale contrast-125 mix-blend-luminosity hover:filter-none'}`}
-                        />
+                    {/* Image Column — placeholder avatar until a real photo/asset exists */}
+                    <div className={`md:col-span-4 relative h-96 md:h-auto overflow-hidden flex items-center justify-center ${vibe === 'brainrot' ? 'lisa-frank-bg' : 'bg-gradient-to-br from-violet/40 to-slate'}`}>
+                        <span className={`font-serif font-black transition-all duration-700 ${vibe === 'brainrot' ? 'text-8xl text-white drop-shadow-xl animate-pulse' : 'text-8xl text-ethereal/70'}`}>
+                            BB
+                        </span>
                         <div className={`absolute inset-0 bg-gradient-to-t from-void to-transparent transition-opacity ${vibe === 'brainrot' ? 'opacity-40' : 'opacity-80'}`} />
                         <div className="absolute bottom-6 left-6">
                             <h4 className={`font-bold text-xl transition-all ${vibe === 'brainrot' ? 'text-white scale-125 drop-shadow-xl animate-bounce' : 'text-white'}`}>
-                                {vibe === 'brainrot' ? "SKIBIDI BRAD" : "Bradley Ren Bates"}
+                                {vibe === 'brainrot' ? "UNICORN BRAD" : "Bradley Ren Bates"}
                             </h4>
                             <p className={`font-mono text-xs transition-colors ${vibe === 'brainrot' ? 'text-white font-black uppercase' : 'text-violet'}`}>
-                                {vibe === 'brainrot' ? "AURA ARCHITECT 👹" : "Systems Architect"}
+                                {vibe === 'brainrot' ? "CHIEF UNICORN 🦄" : "Founder, Unicorn Warehouse"}
                             </p>
                         </div>
                     </div>
@@ -41,31 +39,31 @@ export const Architect = ({ vibe }: ArchitectProps) => {
                             <div className="flex items-center gap-2 mb-8">
                                 <Terminal size={16} className={vibe === 'brainrot' ? 'text-white animate-pulse' : 'text-violet'} />
                                 <span className={`text-xs font-mono uppercase tracking-widest transition-colors ${vibe === 'brainrot' ? 'text-white font-black' : 'text-ethereal/50'}`}>
-                                    {vibe === 'brainrot' ? "MOG_LOGS::BRAINROT" : "Operator Profile"}
+                                    {vibe === 'brainrot' ? "UNICORN_LOGS::FERAL" : "Operator Profile"}
                                 </span>
                             </div>
 
                             <p className={`text-xl leading-relaxed transition-all ${vibe === 'brainrot' ? 'text-white font-black uppercase text-2xl animate-glitch' : 'text-ethereal font-light'}`}>
                                 {vibe === 'brainrot'
-                                    ? '"I BUILD CRACKED SYSTEMS WHERE THE AURA IS ABSOLUTE AND THE GYATT IS LEGIABLE." 👹'
+                                    ? '"I BUILD SYSTEMS WHERE THE GLITTER IS ABSOLUTE AND THE STATE IS LEGIBLE." 🦄'
                                     : '"I build systems where authority is explicit and state is legible."'
                                 }
                             </p>
 
                             <p className={`text-sm leading-relaxed max-w-lg transition-all ${vibe === 'brainrot' ? 'text-white font-black uppercase' : 'text-ethereal/60'}`}>
                                 {vibe === 'brainrot'
-                                    ? "FORMER NAVY STEAM GOAT TURNED SKIBIDI ARCHITECT. PERSISTENT MEMORY AND STATE MAXING IS LITERALLY THE DOPETH VIBE. LOCKING IN THE AURA UNDER LONG-HORIZON BRAINROT. NO CAP. 👹🔥"
-                                    : "Former U.S. Navy steam systems supervisor turned AI systems architect. My work focuses on making AI systems behave predictably under long-horizon interaction, moving beyond 'chatbots' to persistent, stateful entities."
+                                    ? "FORMER NAVY STEAM SYSTEMS UNICORN TURNED FOUNDER. NOW RUNNING A WAREHOUSE FULL OF THEM. INTEGRATOR, NOT AUTHORITY. NO CAP. 🦄✨"
+                                    : "Former U.S. Navy steam systems supervisor turned systems architect. Now building Unicorn Warehouse — an ethical AI lab, creative studio, and applied incubator for people building meaningful things. Integrator, not authority."
                                 }
                             </p>
                         </div>
 
                         <div className="pt-12 flex flex-wrap items-center gap-6">
                             {[
-                                { href: "mailto:bradleybates1@gmail.com", icon: Mail, text: vibe === 'brainrot' ? "SKIBIDI_MAIL" : "Contact" },
-                                { href: "https://www.linkedin.com/in/bradley-bates-792871387/", icon: Linkedin, text: vibe === 'brainrot' ? "LINKEDIN_MOG" : "LinkedIn" },
-                                { href: "https://x.com/recursive_smart", icon: Twitter, text: vibe === 'brainrot' ? "X_RIZZ" : "X" },
-                                { href: "https://www.facebook.com/profile.php?id=61575558568159", icon: Facebook, text: vibe === 'brainrot' ? "FB_GYATT" : "Facebook" }
+                                { href: "mailto:bradleybates1@gmail.com", icon: Mail, text: vibe === 'brainrot' ? "SEND_GLITTER" : "Contact" },
+                                { href: "https://www.linkedin.com/in/bradley-bates-792871387/", icon: Linkedin, text: vibe === 'brainrot' ? "LINKEDIN_HORN" : "LinkedIn" },
+                                { href: "https://x.com/recursive_smart", icon: Twitter, text: vibe === 'brainrot' ? "X_STAMPEDE" : "X" },
+                                { href: "https://www.facebook.com/profile.php?id=61575558568159", icon: Facebook, text: vibe === 'brainrot' ? "FB_HERD" : "Facebook" }
                             ].map((link, i) => (
                                 <a
                                     key={i}

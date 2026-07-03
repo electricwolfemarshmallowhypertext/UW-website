@@ -13,8 +13,8 @@ export function Navbar({ vibe }: { vibe: 'tech' | 'normal' | 'brainrot' }) {
             className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-500 ${vibe === 'brainrot' ? 'border-violet-neon bg-violet/40 shadow-lg' : 'border-ethereal/5 bg-void/60 backdrop-blur-md'}`}
         >
             <nav className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-                <Link to="/" className={`text-xl font-serif italic tracking-tighter group transition-all duration-500 ${vibe === 'brainrot' ? 'text-rainbow scale-110 drop-shadow-md' : 'text-ethereal'}`}>
-                    RECURSIVE<span className={`transition-opacity ${vibe === 'brainrot' ? 'text-white' : 'text-violet opacity-60 group-hover:opacity-100'}`}>EMOTION</span>
+                <Link to="/" className={`text-xl font-serif tracking-tight group transition-all duration-500 ${vibe === 'brainrot' ? 'text-rainbow scale-110 drop-shadow-md' : 'text-ethereal'}`}>
+                    🦄 UNICORN<span className={`transition-opacity ${vibe === 'brainrot' ? 'text-white' : 'text-violet opacity-60 group-hover:opacity-100'}`}>WAREHOUSE</span>
                 </Link>
 
                 <div className="flex items-center gap-12">
@@ -25,7 +25,7 @@ export function Navbar({ vibe }: { vibe: 'tech' | 'normal' | 'brainrot' }) {
                     >
                         <button className={`transition-all flex items-center gap-2 group/btn font-sans text-[10px] tracking-[0.3em] uppercase ${vibe === 'brainrot' ? 'text-white font-black animate-pulse' : 'text-ethereal/60 hover:text-violet'}`}>
                             <Box size={14} className={`transition-transform ${vibe === 'brainrot' ? 'animate-spin-slow' : 'group-hover/btn:rotate-12'}`} />
-                            {vibe === 'brainrot' ? "MOG_LOCK" : "Projects"}
+                            {vibe === 'brainrot' ? "THE STAMPEDE" : "Projects"}
                         </button>
 
                         <AnimatePresence>
@@ -89,7 +89,7 @@ export function Navbar({ vibe }: { vibe: 'tech' | 'normal' | 'brainrot' }) {
                     <div className={`flex items-center gap-2 px-3 py-1 border transition-all ${vibe === 'brainrot' ? 'border-white bg-white/20 animate-pulse' : 'border-violet/10 bg-violet/5'}`}>
                         <div className={`w-1 h-1 animate-pulse ${vibe === 'brainrot' ? 'bg-white' : 'bg-violet'}`} />
                         <span className={`text-[9px] font-sans tracking-[0.3em] uppercase ${vibe === 'brainrot' ? 'text-white font-black' : 'text-violet'}`}>
-                            {vibe === 'brainrot' ? "STATUS::MAXED" : "Status::Connected"}
+                            {vibe === 'brainrot' ? "STATUS::UNICORN" : "Status::Grazing"}
                         </span>
                     </div>
                 </div>

@@ -7,17 +7,17 @@ export default {
     theme: {
         extend: {
             colors: {
-                void: "#05070A",      // Deepest Space Blue
-                slate: "#1E293B",     // Deep Slate Surface
-                violet: "#6B46C1",    // Star-Trail Violet
-                ethereal: "#F8FAFC",  // Ghostly White Highlight
-                text: "#E2E8F0",      // Celestial Grey Text
-                amber: "#B79051",     // Keeps amber as a secondary accent if needed
+                void: "#170B2E",      // Unicorn Night — deep indigo-purple backdrop
+                slate: "#2E1760",     // Grape panel surface
+                violet: "#FF6EC7",    // Bubblegum accent (primary brand color)
+                ethereal: "#FFF6FB",  // Glitter White highlight
+                text: "#F3E4FF",      // Cotton Candy body text
+                amber: "#FFE066",     // Sunshine secondary accent
             },
             fontFamily: {
-                serif: ['"Cormorant Garamond"', 'serif'],
+                serif: ['"Baloo 2"', 'cursive'],
                 mono: ['"JetBrains Mono"', 'monospace'],
-                sans: ['Inter', 'sans-serif'],
+                sans: ['Quicksand', 'sans-serif'],
             },
         },
     },

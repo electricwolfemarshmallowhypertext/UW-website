@@ -56,7 +56,7 @@ export const AuraMaxToggle = ({ vibe, setVibe, onTriggerRipple }: AuraMaxToggleP
                                 }}
                             >
                                 {vibe === 'brainrot' ? (
-                                    <span className="text-2xl">👹</span>
+                                    <span className="text-2xl">🦄</span>
                                 ) : (
                                     <Sparkles size={16} />
                                 )}
@@ -83,7 +83,7 @@ export const AuraMaxToggle = ({ vibe, setVibe, onTriggerRipple }: AuraMaxToggleP
             >
                 <div className={`flex items-center gap-4 ${vibe === 'brainrot' ? 'text-rainbow drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]' : ''}`}>
                     <Sparkles size={24} className={vibe === 'brainrot' ? 'animate-spin-slow' : ''} />
-                    {vibe === 'brainrot' ? "MOGGING_THE_OPPS" : "CLICK FOR AURA"}
+                    {vibe === 'brainrot' ? "UNICORN OVERDRIVE" : "CLICK FOR VIBES"}
                     <Sparkles size={24} className={vibe === 'brainrot' ? 'animate-spin-slow' : ''} />
                 </div>
             </motion.button>
