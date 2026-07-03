@@ -49,7 +49,7 @@ export const Hero = ({ vibe, setVibe, onTriggerRipple }: HeroProps) => {
                         className={`font-mono tracking-[0.5em] text-[10px] uppercase flex items-center justify-center gap-4 ${vibe === 'brainrot' ? 'text-ethereal animate-bounce' : 'text-violet'}`}
                     >
                         <div className={`h-[1px] w-8 ${vibe === 'brainrot' ? 'bg-ethereal' : 'bg-violet/30'}`} />
-                        {vibe === 'brainrot' ? "UNICORN // OVERDRIVE // ENGAGED" : "Lab // Studio"}
+                        {vibe === 'brainrot' ? "UNICORN // OVERDRIVE // ENGAGED" : "Consultancy // Integration Partner"}
                         <div className={`h-[1px] w-8 ${vibe === 'brainrot' ? 'bg-ethereal' : 'bg-violet/30'}`} />
                     </motion.div>
 
@@ -66,13 +66,13 @@ export const Hero = ({ vibe, setVibe, onTriggerRipple }: HeroProps) => {
                         <p className={`text-xl md:text-2xl leading-relaxed ${vibe === 'brainrot' ? 'text-white font-black uppercase' : 'text-ethereal/70 font-serif'}`}>
                             {vibe === 'brainrot'
                                 ? "WE'RE LITERALLY DISRUPTING. WE'RE SO BACK. MANIFESTING THE EXIT WITH OUR WHOLE CHEST. 🦄✨💰 HUMAN RIZZ & CREATIVE ARTISTRY HAVE NO BOT SUBSTITUTES. WE KEEP THE GLITTER 100% ORGANIC & HUMAN MADE NO CAP. 🎨🦄"
-                                : "We make ethical AI, strange ideas, and useful things that actually matter — with enough glitter that you don't notice how serious it is. We believe there is no substitute for human creative artistry, and we are dedicated to preserving that wherever possible."
+                                : "We help people and organizations do more of what actually matters — with AI doing the labor, and humans keeping the creativity, judgment, and critical thinking. 🦄 There's no substitute for that, and we're not interested in finding one."
                             }
                         </p>
                         <div className={`mt-8 pt-8 border-t flex flex-wrap items-center justify-center gap-6 sm:gap-12 text-[10px] font-sans tracking-[0.3em] uppercase transition-colors ${vibe === 'brainrot' ? 'border-violet-neon text-white font-black' : 'border-ethereal/5 text-violet/60'}`}>
-                            <span>{vibe === 'brainrot' ? "GLITTER OPS" : "Ethical AI Lab"}</span>
+                            <span>{vibe === 'brainrot' ? "GLITTER OPS" : "Workflow Architecture"}</span>
                             <div className={`w-1 h-1 rounded-full ${vibe === 'brainrot' ? 'bg-white animate-pulse' : 'bg-violet/40'}`} />
-                            <span>{vibe === 'brainrot' ? "VIBES DEPT." : "Creative Studio"}</span>
+                            <span>{vibe === 'brainrot' ? "VIBES DEPT." : "AI Governance"}</span>
                             <div className={`w-1 h-1 rounded-full ${vibe === 'brainrot' ? 'bg-white animate-pulse' : 'bg-violet/40'}`} />
                             <Link to="/taylor" className={`hover:text-violet-neon transition-all duration-300 normal-case ${vibe === 'brainrot' ? 'text-rainbow font-black' : 'text-violet font-serif italic font-bold tracking-normal text-xs'}`}>
                                 {vibe === 'brainrot' ? "THE_FIRST_UNICORN 🦄" : "The First Unicorn 🦄"}

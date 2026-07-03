@@ -1,6 +1,8 @@
 import { GridBackground } from './components/ui/GridBackground';
 import { Hero } from './components/Hero';
-import { System } from './components/System';
+import { Mission } from './components/Mission';
+import { Services } from './components/Services';
+import { Philosophy } from './components/Philosophy';
 import { EthicalAIPage } from './components/EthicalAIPage';
 import { LearningPage } from './components/LearningPage';
 import { DedicationPage } from './components/DedicationPage';
@@ -20,7 +22,9 @@ function Home({ vibe, setVibe, onTriggerRipple }: {
     return (
         <main className={`pt-20 transition-all duration-500 ${vibe === 'brainrot' ? 'intense-glitter' : ''}`}>
             <Hero vibe={vibe} setVibe={setVibe} onTriggerRipple={onTriggerRipple} />
-            <System vibe={vibe} />
+            <Mission vibe={vibe} />
+            <Services vibe={vibe} />
+            <Philosophy vibe={vibe} />
         </main>
     );
 }
