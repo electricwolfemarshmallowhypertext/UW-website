@@ -53,7 +53,7 @@ export const Architect = ({ vibe }: ArchitectProps) => {
                             <p className={`text-sm leading-relaxed max-w-lg transition-all ${vibe === 'brainrot' ? 'text-white font-black uppercase' : 'text-ethereal/60'}`}>
                                 {vibe === 'brainrot'
                                     ? "FORMER NAVY STEAM SYSTEMS UNICORN TURNED FOUNDER. NOW RUNNING A WAREHOUSE FULL OF THEM. INTEGRATOR, NOT AUTHORITY. NO CAP. 🦄✨"
-                                    : "Former U.S. Navy steam systems supervisor turned systems architect. Now building Unicorn Warehouse — an ethical AI lab, creative studio, and applied incubator for people building meaningful things. Integrator, not authority."
+                                    : "Former U.S. Navy steam systems supervisor turned systems architect. Now building Unicorn Warehouse — an ethical AI lab and creative studio for people building meaningful things. Integrator, not authority."
                                 }
                             </p>
                         </div>

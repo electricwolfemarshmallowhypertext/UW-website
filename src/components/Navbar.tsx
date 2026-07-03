@@ -1,11 +1,12 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Box, Github } from 'lucide-react';
+import { Box, Github, Sparkles, Gamepad2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { projects } from '../data/projects';
 
 export function Navbar({ vibe }: { vibe: 'tech' | 'normal' | 'brainrot' }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isUnicornMenuOpen, setIsUnicornMenuOpen] = useState(false);
 
     return (
         <motion.header
@@ -24,7 +25,10 @@ export function Navbar({ vibe }: { vibe: 'tech' | 'normal' | 'brainrot' }) {
                         onMouseEnter={() => setIsMenuOpen(true)}
                         onMouseLeave={() => setIsMenuOpen(false)}
                     >
-                        <button className={`transition-all flex items-center gap-2 group/btn font-sans text-[10px] tracking-[0.3em] uppercase ${vibe === 'brainrot' ? 'text-white font-black animate-pulse' : 'text-ethereal/60 hover:text-violet'}`}>
+                        <button 
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            className={`transition-all flex items-center gap-2 group/btn font-sans text-[10px] tracking-[0.3em] uppercase ${vibe === 'brainrot' ? 'text-white font-black animate-pulse' : 'text-ethereal/60 hover:text-violet'}`}
+                        >
                             <Box size={14} className={`transition-transform ${vibe === 'brainrot' ? 'animate-spin-slow' : 'group-hover/btn:rotate-12'}`} />
                             {vibe === 'brainrot' ? "THE STAMPEDE" : "Projects"}
                         </button>
@@ -60,6 +64,64 @@ export function Navbar({ vibe }: { vibe: 'tech' | 'normal' | 'brainrot' }) {
                             )}
                         </AnimatePresence>
                     </div>
+
+                    <div
+                        className="relative group"
+                        onMouseEnter={() => setIsUnicornMenuOpen(true)}
+                        onMouseLeave={() => setIsUnicornMenuOpen(false)}
+                    >
+                        <button 
+                            onClick={() => setIsUnicornMenuOpen(!isUnicornMenuOpen)}
+                            className={`transition-all flex items-center gap-2 group/btn font-sans text-[10px] tracking-[0.3em] uppercase ${vibe === 'brainrot' ? 'text-white font-black animate-pulse' : 'text-ethereal/60 hover:text-violet'}`}
+                        >
+                            <Sparkles size={14} className={`transition-transform ${vibe === 'brainrot' ? 'animate-spin-slow' : 'group-hover/btn:rotate-12'}`} />
+                            {vibe === 'brainrot' ? "GLITTER_SQUAD" : "Unicorns"}
+                        </button>
+
+                        <AnimatePresence>
+                            {isUnicornMenuOpen && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10, filter: "blur(10px)" }}
+                                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                                    exit={{ opacity: 0, y: 10, filter: "blur(10px)" }}
+                                    className={`absolute top-full right-0 mt-4 w-64 p-2 shadow-2xl z-50 overflow-hidden ${vibe === 'brainrot' ? 'lisa-frank-bg border-2 border-white rounded-none' : 'glass-panel rounded'}`}
+                                >
+                                    <div className="space-y-1">
+                                        <Link
+                                            to="/unicorns/bradley"
+                                            className={`flex items-center justify-between px-4 py-3 rounded transition-all group/item ${vibe === 'brainrot' ? 'hover:bg-white/20' : 'hover:bg-violet/10'}`}
+                                            onClick={() => setIsUnicornMenuOpen(false)}
+                                        >
+                                            <span className={`text-[10px] font-inter tracking-tighter transition-colors ${vibe === 'brainrot' ? 'text-white/40 group-hover/item:text-white' : 'text-violet/40 group-hover/item:text-violet/60'}`}>01</span>
+                                            <span className={`text-sm font-inter transition-colors ${vibe === 'brainrot' ? 'text-white font-black uppercase' : 'text-ethereal/80 group-hover/item:text-ethereal'}`}>Bradley Bates</span>
+                                        </Link>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+
+                    <Link
+                        to="/ethical-ai"
+                        className={`transition-all font-sans text-[10px] tracking-[0.3em] uppercase ${vibe === 'brainrot' ? 'text-white font-black animate-pulse' : 'text-ethereal/60 hover:text-violet'}`}
+                    >
+                        {vibe === 'brainrot' ? "ETHICAL_MAXING" : "Ethical AI"}
+                    </Link>
+
+                    <Link
+                        to="/learning"
+                        className={`transition-all font-sans text-[10px] tracking-[0.3em] uppercase ${vibe === 'brainrot' ? 'text-white font-black animate-pulse' : 'text-ethereal/60 hover:text-violet'}`}
+                    >
+                        {vibe === 'brainrot' ? "LEARNING_CENTER" : "Learning"}
+                    </Link>
+
+                    <a
+                        href="/slot.html"
+                        className={`transition-all flex items-center gap-2 font-sans text-[10px] tracking-[0.3em] uppercase ${vibe === 'brainrot' ? 'text-white font-black animate-pulse' : 'text-ethereal/60 hover:text-violet'}`}
+                    >
+                        <Gamepad2 size={14} strokeWidth={1} />
+                        {vibe === 'brainrot' ? "FULL SEND" : "Play"}
+                    </a>
 
                     <a
                         href="https://github.com/Bradsadevnow"

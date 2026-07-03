@@ -24,12 +24,6 @@ export function Projects({ vibe }: { vibe: 'tech' | 'normal' | 'brainrot' }) {
                         </h2>
                     </div>
 
-                    <p className={`max-w-md font-mono text-sm leading-relaxed tracking-tighter transition-all ${vibe === 'brainrot' ? 'text-white font-black uppercase text-lg animate-vibrate-slow' : 'text-ethereal/60'}`}>
-                        {vibe === 'brainrot'
-                            ? "WE ONLY SHIP ABSOLUTE WINS. 🦄 IF IT DOESN'T SPARKLE, IT'S NOT IN THE REGISTRY. FULL SEND OR GET LEFT. ✨🔥"
-                            : "Real builds for the ethical AI lab, the creative studio, and the applied incubator. Each entry is a distinct thing we actually shipped."
-                        }
-                    </p>
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">

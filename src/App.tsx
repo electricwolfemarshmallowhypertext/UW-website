@@ -1,14 +1,15 @@
 import { GridBackground } from './components/ui/GridBackground';
 import { Hero } from './components/Hero';
-import { Philosophy } from './components/Philosophy';
 import { System } from './components/System';
-import { Architect } from './components/Architect';
+import { EthicalAIPage } from './components/EthicalAIPage';
+import { LearningPage } from './components/LearningPage';
+import { DedicationPage } from './components/DedicationPage';
+import { BradleyPage } from './components/BradleyPage';
 import { Navbar } from './components/Navbar';
-import { Projects } from './components/Projects';
 import { ProjectPage } from './components/ProjectPage';
 import { projects } from './data/projects';
 import { Linkedin, Twitter, Facebook } from 'lucide-react';
-import { Routes, Route, useLocation, useParams } from 'react-router-dom';
+import { Routes, Route, useLocation, useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 function Home({ vibe, setVibe, onTriggerRipple }: {
@@ -19,10 +20,7 @@ function Home({ vibe, setVibe, onTriggerRipple }: {
     return (
         <main className={`pt-20 transition-all duration-500 ${vibe === 'brainrot' ? 'intense-glitter' : ''}`}>
             <Hero vibe={vibe} setVibe={setVibe} onTriggerRipple={onTriggerRipple} />
-            <Projects vibe={vibe} />
-            <Philosophy vibe={vibe} />
             <System vibe={vibe} />
-            <Architect vibe={vibe} />
         </main>
     );
 }
@@ -87,6 +85,10 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<Home vibe={vibe} setVibe={setVibe} onTriggerRipple={() => triggerRipple()} />} />
                 <Route path="/projects/:slug" element={<ProjectRoute />} />
+                <Route path="/ethical-ai" element={<EthicalAIPage vibe={vibe} />} />
+                <Route path="/learning" element={<LearningPage vibe={vibe} />} />
+                <Route path="/taylor" element={<DedicationPage vibe={vibe} />} />
+                <Route path="/unicorns/bradley" element={<BradleyPage vibe={vibe} />} />
             </Routes>
 
             <footer className="py-12 text-center border-t border-violet/10 bg-void/80 backdrop-blur-md relative z-10 space-y-6">
@@ -101,9 +103,15 @@ export default function App() {
                         <Facebook size={20} strokeWidth={1} />
                     </a>
                 </div>
-                <p className="text-[10px] text-ethereal/40 uppercase tracking-[0.4em] font-mono hover:text-violet transition-colors duration-300">
-                    © 2026 Unicorn Warehouse // Glitter Guaranteed
-                </p>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-[10px] uppercase tracking-[0.35em] font-mono">
+                    <p className="text-ethereal/40">
+                        © 2026 Unicorn Warehouse // Glitter Guaranteed
+                    </p>
+                    <span className="hidden sm:inline text-violet/30">|</span>
+                    <Link to="/taylor" className="text-violet hover:text-violet-neon transition-colors duration-300">
+                        In Loving Memory of Taylor
+                    </Link>
+                </div>
             </footer>
         </div>
     );

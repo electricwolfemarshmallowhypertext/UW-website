@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FARTVIBE 6: ALL FARTS ARE OFF</title>
+<title>UNICORN WAREHOUSE: FULL SEND EDITION</title>
 <link rel="stylesheet" href="slot.css">
 </head>
 <body>
 
 <header>
-  <h1>FARTVIBE 6: ALL FARTS ARE OFF</h1>
-  <div class="subtitle">ENTERPRISE-GRADE FLATULENCE SIMULATION ENGINE v6.0.0-rc.420</div>
+  <h1>UNICORN WAREHOUSE: FULL SEND EDITION</h1>
+  <div class="subtitle">ENTERPRISE-GRADE VIBE SIMULATION ENGINE v6.0.0-rc.420</div>
   <div class="status-bar">
-    <span>OdorPipeline: ONLINE</span>
-    <span>GasRouter: NOMINAL</span>
-    <span>ButtCluster: HEALTHY</span>
+    <span>HypePipeline: ONLINE</span>
+    <span>VibeRouter: NOMINAL</span>
+    <span>FounderCluster: HEALTHY</span>
   </div>
 </header>
 
@@ -23,11 +23,11 @@
   <div class="machine-panel">
     <div class="currency-bar">
       <div class="currency-item">
-        <div class="label">Gas Coins</div>
+        <div class="label">Glitter Coins</div>
         <div class="value" id="coins">1000</div>
       </div>
       <div class="currency-item">
-        <div class="label">Odor Level</div>
+        <div class="label">Hype Level</div>
         <div class="value gas" id="odor-level">0</div>
       </div>
       <div class="currency-item">
@@ -39,18 +39,18 @@
         <div class="value" id="total-spins">0</div>
       </div>
       <div class="currency-item">
-        <div class="label">Stink Tokens</div>
+        <div class="label">Clout Tokens</div>
         <div class="value" style="color:#aa44ff" id="stink-display">0</div>
       </div>
     </div>
 
     <!-- TAB BAR -->
     <div class="tab-bar">
-      <button class="tab-btn active" onclick="switchTab('slots')">SLOTS</button>
-      <button class="tab-btn" onclick="switchTab('gacha')">GACHA</button>
-      <button class="tab-btn" onclick="switchTab('fartdex')">FARTDEX</button>
-      <button class="tab-btn" onclick="switchTab('battlepass')">PASS</button>
-      <button class="tab-btn" onclick="switchTab('pets')">PETS</button>
+      <button class="tab-btn active" data-tab="slots" onclick="switchTab('slots')">SLOTS</button>
+      <button class="tab-btn" data-tab="gacha" onclick="switchTab('gacha')">GACHA</button>
+      <button class="tab-btn" data-tab="fartdex" onclick="switchTab('fartdex')">UNICORNDEX</button>
+      <button class="tab-btn" data-tab="battlepass" onclick="switchTab('battlepass')">PASS</button>
+      <button class="tab-btn" data-tab="pets" onclick="switchTab('pets')">PETS</button>
     </div>
 
     <!-- ═══════ TAB: SLOTS ═══════ -->
@@ -59,53 +59,53 @@
         <div class="paylines-overlay" id="paylines-overlay"></div>
         <div class="reels-frame" id="reels-frame">
           <div class="reel" id="reel-0">
-            <div class="reel-cell"><span class="symbol">💨</span></div>
-            <div class="reel-cell"><span class="symbol">💩</span></div>
-            <div class="reel-cell"><span class="symbol">🍑</span></div>
-            <div class="reel-cell"><span class="symbol">🚽</span></div>
-            <div class="reel-cell"><span class="symbol">🧻</span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/flower.png" alt="SUNFLOWER" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/teddy.png" alt="TEDDY BEAR" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/unicorn-1.png" alt="UNICORN" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/unicorn-2.png" alt="MAMA UNICORN" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/unicorn-3.png" alt="ROYAL UNICORN" class="symbol-img" draggable="false"></span></div>
           </div>
           <div class="reel" id="reel-1">
-            <div class="reel-cell"><span class="symbol">🔥</span></div>
-            <div class="reel-cell"><span class="symbol">💀</span></div>
-            <div class="reel-cell"><span class="symbol">💨</span></div>
-            <div class="reel-cell"><span class="symbol">🍑</span></div>
-            <div class="reel-cell"><span class="symbol">🌟</span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/unicorn-3.png" alt="ROYAL UNICORN" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/star.png" alt="WILD" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/flower.png" alt="SUNFLOWER" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/unicorn-1.png" alt="UNICORN" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/star.png" alt="WILD" class="symbol-img" draggable="false"></span></div>
           </div>
           <div class="reel" id="reel-2">
-            <div class="reel-cell"><span class="symbol">🧻</span></div>
-            <div class="reel-cell"><span class="symbol">🚽</span></div>
-            <div class="reel-cell"><span class="symbol">💩</span></div>
-            <div class="reel-cell"><span class="symbol">🔥</span></div>
-            <div class="reel-cell"><span class="symbol">💨</span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/teddy.png" alt="TEDDY BEAR" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/unicorn-2.png" alt="MAMA UNICORN" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/flower.png" alt="SUNFLOWER" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/unicorn-3.png" alt="ROYAL UNICORN" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/unicorn-1.png" alt="UNICORN" class="symbol-img" draggable="false"></span></div>
           </div>
           <div class="reel" id="reel-3">
-            <div class="reel-cell"><span class="symbol">💀</span></div>
-            <div class="reel-cell"><span class="symbol">🍑</span></div>
-            <div class="reel-cell"><span class="symbol">🌟</span></div>
-            <div class="reel-cell"><span class="symbol">💨</span></div>
-            <div class="reel-cell"><span class="symbol">🧻</span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/unicorn-1.png" alt="UNICORN" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/flower.png" alt="SUNFLOWER" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/star.png" alt="WILD" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/teddy.png" alt="TEDDY BEAR" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/unicorn-2.png" alt="MAMA UNICORN" class="symbol-img" draggable="false"></span></div>
           </div>
           <div class="reel" id="reel-4">
-            <div class="reel-cell"><span class="symbol">🚽</span></div>
-            <div class="reel-cell"><span class="symbol">💩</span></div>
-            <div class="reel-cell"><span class="symbol">🔥</span></div>
-            <div class="reel-cell"><span class="symbol">💀</span></div>
-            <div class="reel-cell"><span class="symbol">🍑</span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/unicorn-2.png" alt="MAMA UNICORN" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/unicorn-3.png" alt="ROYAL UNICORN" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/teddy.png" alt="TEDDY BEAR" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/star.png" alt="WILD" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/flower.png" alt="SUNFLOWER" class="symbol-img" draggable="false"></span></div>
           </div>
           <div class="reel" id="reel-5">
-            <div class="reel-cell"><span class="symbol">🌟</span></div>
-            <div class="reel-cell"><span class="symbol">💨</span></div>
-            <div class="reel-cell"><span class="symbol">🧻</span></div>
-            <div class="reel-cell"><span class="symbol">💩</span></div>
-            <div class="reel-cell"><span class="symbol">🚽</span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/star.png" alt="WILD" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/unicorn-1.png" alt="UNICORN" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/unicorn-2.png" alt="MAMA UNICORN" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/teddy.png" alt="TEDDY BEAR" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/unicorn-3.png" alt="ROYAL UNICORN" class="symbol-img" draggable="false"></span></div>
           </div>
           <div class="reel" id="reel-6">
-            <div class="reel-cell"><span class="symbol">🔥</span></div>
-            <div class="reel-cell"><span class="symbol">🍑</span></div>
-            <div class="reel-cell"><span class="symbol">💀</span></div>
-            <div class="reel-cell"><span class="symbol">🌟</span></div>
-            <div class="reel-cell"><span class="symbol">💨</span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/unicorn-3.png" alt="ROYAL UNICORN" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/flower.png" alt="SUNFLOWER" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/teddy.png" alt="TEDDY BEAR" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/star.png" alt="WILD" class="symbol-img" draggable="false"></span></div>
+            <div class="reel-cell"><span class="symbol"><img src="/img/slot/unicorn-1.png" alt="UNICORN" class="symbol-img" draggable="false"></span></div>
           </div>
         </div>
       </div>
@@ -123,9 +123,9 @@
     <!-- ═══════ TAB: GACHA ═══════ -->
     <div class="tab-content" id="tab-gacha">
       <div class="banner-display">
-        <div class="banner-name" id="banner-name">NUCLEAR CHEEK CLAPPER</div>
-        <div class="banner-subtitle">LIMITED EMISSION BANNER</div>
-        <div class="banner-featured" id="banner-featured">☢️</div>
+        <div class="banner-name" id="banner-name">SERIES Z MEGA ROUND</div>
+        <div class="banner-subtitle">LIMITED FOUNDING BANNER</div>
+        <div class="banner-featured" id="banner-featured">🦄</div>
         <div class="banner-rates">
           <div class="rate-item"><span class="rate-rarity mythic">MYTHIC</span> 0.69%</div>
           <div class="rate-item"><span class="rate-rarity legendary">LEGENDARY</span> 3%</div>
@@ -142,7 +142,7 @@
           <div class="pity-bar"><div class="pity-bar-fill" id="pity-bar" style="width:0%"></div></div>
         </div>
         <div class="gacha-stat">
-          <div class="gs-label">Stink Tokens</div>
+          <div class="gs-label">Clout Tokens</div>
           <div class="gs-value tokens" id="stink-tokens">0</div>
         </div>
         <div class="gacha-stat">
@@ -154,11 +154,11 @@
       <div class="pull-buttons">
         <button class="pull-btn single" onclick="gachaPull(1)">
           SINGLE PULL
-          <span class="cost">100 Gas Coins</span>
+          <span class="cost">100 Glitter Coins</span>
         </button>
         <button class="pull-btn multi" onclick="gachaPull(10)">
           10x MEGA PULL
-          <span class="cost">900 Gas Coins</span>
+          <span class="cost">900 Glitter Coins</span>
         </button>
       </div>
     </div>
@@ -166,7 +166,7 @@
     <!-- ═══════ TAB: FARTDEX ═══════ -->
     <div class="tab-content" id="tab-fartdex">
       <div class="fartdex-header">
-        <span class="fdh-title">FARTDEX&trade;</span>
+        <span class="fdh-title">UNICORNDEX&trade;</span>
         <span class="fdh-count" id="fdex-count">0 / 69 Collected</span>
       </div>
       <div class="fartdex-filters">
@@ -187,7 +187,7 @@
     <div class="tab-content" id="tab-battlepass">
       <div class="bp-header">
         <div class="bp-season-badge">SEASON 1</div>
-        <div class="bp-title">THE GREAT UNBOTTLING</div>
+        <div class="bp-title">THE GREAT BOOTSTRAPPING</div>
         <div class="bp-time-remaining" id="bp-timer">SEASON ENDS IN: 29d 23h 59m</div>
       </div>
 
@@ -203,7 +203,7 @@
 
       <div class="bp-premium-bar" id="bp-premium-bar">
         <div class="bp-premium-label">
-          <span class="premium-tag">PREMIUM PASS</span> &mdash; Unlock golden rewards + exclusive emission profiles
+          <span class="premium-tag">PREMIUM PASS</span> &mdash; Unlock golden rewards + exclusive founder auras
         </div>
         <button class="bp-premium-btn" id="bp-premium-btn" onclick="buyPremiumPass()">UPGRADE 2,000</button>
       </div>
@@ -216,13 +216,13 @@
     <!-- ═══════ TAB: PETS (TAMAGOTCHI) ═══════ -->
     <div class="tab-content" id="tab-pets">
       <div class="pets-header">
-        <div class="pets-title">FART PET DOJO</div>
-        <div class="pets-subtitle">Train Your Fart. Conquer Bathrooms. Master The Bell.</div>
+        <div class="pets-title">STARTUP PET RANCH</div>
+        <div class="pets-subtitle">Train Your Founder. Conquer Funding Rounds. Master The Exit.</div>
       </div>
 
       <div id="pet-view"></div>
 
-      <div class="bathroom-section-title">THE BATHROOM LADDER</div>
+      <div class="bathroom-section-title">THE FUNDING LADDER</div>
       <div class="bathroom-lords" id="bathroom-lords"></div>
       <div class="bathroom-ladder-container">
         <div id="bathroom-ladder"></div>
@@ -235,25 +235,25 @@
   <div class="side-panel">
     <!-- METRICS -->
     <div class="panel-box">
-      <div class="panel-header"><span class="dot"></span>GAS TELEMETRY</div>
+      <div class="panel-header"><span class="dot"></span>HYPE TELEMETRY</div>
       <div class="metrics-grid">
         <div class="metric">
-          <div class="metric-label">Odor Intensity</div>
+          <div class="metric-label">Hype Intensity</div>
           <div class="metric-value critical" id="m-odor">97%</div>
           <div class="metric-bar"><div class="metric-bar-fill" id="bar-odor" style="width:97%;background:var(--danger)"></div></div>
         </div>
         <div class="metric">
-          <div class="metric-label">Flush Efficiency</div>
+          <div class="metric-label">Burn Rate</div>
           <div class="metric-value warning" id="m-flush">CRITICAL</div>
           <div class="metric-bar"><div class="metric-bar-fill" id="bar-flush" style="width:23%;background:var(--neon-orange)"></div></div>
         </div>
         <div class="metric">
-          <div class="metric-label">Gas Throughput</div>
+          <div class="metric-label">Runway Throughput</div>
           <div class="metric-value max" id="m-gas">MAX</div>
           <div class="metric-bar"><div class="metric-bar-fill" id="bar-gas" style="width:100%;background:var(--neon-yellow)"></div></div>
         </div>
         <div class="metric">
-          <div class="metric-label">Butt Alignment</div>
+          <div class="metric-label">Founder Alignment</div>
           <div class="metric-value nominal" id="m-butt">STABLE</div>
           <div class="metric-bar"><div class="metric-bar-fill" id="bar-butt" style="width:82%;background:var(--neon-green)"></div></div>
         </div>
@@ -264,12 +264,12 @@
     <div class="panel-box">
       <div class="panel-header"><span class="dot"></span>SYSTEM STATUS</div>
       <div class="system-list" id="system-list">
-        <div class="system-row"><span class="system-name">OdorOrchestrator</span><span class="system-status ok" id="sys-odor">RUNNING</span></div>
-        <div class="system-row"><span class="system-name">FlatulenceEngine</span><span class="system-status ok" id="sys-flat">NOMINAL</span></div>
-        <div class="system-row"><span class="system-name">ButtStateManager</span><span class="system-status ok" id="sys-butt">SYNCED</span></div>
-        <div class="system-row"><span class="system-name">FlushMultiplierSvc</span><span class="system-status ok" id="sys-flush">READY</span></div>
+        <div class="system-row"><span class="system-name">HypeOrchestrator</span><span class="system-status ok" id="sys-odor">RUNNING</span></div>
+        <div class="system-row"><span class="system-name">BuzzwordEngine</span><span class="system-status ok" id="sys-flat">NOMINAL</span></div>
+        <div class="system-row"><span class="system-name">FounderStateManager</span><span class="system-status ok" id="sys-butt">SYNCED</span></div>
+        <div class="system-row"><span class="system-name">BurnMultiplierSvc</span><span class="system-status ok" id="sys-flush">READY</span></div>
         <div class="system-row"><span class="system-name">DopamineFeedbackCtrl</span><span class="system-status ok" id="sys-dopa">ACTIVE</span></div>
-        <div class="system-row"><span class="system-name">GasLeakDetector</span><span class="system-status ok" id="sys-leak">MONITORING</span></div>
+        <div class="system-row"><span class="system-name">RunwayLeakDetector</span><span class="system-status ok" id="sys-leak">MONITORING</span></div>
       </div>
     </div>
 
@@ -282,15 +282,15 @@
 </div>
 
 <div class="satire-footer">
-  All systems operational. &nbsp;|&nbsp; Meaningless spins continue. Numbers go up. Nothing changes.
+  All systems operational. &nbsp;|&nbsp; Meaningless spins continue. Valuation goes up. Nothing changes.
 </div>
 
 <!-- FIRST TIME BONUS BANNER -->
 <div class="ftb-banner" id="ftb-banner">
   <span class="ftb-sparkle">✨</span>
   <div>
-    <div class="ftb-text">FIRST TIME DOUBLE ODOR BONUS</div>
-    <div class="ftb-sub">Welcome to FartVibe 6! Claim 500 FREE GasCoins + 2X Odor for your first 10 spins!</div>
+    <div class="ftb-text">FIRST TIME DOUBLE HYPE BONUS</div>
+    <div class="ftb-sub">Welcome to Unicorn Warehouse! Claim 500 FREE Glitter Coins + 2X Hype for your first 10 spins!</div>
   </div>
   <button class="ftb-claim-btn" onclick="claimFirstTimeBonus()">CLAIM NOW</button>
   <button class="ftb-dismiss" onclick="dismissFTB()">✕</button>
@@ -302,16 +302,16 @@
     <button class="shop-close" onclick="closeShop()">✕</button>
 
     <div id="shop-main">
-      <div class="shop-title">GASCOIN EXCHANGE</div>
-      <div class="shop-subtitle">PREMIUM FLATULENCE CURRENCY</div>
-      <div class="shop-insufficient" id="shop-insufficient">INSUFFICIENT GASCOINS</div>
+      <div class="shop-title">GLITTER EXCHANGE</div>
+      <div class="shop-subtitle">PREMIUM FOUNDER CURRENCY</div>
+      <div class="shop-insufficient" id="shop-insufficient">INSUFFICIENT GLITTER COINS</div>
 
       <div class="shop-packages">
         <div class="shop-pkg first-buy" onclick="buyPackage(0)" id="shop-pkg-0">
           <div class="shop-pkg-left">
-            <span class="shop-pkg-emoji">💨</span>
+            <span class="shop-pkg-emoji">🦄</span>
             <div class="shop-pkg-info">
-              <div class="shop-pkg-coins">500 GasCoins</div>
+              <div class="shop-pkg-coins">500 GlitterCoins</div>
               <div class="shop-pkg-bonus">+ 500 BONUS (First Buy!)</div>
             </div>
           </div>
@@ -319,9 +319,9 @@
         </div>
         <div class="shop-pkg" onclick="buyPackage(1)">
           <div class="shop-pkg-left">
-            <span class="shop-pkg-emoji">💩</span>
+            <span class="shop-pkg-emoji">🚀</span>
             <div class="shop-pkg-info">
-              <div class="shop-pkg-coins">1,000 GasCoins</div>
+              <div class="shop-pkg-coins">1,000 GlitterCoins</div>
               <div class="shop-pkg-bonus">+ 100 BONUS</div>
             </div>
           </div>
@@ -329,9 +329,9 @@
         </div>
         <div class="shop-pkg" onclick="buyPackage(2)">
           <div class="shop-pkg-left">
-            <span class="shop-pkg-emoji">🍑</span>
+            <span class="shop-pkg-emoji">💰</span>
             <div class="shop-pkg-info">
-              <div class="shop-pkg-coins">5,000 GasCoins</div>
+              <div class="shop-pkg-coins">5,000 GlitterCoins</div>
               <div class="shop-pkg-bonus">+ 1,000 BONUS</div>
             </div>
           </div>
@@ -339,20 +339,20 @@
         </div>
         <div class="shop-pkg best-value" onclick="buyPackage(3)">
           <div class="shop-pkg-left">
-            <span class="shop-pkg-emoji">🚽</span>
+            <span class="shop-pkg-emoji">📈</span>
             <div class="shop-pkg-info">
-              <div class="shop-pkg-coins">25,000 GasCoins</div>
-              <div class="shop-pkg-bonus">+ 10,000 BONUS + 50 Stink Tokens</div>
+              <div class="shop-pkg-coins">25,000 GlitterCoins</div>
+              <div class="shop-pkg-bonus">+ 10,000 BONUS + 50 Clout Tokens</div>
             </div>
           </div>
           <div class="shop-pkg-price">$19.99</div>
         </div>
         <div class="shop-pkg" onclick="buyPackage(4)">
           <div class="shop-pkg-left">
-            <span class="shop-pkg-emoji">☢️</span>
+            <span class="shop-pkg-emoji">👑</span>
             <div class="shop-pkg-info">
-              <div class="shop-pkg-coins">100,000 GasCoins</div>
-              <div class="shop-pkg-bonus">+ 69,000 BONUS + 500 Stink Tokens + Mythic Pity Reset</div>
+              <div class="shop-pkg-coins">100,000 GlitterCoins</div>
+              <div class="shop-pkg-bonus">+ 69,000 BONUS + 500 Clout Tokens + Mythic Pity Reset</div>
             </div>
           </div>
           <div class="shop-pkg-price">$99.99</div>
@@ -360,23 +360,23 @@
       </div>
 
       <div class="shop-disclaimer">
-        By purchasing GasCoins you agree to the FartVibe Terms of Emission (ToE). All sales are final.
-        GasCoins have no real-world value. Flatulence is not guaranteed. Side effects may include
-        uncontrollable laughter, loss of dignity, and existential dread. FartVibe Inc. is not responsible
-        for any social, emotional, or olfactory damage resulting from the use of this product.
+        By purchasing GlitterCoins you agree to the Unicorn Warehouse Terms of Hype (ToH). All sales are final.
+        GlitterCoins have no real-world value. Unicorn status is not guaranteed. Side effects may include
+        uncontrollable optimism, loss of equity, and existential dread. Unicorn Warehouse Inc. is not responsible
+        for any social, emotional, or financial damage resulting from the use of this product.
         No actual money will be charged. This is a joke. Please do not give us money.
       </div>
     </div>
 
     <div class="shop-processing" id="shop-processing">
       <div class="spinner"></div>
-      <div class="proc-text" id="proc-text">Contacting GasCoin Blockchain...</div>
+      <div class="proc-text" id="proc-text">Contacting GlitterCoin Blockchain...</div>
     </div>
 
     <div class="shop-success" id="shop-success">
       <div class="success-emoji">💸</div>
-      <div class="success-text" id="success-text">+1,000 GASCOINS</div>
-      <div class="success-sub" id="success-sub">Thank you for supporting independent flatulence research.</div>
+      <div class="success-text" id="success-text">+1,000 GLITTER COINS</div>
+      <div class="success-sub" id="success-sub">Thank you for supporting independent hype research.</div>
     </div>
   </div>
 </div>
@@ -385,7 +385,7 @@
 <div class="gacha-overlay" id="gacha-overlay">
   <!-- Buildup Stage -->
   <div class="pull-stage" id="pull-buildup">
-    <div class="pull-buildup">CHANNELING EMISSIONS...</div>
+    <div class="pull-buildup">CHANNELING VIBES...</div>
   </div>
   <!-- Single Reveal Stage -->
   <div class="pull-stage" id="pull-reveal">

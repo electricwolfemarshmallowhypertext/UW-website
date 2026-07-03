@@ -1,4 +1,4 @@
-import { ShieldCheck, Palette, Rocket } from 'lucide-react';
+import { ShieldCheck, Palette } from 'lucide-react';
 import { Section } from './ui/Section';
 
 const SystemCard = ({ icon: Icon, title, points, vibe }: { icon: any, title: string, points: string[], vibe: 'tech' | 'normal' | 'brainrot' }) => (
@@ -39,17 +39,17 @@ export const System = ({ vibe }: { vibe: 'tech' | 'normal' | 'brainrot' }) => {
                     {vibe === 'brainrot' ? "CURRENT_UNICORN_MAXING" : "How We're Built"}
                 </h2>
                 <h3 className={`text-4xl md:text-6xl font-black tracking-tighter transition-all ${vibe === 'brainrot' ? 'text-rainbow scale-125 drop-shadow-[0_0_50px_rgba(255,0,247,0.8)]' : 'text-white'}`}>
-                    THREE <span className={vibe === 'brainrot' ? 'text-white' : 'text-transparent bg-clip-text bg-gradient-to-r from-violet to-ethereal'}>{vibe === 'brainrot' ? "HORNS" : "ARMS"}</span>
+                    TWO <span className={vibe === 'brainrot' ? 'text-white' : 'text-transparent bg-clip-text bg-gradient-to-r from-violet to-ethereal'}>{vibe === 'brainrot' ? "HORNS" : "ARMS"}</span>
                 </h3>
                 <p className={`font-mono transition-colors ${vibe === 'brainrot' ? 'text-white font-black text-xl animate-glitch' : 'text-ethereal/50'}`}>
                     {vibe === 'brainrot'
-                        ? "ONE UNICORN. THREE HORNS. INFINITE GLITTER SUPPLY."
-                        : "Ethical AI Lab // Creative Studio // Applied Incubator"
+                        ? "ONE UNICORN. TWO HORNS. INFINITE GLITTER SUPPLY."
+                        : "Ethical AI Lab // Creative Studio"
                     }
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <SystemCard
                     icon={ShieldCheck}
                     title={vibe === 'brainrot' ? "GLITTER_GOVERNANCE" : "Ethical AI Lab"}
@@ -76,20 +76,6 @@ export const System = ({ vibe }: { vibe: 'tech' | 'normal' | 'brainrot' }) => {
                         "Games, satire, illustration, and brand worlds.",
                         "Educational content that makes hard ideas legible.",
                         "Writing and worldbuilding as a teaching tool.",
-                    ]}
-                />
-                <SystemCard
-                    icon={Rocket}
-                    title={vibe === 'brainrot' ? "MOONSHOT FACTORY" : "Applied Incubator"}
-                    vibe={vibe}
-                    points={vibe === 'brainrot' ? [
-                        "REAL BUILDS. REAL STAKES. REAL GLITTER.",
-                        "NONPROFITS, RESEARCH, AND STARTUPS GET THE FULL SEND.",
-                        "SHIPPED > SPECULATED. EVERY TIME.",
-                    ] : [
-                        "Real builds for nonprofits, research, and startups.",
-                        "Security work and experimental software.",
-                        "Unicorn Warehouse itself is portfolio company #1.",
                     ]}
                 />
             </div>

@@ -1,41 +1,38 @@
 // ╔══════════════════════════════════════════════════════════════╗
-// ║  FARTVIBE 6: ALL FARTS ARE OFF                              ║
-// ║  Enterprise-Grade Flatulence Simulation Engine v6.0.0       ║
+// ║  UNICORN WAREHOUSE: FULL SEND EDITION                        ║
+// ║  Enterprise-Grade Vibe Simulation Engine v6.0.0              ║
 // ║                                                             ║
 // ║  WARNING: This codebase is overengineered ON PURPOSE.       ║
 // ║  If you are reading this and thinking "why?"                ║
 // ║  the answer is: vibe coding.                                ║
 // ╚══════════════════════════════════════════════════════════════╝
 
-const SYMBOLS = ['💨', '💩', '🍑', '🚽', '🧻', '🔥', '💀'];
-const WILD_SYMBOL = '🌟';
+const SYMBOLS = ['flower', 'teddy', 'unicorn1', 'unicorn2', 'unicorn3'];
+const WILD_SYMBOL = 'star';
 const ALL_SYMBOLS = [...SYMBOLS, WILD_SYMBOL];
-const SYMBOL_NAMES = { '💨': 'FART', '💩': 'POOP', '🍑': 'BUTT', '🚽': 'TOILET', '🧻': 'TP', '🔥': 'FIRE', '💀': 'SKULL', '🌟': 'WILD' };
+const SYMBOL_NAMES = { flower: 'SUNFLOWER', teddy: 'TEDDY BEAR', unicorn1: 'UNICORN', unicorn2: 'MAMA UNICORN', unicorn3: 'ROYAL UNICORN', star: 'WILD' };
 const SYMBOL_IMAGES = {
-  '💨': 'fart_cloud.jpeg',
-  '💩': 'poop.jpeg',
-  '🍑': 'peach.jpeg',
-  '🚽': 'toilet.jpeg',
-  '🔥': 'butt.jpeg',
-  '🧻': 'TP.jpeg',
-  '💀': 'skull.jpeg',
-  '🌟': 'pepto.jpeg'
+  flower: '/img/slot/flower.png',
+  teddy: '/img/slot/teddy.png',
+  unicorn1: '/img/slot/unicorn-1.png',
+  unicorn2: '/img/slot/unicorn-2.png',
+  unicorn3: '/img/slot/unicorn-3.png',
+  star: '/img/slot/star.png',
 };
 function renderSymbolHTML(symbol) {
-  const img = SYMBOL_IMAGES[symbol];
-  if (img) return `<img src="${img}" alt="${SYMBOL_NAMES[symbol]}" class="symbol-img" draggable="false">`;
-  return symbol;
+  return `<img src="${SYMBOL_IMAGES[symbol]}" alt="${SYMBOL_NAMES[symbol]}" class="symbol-img" draggable="false">`;
 }
 function setSymbol(el, symbol) {
-  const img = SYMBOL_IMAGES[symbol];
-  if (img) {
-    el.innerHTML = `<img src="${img}" alt="${SYMBOL_NAMES[symbol]}" class="symbol-img" draggable="false">`;
-  } else {
-    el.textContent = symbol;
-  }
+  el.innerHTML = renderSymbolHTML(symbol);
 }
 const NUM_REELS = 7;
 const NUM_ROWS = 5;
+
+// Display-only labels for the four stat axes. The underlying property
+// names (volume/wetness/duration/regret) stay as-is everywhere in the
+// pet/gacha mechanics — this just controls what the player sees.
+const STAT_LABELS = { volume: 'HYPE', wetness: 'RISK', duration: 'RUNWAY', regret: 'REGRET' };
+const STAT_LABELS_SHORT = { volume: 'HYPE', wetness: 'RISK', duration: 'RWAY', regret: 'REG' };
 
 // ═══════════════════════════════════════════
 //  PAYLINE DEFINITIONS (20 crisscross paylines)
@@ -73,14 +70,12 @@ const PAYLINES = [
 
 // Symbol payout values (per symbol, for 3/4/5/6/7 matches on a line)
 const SYMBOL_PAYOUTS = {
-  '💨': [5, 15, 40, 100, 250],
-  '💩': [5, 15, 40, 100, 250],
-  '🍑': [8, 25, 60, 150, 400],
-  '🚽': [8, 25, 60, 150, 400],
-  '🧻': [10, 30, 80, 200, 500],
-  '🔥': [15, 50, 120, 300, 800],
-  '💀': [20, 75, 200, 500, 1500],
-  '🌟': [25, 100, 300, 750, 2500],  // wild-only line (rare)
+  flower: [5, 15, 40, 100, 250],
+  teddy: [5, 15, 40, 100, 250],
+  unicorn1: [10, 30, 80, 200, 500],
+  unicorn2: [15, 50, 120, 300, 800],
+  unicorn3: [20, 75, 200, 500, 1500],
+  star: [25, 100, 300, 750, 2500],  // wild-only line (rare)
 };
 
 // ═══════════════════════════════════════════
@@ -102,7 +97,7 @@ const ButtStateManager = {
     this.coherence = Math.random() * 0.3 + 0.7;
     this.alignment = Math.floor(60 + Math.random() * 40);
     this.lastCalibration = Date.now();
-    LogService.debug(`ButtState synced: coherence=${this.coherence.toFixed(3)}, alignment=${this.alignment}%`);
+    LogService.debug(`FounderState synced: coherence=${this.coherence.toFixed(3)}, alignment=${this.alignment}%`);
     return { aligned: this.alignment > 70, vector: this.stateVector };
   },
 
@@ -118,8 +113,8 @@ const ButtStateManager = {
  */
 const FlatulenceEngine = {
   emissionProfiles: [
-    'silent_drift_v1', 'wet_blast_v2', 'dry_squeak_v3',
-    'thunderclap_v4', 'phantom_whisper_v5', 'nuclear_v6'
+    'quiet_pivot_v1', 'loud_pivot_v2', 'stealth_mode_v3',
+    'full_send_v4', 'ghost_round_v5', 'unicorn_v6'
   ],
   currentProfile: null,
   gasBuffer: [],
@@ -131,7 +126,7 @@ const FlatulenceEngine = {
       Math.floor(spinEnergy * this.emissionProfiles.length)
     );
     this.currentProfile = this.emissionProfiles[idx];
-    LogService.debug(`Selecting emission profile: "${this.currentProfile}"`);
+    LogService.debug(`Selecting hype profile: "${this.currentProfile}"`);
     return this.currentProfile;
   },
 
@@ -143,7 +138,7 @@ const FlatulenceEngine = {
       turbulence: Math.random()
     }));
     this.pressure = this.gasBuffer.reduce((a, b) => a + b.gasIndex + b.turbulence, 0) / symbols.length;
-    LogService.info(`Gas vector computed: pressure=${this.pressure.toFixed(4)} across ${symbols.length} chambers`);
+    LogService.info(`Hype vector computed: pressure=${this.pressure.toFixed(4)} across ${symbols.length} vibe chambers`);
     return this.gasBuffer;
   },
 
@@ -166,21 +161,21 @@ const FlushMultiplierService = {
   calculate(symbols, buttState) {
     let mult = this.baseMultiplier;
 
-    // TP symbols boost multiplier (they do nothing but we pretend)
-    const tpCount = symbols.filter(s => s === '🧻').length;
+    // Flower symbols boost multiplier (they do nothing but we pretend)
+    const tpCount = symbols.filter(s => s === 'flower').length;
     mult += tpCount * 0.5;
 
-    // Toilet wilds
-    const toiletCount = symbols.filter(s => s === '🚽').length;
+    // Teddy symbols
+    const toiletCount = symbols.filter(s => s === 'teddy').length;
     mult += toiletCount * 0.3;
 
-    // Butt alignment bonus
+    // Founder alignment bonus
     if (buttState.aligned) mult *= 1.1;
 
     this.flushEfficiency = Math.random() * 0.4 + 0.1;
     this.consecutiveFlushes++;
 
-    LogService.info(`FlushMultiplier: ${mult.toFixed(2)}x (efficiency: ${(this.flushEfficiency * 100).toFixed(0)}%)`);
+    LogService.info(`BurnMultiplier: ${mult.toFixed(2)}x (efficiency: ${(this.flushEfficiency * 100).toFixed(0)}%)`);
     return mult;
   },
 
@@ -226,10 +221,10 @@ const DopamineFeedbackController = {
 };
 
 /**
- * OdorOrchestrator - Top-level orchestration layer that coordinates
+ * HypeOrchestrator - Top-level orchestration layer that coordinates
  * all flatulence subsystems for each spin cycle.
  */
-const OdorOrchestrator = {
+const HypeOrchestrator = {
   pipelineVersion: '6.0.0-rc.420',
   cycleCount: 0,
   lastResult: null,
@@ -238,7 +233,7 @@ const OdorOrchestrator = {
     this.cycleCount++;
     const cycleId = `CYCLE-${this.cycleCount.toString().padStart(5, '0')}`;
     LogService.info(`═══ ${cycleId} BEGIN ═══`);
-    LogService.info('Initializing Odor Pipeline...');
+    LogService.info('Initializing Hype Pipeline...');
 
     // Step 1: Generate 7x5 grid (THE ONLY THING THAT MATTERS)
     // grid[reel][row] — 7 reels, 5 rows each
@@ -290,7 +285,7 @@ const OdorOrchestrator = {
       }
 
       if (matchCount >= 3) {
-        const payoutTable = SYMBOL_PAYOUTS[firstReal] || SYMBOL_PAYOUTS['💨'];
+        const payoutTable = SYMBOL_PAYOUTS[firstReal] || SYMBOL_PAYOUTS['flower'];
         const linePayout = Math.floor(payoutTable[matchCount - 3] * multiplier);
         const wildCount = lineSymbols.slice(0, matchCount).filter(s => s === WILD_SYMBOL).length;
         const wildMult = wildCount > 0 ? 1 + wildCount * 0.5 : 1;
@@ -326,7 +321,7 @@ const OdorOrchestrator = {
     }
 
     if (isWin) {
-      LogService.success(`${winningLines.length} WINNING LINE${winningLines.length > 1 ? 'S' : ''} | Total: ${totalPayout} GasCoins (${multiplier.toFixed(2)}x base)`);
+      LogService.success(`${winningLines.length} WINNING LINE${winningLines.length > 1 ? 'S' : ''} | Total: ${totalPayout} GlitterCoins (${multiplier.toFixed(2)}x base)`);
     }
 
     return { grid, payout: totalPayout, winType, isWin, multiplier, winningLines, totalWilds };
@@ -337,19 +332,19 @@ const OdorOrchestrator = {
     const totalWilds = result.totalWilds || 0;
 
     if (result.winningLines.length >= 8) {
-      return { type: 'codebrown', label: '🚨 CODE BROWN MEGA JACKPOT 🚨', message: `${result.winningLines.length} LINES HIT! MAXIMUM EMISSION ACROSS ALL CHAMBERS!` };
+      return { type: 'codebrown', label: '🦄 UNICORN STATUS ACHIEVED 🦄', message: `${result.winningLines.length} LINES HIT! MAXIMUM HYPE ACROSS ALL VERTICALS!` };
     }
     if (totalWilds >= 5) {
-      return { type: 'gasleak', label: '🌟 WILD EXPLOSION 🌟', message: `${totalWilds} WILDS ON GRID! CONTAINMENT IMPOSSIBLE!` };
+      return { type: 'gasleak', label: '🚀 ROCKET EXPLOSION 🚀', message: `${totalWilds} WILDS ON GRID! TO THE MOON, NO BRAKES!` };
     }
     if (roll < 0.04) {
-      return { type: 'gasleak', label: '⚠️ GAS LEAK MODE ⚠️', message: 'CONTAINMENT BREACH DETECTED. AUTO-SPIN ENGAGED.' };
+      return { type: 'gasleak', label: '⚠️ RUNWAY LEAK MODE ⚠️', message: 'BURN RATE BREACH DETECTED. AUTO-SPIN ENGAGED.' };
     }
     if (roll < 0.10) {
-      return { type: 'doubleflush', label: '🚽 DOUBLEFLUSH MULTIPLIER 🚽', message: 'FLUSH DYNAMICS AMPLIFIED. ALL REWARDS 2X.' };
+      return { type: 'doubleflush', label: '📈 DOUBLE GROWTH MULTIPLIER 📈', message: 'GROWTH DYNAMICS AMPLIFIED. ALL REWARDS 2X.' };
     }
     if (roll < 0.18) {
-      return { type: 'odor', label: '💨 ODOR BONUS 💨', message: 'UNBELIEVABLE ODOR BONUS ACTIVATED!!!' };
+      return { type: 'odor', label: '✨ HYPE BONUS ✨', message: 'UNBELIEVABLE HYPE BONUS ACTIVATED!!!' };
     }
     return null;
   }
@@ -388,7 +383,7 @@ const LogService = {
 
 const MetricsService = {
   update(result) {
-    // Odor intensity - always absurdly high
+    // Hype intensity - always absurdly high
     const odor = Math.floor(70 + Math.random() * 30);
     const odorEl = document.getElementById('m-odor');
     odorEl.textContent = odor + '%';
@@ -419,18 +414,18 @@ const MetricsService = {
     document.getElementById('bar-butt').style.width = butt + '%';
     document.getElementById('bar-butt').style.background = butt > 85 ? 'var(--neon-green)' : butt > 70 ? 'var(--neon-orange)' : 'var(--danger)';
 
-    if (butt <= 70) LogService.warn('Butt alignment unstable');
+    if (butt <= 70) LogService.warn('Founder alignment unstable');
   },
 
   randomFlicker() {
     // Occasionally flicker metrics for dramatic effect
     const systems = [
-      { id: 'sys-odor', states: ['RUNNING', 'PROCESSING', 'FLUSHING'] },
-      { id: 'sys-flat', states: ['NOMINAL', 'COMPUTING', 'EMITTING'] },
+      { id: 'sys-odor', states: ['RUNNING', 'PROCESSING', 'SCALING'] },
+      { id: 'sys-flat', states: ['NOMINAL', 'COMPUTING', 'PIVOTING'] },
       { id: 'sys-butt', states: ['SYNCED', 'CALIBRATING', 'ALIGNED'] },
-      { id: 'sys-flush', states: ['READY', 'BUFFERING', 'DRAINING'] },
+      { id: 'sys-flush', states: ['READY', 'BUFFERING', 'BURNING'] },
       { id: 'sys-dopa', states: ['ACTIVE', 'INJECTING', 'SURGING'] },
-      { id: 'sys-leak', states: ['MONITORING', 'SCANNING', 'SNIFFING'] }
+      { id: 'sys-leak', states: ['MONITORING', 'SCANNING', 'AUDITING'] }
     ];
 
     systems.forEach(sys => {
@@ -445,7 +440,7 @@ const MetricsService = {
 };
 
 // ═══════════════════════════════════════════
-//  AUDIO ENGINE (Web Audio API fart synthesis)
+//  AUDIO ENGINE (Web Audio API hype synthesis)
 // ═══════════════════════════════════════════
 
 const AudioEngine = {
@@ -593,98 +588,98 @@ const AudioEngine = {
 // ═══════════════════════════════════════════
 
 /**
- * GachaCollectionManager - Enterprise-grade collectible flatulence
+ * GachaCollectionManager - Enterprise-grade collectible founder
  * acquisition and ascension framework.
  *
  * Features:
- * - 69 unique farts across 6 rarity tiers
+ * - 69 unique founders across 6 rarity tiers
  * - Pity system (guaranteed legendary at 90 pulls)
  * - Stink Token dupe economy
- * - Ascension system (1-5 stars per fart)
+ * - Ascension system (1-5 stars per founder)
  * - Rotating limited banners (they never actually rotate)
  */
 
-const FART_COLLECTION = [
+const UNICORN_COLLECTION = [
   // ══ COMMON (20) ══
-  { id: 'c01', name: 'The Squeaker', emoji: '🐭', rarity: 'common', stars: 1, title: 'Office Chair Classic', lore: 'A modest emission. Barely registers on the Richter scale. Your coworker still heard it.', stats: { volume: 12, wetness: 5, duration: 0.3, regret: 15 } },
-  { id: 'c02', name: 'Silent Puff', emoji: '💭', rarity: 'common', stars: 1, title: 'The Deniable One', lore: 'Was that you? No. Definitely not. The dog isn\'t even here.', stats: { volume: 2, wetness: 8, duration: 0.5, regret: 40 } },
-  { id: 'c03', name: 'Morning Breeze', emoji: '🌅', rarity: 'common', stars: 1, title: 'Dawn Patrol', lore: 'The first emission of the day. Sets the tone for everything that follows.', stats: { volume: 18, wetness: 3, duration: 0.8, regret: 5 } },
-  { id: 'c04', name: 'The Toot', emoji: '🎺', rarity: 'common', stars: 1, title: 'Baby\'s First', lore: 'Simple. Clean. A foundational fart that every collector needs.', stats: { volume: 25, wetness: 2, duration: 0.2, regret: 3 } },
-  { id: 'c05', name: 'Desk Ripper', emoji: '🪑', rarity: 'common', stars: 1, title: 'Corporate Emission', lore: 'Amplified by the ergonomic mesh chair. HR has been notified.', stats: { volume: 30, wetness: 4, duration: 0.4, regret: 55 } },
-  { id: 'c06', name: 'The Fizz', emoji: '🥤', rarity: 'common', stars: 1, title: 'Post-Soda Pop', lore: 'Carbonation finds a way. It always finds a way.', stats: { volume: 15, wetness: 1, duration: 0.2, regret: 10 } },
-  { id: 'c07', name: 'Whisper Wind', emoji: '🍃', rarity: 'common', stars: 1, title: 'Nature\'s Sigh', lore: 'So gentle, so fleeting. Like a butterfly made of methane.', stats: { volume: 5, wetness: 0, duration: 1.0, regret: 2 } },
-  { id: 'c08', name: 'Bean Dream', emoji: '🫘', rarity: 'common', stars: 1, title: 'Legume Legacy', lore: 'You knew what would happen when you ate those beans. You did it anyway.', stats: { volume: 22, wetness: 6, duration: 0.6, regret: 25 } },
-  { id: 'c09', name: 'The Seep', emoji: '😶', rarity: 'common', stars: 1, title: 'Slow Release', lore: 'Not so much a fart as a gradual atmospheric event. Low pressure system moving in.', stats: { volume: 3, wetness: 7, duration: 3.0, regret: 30 } },
-  { id: 'c10', name: 'Bubble Pop', emoji: '🫧', rarity: 'common', stars: 1, title: 'Bathtub Special', lore: 'The acoustics of porcelain really bring out the midtones.', stats: { volume: 20, wetness: 95, duration: 0.1, regret: 0 } },
-  { id: 'c11', name: 'The Creak', emoji: '🚪', rarity: 'common', stars: 1, title: 'Rusty Gate', lore: 'Sounds like an old door. Smells like a new sin.', stats: { volume: 28, wetness: 2, duration: 0.7, regret: 20 } },
-  { id: 'c12', name: 'Subway Stealth', emoji: '🚇', rarity: 'common', stars: 1, title: 'Urban Camo', lore: 'Timed perfectly with the train arrival. You\'re basically a ninja.', stats: { volume: 35, wetness: 4, duration: 0.3, regret: 0 } },
-  { id: 'c13', name: 'Pillow Muffler', emoji: '🛏️', rarity: 'common', stars: 1, title: 'Bedtime Buddy', lore: 'Absorbed by 400 thread count Egyptian cotton. Contained, but not forgotten.', stats: { volume: 8, wetness: 3, duration: 0.5, regret: 15 } },
-  { id: 'c14', name: 'The Staccato', emoji: '🎵', rarity: 'common', stars: 1, title: 'Rhythm Section', lore: 'Pap-pap-pap-pap. Four quick notes. A percussive masterpiece.', stats: { volume: 18, wetness: 1, duration: 0.4, regret: 10 } },
-  { id: 'c15', name: 'Lunch Echo', emoji: '🥪', rarity: 'common', stars: 1, title: 'Sandwich Revenge', lore: 'That gas station sandwich said it was fresh. It lied.', stats: { volume: 24, wetness: 8, duration: 0.6, regret: 50 } },
-  { id: 'c16', name: 'The Flutter', emoji: '🦋', rarity: 'common', stars: 1, title: 'Dainty Emission', lore: 'So delicate it might actually be charming. It is not.', stats: { volume: 7, wetness: 0, duration: 0.3, regret: 8 } },
-  { id: 'c17', name: 'Nervous Gas', emoji: '😰', rarity: 'common', stars: 1, title: 'First Date Special', lore: 'Stress-induced. Perfectly timed with a silence in conversation.', stats: { volume: 14, wetness: 3, duration: 0.2, regret: 99 } },
-  { id: 'c18', name: 'The Rumble', emoji: '⛈️', rarity: 'common', stars: 1, title: 'Distant Thunder', lore: 'More felt than heard. The floorboards know what happened.', stats: { volume: 10, wetness: 5, duration: 1.2, regret: 12 } },
-  { id: 'c19', name: 'Gym Blast', emoji: '🏋️', rarity: 'common', stars: 1, title: 'Deadlift Special', lore: 'Core engagement at its finest. Everyone at the squat rack knows.', stats: { volume: 40, wetness: 2, duration: 0.5, regret: 65 } },
-  { id: 'c20', name: 'The Deflate', emoji: '🎈', rarity: 'common', stars: 1, title: 'Balloon Animal', lore: 'A slow, sad hiss. Like hope leaving the body.', stats: { volume: 6, wetness: 1, duration: 2.0, regret: 18 } },
+  { id: 'c01', name: 'The Pivot', emoji: '🔄', rarity: 'common', stars: 1, title: 'Strategic Realignment', lore: 'You didn\'t fail. You pivoted. Six times. This month.', stats: { volume: 12, wetness: 5, duration: 0.3, regret: 15 } },
+  { id: 'c02', name: 'Cold Email', emoji: '📧', rarity: 'common', stars: 1, title: 'Founder-Led Sales', lore: 'Hi {{firstName}}, I noticed your company... (they did not notice yours).', stats: { volume: 2, wetness: 8, duration: 0.5, regret: 40 } },
+  { id: 'c03', name: 'The Deck', emoji: '📊', rarity: 'common', stars: 1, title: 'Pre-Seed Special', lore: '47 slides. Zero revenue. Infinite TAM.', stats: { volume: 18, wetness: 3, duration: 0.8, regret: 5 } },
+  { id: 'c04', name: 'Free Trial', emoji: '🎟️', rarity: 'common', stars: 1, title: 'Freemium Forever', lore: 'Convert later. Or never. Mostly never.', stats: { volume: 25, wetness: 2, duration: 0.2, regret: 3 } },
+  { id: 'c05', name: 'LinkedIn Post', emoji: '📱', rarity: 'common', stars: 1, title: 'Thought Leadership', lore: 'Excited to announce... nothing, actually. 400 likes anyway.', stats: { volume: 30, wetness: 4, duration: 0.4, regret: 55 } },
+  { id: 'c06', name: 'The Standup', emoji: '🧍', rarity: 'common', stars: 1, title: 'Daily Sync', lore: '15 minutes that always become 45.', stats: { volume: 15, wetness: 1, duration: 0.2, regret: 10 } },
+  { id: 'c07', name: 'Ramen Budget', emoji: '🍜', rarity: 'common', stars: 1, title: 'Founder Salary', lore: 'You pay yourself last. If at all.', stats: { volume: 5, wetness: 0, duration: 1.0, regret: 2 } },
+  { id: 'c08', name: 'Slack Notification', emoji: '🔔', rarity: 'common', stars: 1, title: 'Async Culture', lore: '247 unread messages. You will get to them never.', stats: { volume: 22, wetness: 6, duration: 0.6, regret: 25 } },
+  { id: 'c09', name: 'The Whiteboard', emoji: '🖊️', rarity: 'common', stars: 1, title: 'Ideation Session', lore: 'Erased. Redrawn. Erased again.', stats: { volume: 3, wetness: 7, duration: 3.0, regret: 30 } },
+  { id: 'c10', name: 'Term Sheet Draft', emoji: '📝', rarity: 'common', stars: 1, title: 'Almost There', lore: 'Redlined for the fourth time this week.', stats: { volume: 20, wetness: 95, duration: 0.1, regret: 0 } },
+  { id: 'c11', name: 'Growth Hack', emoji: '📣', rarity: 'common', stars: 1, title: '10x Overnight', lore: 'Worked once. In 2019. For someone else.', stats: { volume: 28, wetness: 2, duration: 0.7, regret: 20 } },
+  { id: 'c12', name: 'The Onboarding Flow', emoji: '🚪', rarity: 'common', stars: 1, title: 'Day One Ritual', lore: '47 steps to click one button.', stats: { volume: 35, wetness: 4, duration: 0.3, regret: 0 } },
+  { id: 'c13', name: 'Cap Table Chaos', emoji: '🧮', rarity: 'common', stars: 1, title: 'Equity Spaghetti', lore: 'Nobody knows who owns what anymore. Including the founders.', stats: { volume: 8, wetness: 3, duration: 0.5, regret: 15 } },
+  { id: 'c14', name: 'Elevator Pitch', emoji: '🛗', rarity: 'common', stars: 1, title: 'The 30-Second Version', lore: 'Rehearsed 200 times. Still stumbles on floor 3.', stats: { volume: 18, wetness: 1, duration: 0.4, regret: 10 } },
+  { id: 'c15', name: 'The MVP', emoji: '🧱', rarity: 'common', stars: 1, title: 'Minimum Viable Product', lore: 'Emphasis on minimum.', stats: { volume: 24, wetness: 8, duration: 0.6, regret: 50 } },
+  { id: 'c16', name: 'Networking Event', emoji: '🍷', rarity: 'common', stars: 1, title: 'Open Bar Strategy', lore: 'Collected 40 cards. Followed up with none.', stats: { volume: 7, wetness: 0, duration: 0.3, regret: 8 } },
+  { id: 'c17', name: 'Feature Creep', emoji: '🐌', rarity: 'common', stars: 1, title: 'Scope Expansion', lore: 'Just one more thing. Then one more. Ship date: TBD forever.', stats: { volume: 14, wetness: 3, duration: 0.2, regret: 99 } },
+  { id: 'c18', name: 'The All-Hands', emoji: '🗣️', rarity: 'common', stars: 1, title: 'Company Update', lore: 'Morale stays high. Numbers stay vague.', stats: { volume: 10, wetness: 5, duration: 1.2, regret: 12 } },
+  { id: 'c19', name: 'Burn Rate Spreadsheet', emoji: '📉', rarity: 'common', stars: 1, title: 'Runway Countdown', lore: 'Refreshed anxiously every morning at 3am.', stats: { volume: 40, wetness: 2, duration: 0.5, regret: 65 } },
+  { id: 'c20', name: 'Swag Box', emoji: '👕', rarity: 'common', stars: 1, title: 'Company Merch', lore: 'The hoodie outlived the startup.', stats: { volume: 6, wetness: 1, duration: 2.0, regret: 18 } },
 
   // ══ UNCOMMON (15) ══
-  { id: 'u01', name: 'Broccoli\'s Revenge', emoji: '🥦', rarity: 'uncommon', stars: 2, title: 'Vegetal Vengeance', lore: 'You thought eating healthy would be good for you. The broccoli had other plans.', stats: { volume: 45, wetness: 12, duration: 1.5, regret: 40 } },
-  { id: 'u02', name: 'The Hot Box', emoji: '🚗', rarity: 'uncommon', stars: 2, title: 'Road Trip Ruiner', lore: 'Window locks engaged. Child locks on. There is no escape from this vehicle.', stats: { volume: 35, wetness: 15, duration: 2.0, regret: 75 } },
-  { id: 'u03', name: 'Elevator Gambit', emoji: '🛗', rarity: 'uncommon', stars: 2, title: 'Floor 13 Special', lore: 'Deployed at floor 3. You exit at floor 4. The next passenger enters at floor 5. Perfect crime.', stats: { volume: 20, wetness: 18, duration: 4.0, regret: 5 } },
-  { id: 'u04', name: 'The Dutch Oven', emoji: '🫕', rarity: 'uncommon', stars: 2, title: 'Relationship Tester', lore: 'Trapped under the comforter. A test of love. Few pass.', stats: { volume: 30, wetness: 10, duration: 8.0, regret: 60 } },
-  { id: 'u05', name: 'Yoga Release', emoji: '🧘', rarity: 'uncommon', stars: 2, title: 'Downward Dog Disaster', lore: 'The instructor said to "let go of tension." You did. Everyone heard.', stats: { volume: 42, wetness: 3, duration: 0.8, regret: 95 } },
-  { id: 'u06', name: 'Double Barrel', emoji: '🔫', rarity: 'uncommon', stars: 2, title: 'The Sequel', lore: 'Two distinct blasts in rapid succession. The second one surprises even you.', stats: { volume: 55, wetness: 8, duration: 0.6, regret: 35 } },
-  { id: 'u07', name: 'The Marinator', emoji: '🥩', rarity: 'uncommon', stars: 2, title: 'Meat Sweats Edition', lore: 'Post-BBQ emission. Has actual flavor notes. Sommeliers weep.', stats: { volume: 38, wetness: 20, duration: 1.2, regret: 45 } },
-  { id: 'u08', name: 'Meeting Muffler', emoji: '💼', rarity: 'uncommon', stars: 2, title: 'Q3 Review Saboteur', lore: 'Perfectly synced with "any questions?" Nobody had questions after that.', stats: { volume: 25, wetness: 6, duration: 0.4, regret: 88 } },
-  { id: 'u09', name: 'Cheek Flapper', emoji: '👋', rarity: 'uncommon', stars: 2, title: 'Standing Ovation', lore: 'Audible cheek vibration. The leather couch was NOT your friend today.', stats: { volume: 60, wetness: 4, duration: 0.5, regret: 50 } },
-  { id: 'u10', name: 'The Percolator', emoji: '☕', rarity: 'uncommon', stars: 2, title: 'Morning Brew', lore: 'Coffee in, gas out. The biological percolation cycle continues.', stats: { volume: 28, wetness: 14, duration: 1.8, regret: 20 } },
-  { id: 'u11', name: 'Sleep Bomber', emoji: '😴', rarity: 'uncommon', stars: 2, title: 'Unconscious Warfare', lore: 'You don\'t remember it. Your partner does. They always do.', stats: { volume: 50, wetness: 9, duration: 2.5, regret: 0 } },
-  { id: 'u12', name: 'The Crop Duster', emoji: '✈️', rarity: 'uncommon', stars: 2, title: 'Aisle Walker', lore: 'Walking and releasing. A trail of destruction through the grocery store.', stats: { volume: 15, wetness: 11, duration: 10.0, regret: 10 } },
-  { id: 'u13', name: 'Wet Bark', emoji: '🐕', rarity: 'uncommon', stars: 2, title: 'Suspicious Moisture', lore: 'Was that... wet? A moment of existential uncertainty follows.', stats: { volume: 32, wetness: 55, duration: 0.3, regret: 80 } },
-  { id: 'u14', name: 'The Choir', emoji: '🎶', rarity: 'uncommon', stars: 2, title: 'Multi-Note Melody', lore: 'Rises, falls, rises again. A genuine three-act structure.', stats: { volume: 38, wetness: 5, duration: 1.5, regret: 25 } },
-  { id: 'u15', name: 'Protein Shake', emoji: '🥤', rarity: 'uncommon', stars: 2, title: 'Gains to Pains', lore: 'The whey must exit somehow. Today it chose violence.', stats: { volume: 48, wetness: 16, duration: 1.0, regret: 55 } },
+  { id: 'u01', name: 'Series A Term Sheet', emoji: '📄', rarity: 'uncommon', stars: 2, title: 'The Real Deal', lore: 'You thought pre-seed was hard. This has actual due diligence.', stats: { volume: 45, wetness: 12, duration: 1.5, regret: 40 } },
+  { id: 'u02', name: 'Angel Investor DM', emoji: '👼', rarity: 'uncommon', stars: 2, title: 'Warm Intro Required', lore: 'They replied. To the cold email. This has never happened before.', stats: { volume: 35, wetness: 15, duration: 2.0, regret: 75 } },
+  { id: 'u03', name: 'Product Hunt Launch', emoji: '🏹', rarity: 'uncommon', stars: 2, title: '#4 Of The Day', lore: 'Not #1. Never #1. But you tweeted about it like you were.', stats: { volume: 20, wetness: 18, duration: 4.0, regret: 5 } },
+  { id: 'u04', name: 'The Acqui-hire', emoji: '🤲', rarity: 'uncommon', stars: 2, title: 'Soft Landing', lore: 'Technically an exit. Emotionally a eulogy.', stats: { volume: 30, wetness: 10, duration: 8.0, regret: 60 } },
+  { id: 'u05', name: 'Growth Metrics Dashboard', emoji: '📊', rarity: 'uncommon', stars: 2, title: 'Vanity Metrics Central', lore: 'The instructor said "focus on what matters." You did not.', stats: { volume: 42, wetness: 3, duration: 0.8, regret: 95 } },
+  { id: 'u06', name: 'Office Ping Pong Table', emoji: '🏓', rarity: 'uncommon', stars: 2, title: 'Culture Investment', lore: 'Used twice. Once for the recruiting photo.', stats: { volume: 55, wetness: 8, duration: 0.6, regret: 35 } },
+  { id: 'u07', name: 'The Rebrand', emoji: '🎨', rarity: 'uncommon', stars: 2, title: 'New Logo, Same Problems', lore: 'Six figures later, the churn rate is unchanged but the font is rounder.', stats: { volume: 38, wetness: 20, duration: 1.2, regret: 45 } },
+  { id: 'u08', name: 'Investor Update Email', emoji: '📬', rarity: 'uncommon', stars: 2, title: 'Monthly Optimism', lore: 'Perfectly synced with "any questions?" Nobody had questions after that.', stats: { volume: 25, wetness: 6, duration: 0.4, regret: 88 } },
+  { id: 'u09', name: 'Customer Churn Report', emoji: '📉', rarity: 'uncommon', stars: 2, title: 'The Uncomfortable Truth', lore: 'The leather boardroom chair was NOT your friend during this presentation.', stats: { volume: 60, wetness: 4, duration: 0.5, regret: 50 } },
+  { id: 'u10', name: 'Hiring Freeze', emoji: '🧊', rarity: 'uncommon', stars: 2, title: 'Runway Extension Tactic', lore: 'Coffee in, layoffs out. The biological runway cycle continues.', stats: { volume: 28, wetness: 14, duration: 1.8, regret: 20 } },
+  { id: 'u11', name: 'The Advisory Board', emoji: '🎓', rarity: 'uncommon', stars: 2, title: 'Equity For Vibes', lore: 'You don\'t remember agreeing to 2%. They always remember.', stats: { volume: 50, wetness: 9, duration: 2.5, regret: 0 } },
+  { id: 'u12', name: 'Beta Waitlist', emoji: '⏳', rarity: 'uncommon', stars: 2, title: '10,000 Signups, 12 Users', lore: 'A trail of unopened emails through the entire TAM.', stats: { volume: 15, wetness: 11, duration: 10.0, regret: 10 } },
+  { id: 'u13', name: 'Series A Extension', emoji: '🔁', rarity: 'uncommon', stars: 2, title: 'The Bridge Round', lore: 'Was that... a down round? A moment of existential uncertainty follows.', stats: { volume: 32, wetness: 55, duration: 0.3, regret: 80 } },
+  { id: 'u14', name: 'Founder Burnout', emoji: '🕯️', rarity: 'uncommon', stars: 2, title: 'The Real Cost of Hustle', lore: 'Rises, falls, rises again. A genuine three-act structure, therapist billed hourly.', stats: { volume: 38, wetness: 5, duration: 1.5, regret: 25 } },
+  { id: 'u15', name: 'Competitor Copycat', emoji: '🪞', rarity: 'uncommon', stars: 2, title: 'Flattery, Allegedly', lore: 'They must exit somehow. Today they chose your entire roadmap.', stats: { volume: 48, wetness: 16, duration: 1.0, regret: 55 } },
 
   // ══ RARE (15) ══
-  { id: 'r01', name: 'Thunderclap', emoji: '⚡', rarity: 'rare', stars: 3, title: 'Zeus\'s Backdraft', lore: 'A single, devastating report that echoes through the halls. Coworkers three rooms over felt the pressure change.', stats: { volume: 85, wetness: 8, duration: 0.3, regret: 60 } },
-  { id: 'r02', name: 'Silent But Deadly', emoji: '☠️', rarity: 'rare', stars: 3, title: 'The Invisible Hand', lore: 'No sound. No warning. Just suddenly everyone in the room is questioning their life choices.', stats: { volume: 0, wetness: 25, duration: 15.0, regret: 70 } },
-  { id: 'r03', name: 'Taco Tuesday', emoji: '🌮', rarity: 'rare', stars: 3, title: 'Tex-Mex Terror', lore: 'Four tacos, extra hot sauce. Your intestines are running the Manhattan Project in there.', stats: { volume: 65, wetness: 30, duration: 2.0, regret: 45 } },
-  { id: 'r04', name: 'The Bassline', emoji: '🔊', rarity: 'rare', stars: 3, title: 'Subwoofer Edition', lore: 'So deep you feel it in your chest. Rattles nearby objects. Dogs howl.', stats: { volume: 75, wetness: 10, duration: 1.8, regret: 30 } },
-  { id: 'r05', name: 'Phantom Ripper', emoji: '👻', rarity: 'rare', stars: 3, title: 'Ghost Protocol', lore: 'You felt it leave. But there\'s no smell. WHERE DID IT GO? It\'s waiting. Planning.', stats: { volume: 40, wetness: 0, duration: 0.2, regret: 50 } },
-  { id: 'r06', name: 'The Foghorn', emoji: '🚢', rarity: 'rare', stars: 3, title: 'Harbor Master', lore: 'Deep, resonant, and authoritative. Ships in the harbor change course.', stats: { volume: 80, wetness: 12, duration: 3.0, regret: 35 } },
-  { id: 'r07', name: 'Curry Storm', emoji: '🍛', rarity: 'rare', stars: 3, title: 'Vindaloo Vortex', lore: 'The ghost pepper curry was a mistake. Your body is now a superfund site.', stats: { volume: 58, wetness: 35, duration: 2.5, regret: 55 } },
-  { id: 'r08', name: 'The Tremor', emoji: '🫨', rarity: 'rare', stars: 3, title: 'Seismic Event', lore: 'Registered on local seismographs as a 1.2 magnitude event. USGS is investigating.', stats: { volume: 70, wetness: 15, duration: 1.5, regret: 40 } },
-  { id: 'r09', name: 'Sulfur Springs', emoji: '♨️', rarity: 'rare', stars: 3, title: 'Hot Springs Horror', lore: 'Eggy. So eggy. The bathroom smells like Yellowstone. Someone calls the gas company.', stats: { volume: 45, wetness: 22, duration: 8.0, regret: 75 } },
-  { id: 'r10', name: 'Air Biscuit', emoji: '🍪', rarity: 'rare', stars: 3, title: 'Baker\'s Dozen', lore: 'Warm and aromatic. But not in the way baked goods should be. Not at all.', stats: { volume: 35, wetness: 18, duration: 5.0, regret: 38 } },
-  { id: 'r11', name: 'The Ricochet', emoji: '🪃', rarity: 'rare', stars: 3, title: 'Boomerang Blast', lore: 'You thought it was over. It came back. With reinforcements.', stats: { volume: 55, wetness: 8, duration: 0.8, regret: 45 } },
-  { id: 'r12', name: 'Fiber Optic', emoji: '🌾', rarity: 'rare', stars: 3, title: 'Health Food Havoc', lore: 'All that fiber finally connected. You are now a broadband emission source.', stats: { volume: 62, wetness: 20, duration: 2.2, regret: 30 } },
-  { id: 'r13', name: 'The Trumpeter', emoji: '🎺', rarity: 'rare', stars: 3, title: 'Royal Fanfare', lore: 'A regal, brass-like tone that commands attention. The queen would not be amused.', stats: { volume: 72, wetness: 5, duration: 1.0, regret: 42 } },
-  { id: 'r14', name: 'Beer Fog', emoji: '🍺', rarity: 'rare', stars: 3, title: 'Last Call Emission', lore: 'Six IPAs deep. Your gut biome has declared independence. This is their national anthem.', stats: { volume: 50, wetness: 28, duration: 3.5, regret: 55 } },
-  { id: 'r15', name: 'The Squealer', emoji: '🐷', rarity: 'rare', stars: 3, title: 'High Frequency Alert', lore: 'So high-pitched only dogs and embarrassed humans can hear it.', stats: { volume: 42, wetness: 6, duration: 0.4, regret: 85 } },
+  { id: 'r01', name: 'The Unicorn Valuation', emoji: '🦄', rarity: 'rare', stars: 3, title: 'On Paper Only', lore: 'A single, devastating term sheet that echoes through the halls. Investors three rooms over felt the FOMO.', stats: { volume: 85, wetness: 8, duration: 0.3, regret: 60 } },
+  { id: 'r02', name: 'Down Round', emoji: '📉', rarity: 'rare', stars: 3, title: 'The Humbling', lore: 'No warning. Just suddenly everyone in the cap table is questioning their life choices.', stats: { volume: 0, wetness: 25, duration: 15.0, regret: 70 } },
+  { id: 'r03', name: 'VC Bidding War', emoji: '⚔️', rarity: 'rare', stars: 3, title: 'Term Sheet Chaos', lore: 'Four VCs, one Slack thread. Your intestines are running the negotiation in there.', stats: { volume: 65, wetness: 30, duration: 2.0, regret: 45 } },
+  { id: 'r04', name: 'The Exit Rumor', emoji: '👀', rarity: 'rare', stars: 3, title: 'Someone Heard Something', lore: 'So deep you feel it in the group chat. Rattles nearby competitors. Recruiters howl.', stats: { volume: 75, wetness: 10, duration: 1.8, regret: 30 } },
+  { id: 'r05', name: 'Viral Tweet', emoji: '🐦', rarity: 'rare', stars: 3, title: 'Main Character Energy', lore: 'You felt it leave. But there\'s no revenue. WHERE DID THE USERS GO? They\'re waiting. Planning to churn.', stats: { volume: 40, wetness: 0, duration: 0.2, regret: 50 } },
+  { id: 'r06', name: 'Board Meeting Ambush', emoji: '🗡️', rarity: 'rare', stars: 3, title: 'Surprise Agenda Item', lore: 'Deep, resonant, and authoritative. The whole board changes course.', stats: { volume: 80, wetness: 12, duration: 3.0, regret: 35 } },
+  { id: 'r07', name: 'The Co-Founder Breakup', emoji: '💔', rarity: 'rare', stars: 3, title: 'Vesting Cliff Drama', lore: 'The four-year cliff was a mistake. Your equity is now a superfund site.', stats: { volume: 58, wetness: 35, duration: 2.5, regret: 55 } },
+  { id: 'r08', name: 'Secondary Sale', emoji: '💵', rarity: 'rare', stars: 3, title: 'Chips Off The Table', lore: 'Registered on local gossip networks as a 1.2 magnitude event. LinkedIn is investigating.', stats: { volume: 70, wetness: 15, duration: 1.5, regret: 40 } },
+  { id: 'r09', name: 'Acquisition Offer', emoji: '🤝', rarity: 'rare', stars: 3, title: 'Too Good, Too Weird', lore: 'Eggy. So eggy. The whole term sheet smells like a trap. Legal calls a meeting.', stats: { volume: 45, wetness: 22, duration: 8.0, regret: 75 } },
+  { id: 'r10', name: 'The Pivot That Worked', emoji: '✨', rarity: 'rare', stars: 3, title: 'Lightning In A Bottle', lore: 'Warm and unexpected. But not in the way the original pitch deck promised. Not at all.', stats: { volume: 35, wetness: 18, duration: 5.0, regret: 38 } },
+  { id: 'r11', name: 'Hostile Takeover Attempt', emoji: '🏴', rarity: 'rare', stars: 3, title: 'Boardroom Drama', lore: 'You thought the deal was closed. It came back. With lawyers.', stats: { volume: 55, wetness: 8, duration: 0.8, regret: 45 } },
+  { id: 'r12', name: 'Regulatory Investigation', emoji: '🕵️', rarity: 'rare', stars: 3, title: 'Growing Pains, Legally', lore: 'All that "move fast" finally connected with a subpoena. You are now a broadband compliance source.', stats: { volume: 62, wetness: 20, duration: 2.2, regret: 30 } },
+  { id: 'r13', name: 'The Media Profile', emoji: '📰', rarity: 'rare', stars: 3, title: '40 Under 40, Barely', lore: 'A regal, brass-like profile that commands attention. The competitors would not be amused.', stats: { volume: 72, wetness: 5, duration: 1.0, regret: 42 } },
+  { id: 'r14', name: 'Employee Stock Windfall', emoji: '💸', rarity: 'rare', stars: 3, title: 'Options Finally Worth Something', lore: 'Six years deep. The whole team has declared independence. This is their national anthem.', stats: { volume: 50, wetness: 28, duration: 3.5, regret: 55 } },
+  { id: 'r15', name: 'Emergency Bridge Round', emoji: '🌉', rarity: 'rare', stars: 3, title: 'Runway CPR', lore: 'So high-pressure only the CFO and embarrassed founders can hear the alarm.', stats: { volume: 42, wetness: 6, duration: 0.4, regret: 85 } },
 
   // ══ EPIC (10) ══
-  { id: 'e01', name: 'The Chainsaw', emoji: '🪚', rarity: 'epic', stars: 4, title: 'Power Tool of the Colon', lore: 'BRRRRRRR. A sustained, mechanical emission that sounds like a 2-stroke engine starting up. Neighbors call the cops.', stats: { volume: 88, wetness: 15, duration: 4.0, regret: 60 } },
-  { id: 'e02', name: 'Trouser Cough', emoji: '👖', rarity: 'epic', stars: 4, title: 'Denim Destroyer', lore: 'The jeans tried to contain it. The jeans failed. Structural denim integrity compromised.', stats: { volume: 78, wetness: 22, duration: 1.2, regret: 72 } },
-  { id: 'e03', name: 'The Exorcism', emoji: '😈', rarity: 'epic', stars: 4, title: 'Demonic Expulsion', lore: 'Your head didn\'t spin, but your gut did. The priest is on speed dial now. Holy water doesn\'t help.', stats: { volume: 82, wetness: 30, duration: 2.5, regret: 55 } },
-  { id: 'e04', name: 'Magnitude 5', emoji: '🌋', rarity: 'epic', stars: 4, title: 'Tectonic Shift', lore: 'The earth moved. Not in the romantic way. Geological surveys have been dispatched. This is a natural disaster.', stats: { volume: 90, wetness: 20, duration: 3.0, regret: 50 } },
-  { id: 'e05', name: 'The Orchestra', emoji: '🎻', rarity: 'epic', stars: 4, title: 'Philharmonic Flatulence', lore: 'Multiple notes, harmonics, overtones. Somewhere, a music theory professor takes notes and weeps with joy.', stats: { volume: 72, wetness: 8, duration: 5.0, regret: 20 } },
-  { id: 'e06', name: 'Dairy Doom', emoji: '🧀', rarity: 'epic', stars: 4, title: 'Lactose Reckoning', lore: 'You KNEW you were intolerant. The cheese knew too. This is mutually assured destruction.', stats: { volume: 85, wetness: 40, duration: 6.0, regret: 80 } },
-  { id: 'e07', name: 'The Time Bomb', emoji: '💣', rarity: 'epic', stars: 4, title: 'Delayed Detonation', lore: 'Silent release. Then you leave the room. Then 90 seconds later, screaming.', stats: { volume: 5, wetness: 35, duration: 90.0, regret: 15 } },
-  { id: 'e08', name: 'Swamp Thing', emoji: '🐊', rarity: 'epic', stars: 4, title: 'Wetland Horror', lore: 'So humid you can feel the moisture. The room develops its own weather system. Meteorologists confused.', stats: { volume: 65, wetness: 85, duration: 4.5, regret: 70 } },
-  { id: 'e09', name: 'Bugle Blast', emoji: '📯', rarity: 'epic', stars: 4, title: 'Call to Harms', lore: 'CHARGE! A battle cry from your bowels. The troops rally. The enemy retreats. Geneva Convention violated.', stats: { volume: 92, wetness: 5, duration: 1.5, regret: 25 } },
-  { id: 'e10', name: 'The Encore', emoji: '👏', rarity: 'epic', stars: 4, title: 'Standing Devastation', lore: 'Just when they thought it was over. Just when the air cleared. YOU CAME BACK FOR MORE.', stats: { volume: 80, wetness: 18, duration: 3.0, regret: 40 } },
+  { id: 'e01', name: 'The IPO Filing', emoji: '📜', rarity: 'epic', stars: 4, title: 'S-1 Goes Public', lore: 'BRRRRRRR. A sustained, mechanical disclosure that sounds like a legal team starting up. Analysts call in.', stats: { volume: 88, wetness: 15, duration: 4.0, regret: 60 } },
+  { id: 'e02', name: 'Billion Dollar Term Sheet', emoji: '💰', rarity: 'epic', stars: 4, title: 'The Big One', lore: 'The lawyers tried to contain it. The lawyers failed. Structural cap table integrity compromised.', stats: { volume: 78, wetness: 22, duration: 1.2, regret: 72 } },
+  { id: 'e03', name: 'Founder Cover Story', emoji: '🖼️', rarity: 'epic', stars: 4, title: 'Magazine Cover Energy', lore: 'Your face didn\'t change, but your ego did. The PR team is on speed dial now. Humility doesn\'t help.', stats: { volume: 82, wetness: 30, duration: 2.5, regret: 55 } },
+  { id: 'e04', name: 'The Talent Raid', emoji: '🏹', rarity: 'epic', stars: 4, title: 'Poached The Whole Team', lore: 'The org chart moved. Not in the romantic way. HR surveys have been dispatched. This is a natural disaster.', stats: { volume: 90, wetness: 20, duration: 3.0, regret: 50 } },
+  { id: 'e05', name: 'Category Creation', emoji: '🌌', rarity: 'epic', stars: 4, title: 'We Invented This Market', lore: 'Multiple analysts, multiple reports, multiple asterisks. Somewhere, a Gartner intern takes notes and weeps with joy.', stats: { volume: 72, wetness: 8, duration: 5.0, regret: 20 } },
+  { id: 'e06', name: 'Global Expansion Launch', emoji: '🌍', rarity: 'epic', stars: 4, title: '47 Countries, Zero Localization', lore: 'You KNEW the market wasn\'t ready. The market knew too. This is mutually assured destruction.', stats: { volume: 85, wetness: 40, duration: 6.0, regret: 80 } },
+  { id: 'e07', name: 'The Time Bomb Clause', emoji: '💣', rarity: 'epic', stars: 4, title: 'Delayed Vesting Cliff', lore: 'Silent signature. Then you leave the company. Then 90 days later, screaming.', stats: { volume: 5, wetness: 35, duration: 90.0, regret: 15 } },
+  { id: 'e08', name: 'The Turnaround Story', emoji: '🐊', rarity: 'epic', stars: 4, title: 'From Down Round To Darling', lore: 'So sudden you can feel the momentum shift. The market develops its own weather system. Analysts confused.', stats: { volume: 65, wetness: 85, duration: 4.5, regret: 70 } },
+  { id: 'e09', name: 'Strategic Partnership Announcement', emoji: '📯', rarity: 'epic', stars: 4, title: 'Logos Touching', lore: 'CHARGE! A press release from the comms team. The stock rallies. The lawyers retreat. NDA violated.', stats: { volume: 92, wetness: 5, duration: 1.5, regret: 25 } },
+  { id: 'e10', name: 'The Acquisition Bake-Off', emoji: '🍰', rarity: 'epic', stars: 4, title: 'Everyone Wants A Slice', lore: 'Just when they thought the deal was done. Just when the term sheet cleared. THEY CAME BACK WITH A HIGHER BID.', stats: { volume: 80, wetness: 18, duration: 3.0, regret: 40 } },
 
   // ══ LEGENDARY (6) ══
-  { id: 'l01', name: 'The Brown Note', emoji: '🎵', rarity: 'legendary', stars: 5, title: 'Forbidden Frequency', lore: 'Legend speaks of a frequency so low, so resonant, that it triggers a sympathetic response in all who hear it. You have found it. God help us all.', stats: { volume: 95, wetness: 50, duration: 5.0, regret: 90 } },
-  { id: 'l02', name: 'Extinction Event', emoji: '☄️', rarity: 'legendary', stars: 5, title: 'K-T Boundary Layer', lore: 'The dinosaurs aren\'t really extinct. They were just in the blast radius. This fart has its own Wikipedia page.', stats: { volume: 98, wetness: 35, duration: 8.0, regret: 75 } },
-  { id: 'l03', name: 'The Kraken', emoji: '🐙', rarity: 'legendary', stars: 5, title: 'Release The Beast', lore: 'From the deepest depths of your intestinal ocean, something ancient and terrible stirs. Sailors report it from miles away.', stats: { volume: 88, wetness: 60, duration: 6.0, regret: 65 } },
-  { id: 'l04', name: 'Supernova', emoji: '💫', rarity: 'legendary', stars: 5, title: 'Stellar Collapse', lore: 'A dying star doesn\'t hold a candle to this. The emission is visible from space. NASA has questions. You have no answers.', stats: { volume: 99, wetness: 25, duration: 4.0, regret: 45 } },
-  { id: 'l05', name: 'Chernobyl Cheeks', emoji: '☢️', rarity: 'legendary', stars: 5, title: 'Reactor Meltdown', lore: 'Containment breach in sector 7. Evacuation recommended. Half-life of this emission: 3 hours. Zone of exclusion: 50 meters.', stats: { volume: 92, wetness: 45, duration: 10.0, regret: 85 } },
-  { id: 'l06', name: 'The Rapture', emoji: '😇', rarity: 'legendary', stars: 5, title: 'Holy Emission', lore: 'So powerful it becomes transcendent. You see God. God sees you. God pinches His nose. Churches close.', stats: { volume: 85, wetness: 30, duration: 7.0, regret: 0 } },
+  { id: 'l01', name: 'The Decacorn', emoji: '🦄👑', rarity: 'legendary', stars: 5, title: 'Ten Billion And Counting', lore: 'Legend speaks of a valuation so high, so resonant, that it triggers a sympathetic response in every LP. You have found it. The board help us all.', stats: { volume: 95, wetness: 50, duration: 5.0, regret: 90 } },
+  { id: 'l02', name: 'IPO Day Bell Ring', emoji: '🔔', rarity: 'legendary', stars: 5, title: 'NYSE Floor Chaos', lore: 'The founders aren\'t really calm. They\'re just in the blast radius of confetti. This moment has its own Wikipedia page.', stats: { volume: 98, wetness: 35, duration: 8.0, regret: 75 } },
+  { id: 'l03', name: 'The Acquihire By A Trillion-Dollar Company', emoji: '🐙', rarity: 'legendary', stars: 5, title: 'Big Tech Comes Calling', lore: 'From the deepest depths of the corp-dev budget, something ancient and terrible stirs. Competitors report it from miles away.', stats: { volume: 88, wetness: 60, duration: 6.0, regret: 65 } },
+  { id: 'l04', name: 'Founder On The Cover Of Forbes', emoji: '💫', rarity: 'legendary', stars: 5, title: '30 Under 30, Redux', lore: 'A dying news cycle doesn\'t hold a candle to this. The profile is visible from orbit. Skeptics have questions. You have no answers.', stats: { volume: 99, wetness: 25, duration: 4.0, regret: 45 } },
+  { id: 'l05', name: 'The Down Round Comeback', emoji: '☢️', rarity: 'legendary', stars: 5, title: 'Phoenix Round', lore: 'Containment of the narrative in sector 7. Investors recommended to re-engage. Half-life of the humility: 3 hours.', stats: { volume: 92, wetness: 45, duration: 10.0, regret: 85 } },
+  { id: 'l06', name: 'Total Category Domination', emoji: '😇', rarity: 'legendary', stars: 5, title: 'The Whole Market, Basically', lore: 'So powerful it becomes transcendent. You see the exit. The exit sees you. The exit pinches its nose. Competitors close.', stats: { volume: 85, wetness: 30, duration: 7.0, regret: 0 } },
 
   // ══ MYTHIC (3) ══
-  { id: 'm01', name: 'Nuclear Cheek Clapper', emoji: '☢️', rarity: 'mythic', stars: 6, title: 'The Destroyer of Worlds', lore: '"Now I am become fart, the destroyer of worlds." - J. Robert Oppenbottom. A weapon to surpass Metal Gear. The Geneva Convention was updated specifically because of this emission.', stats: { volume: 100, wetness: 69, duration: 15.0, regret: 100 } },
-  { id: 'm02', name: 'The Big Bang', emoji: '🌌', rarity: 'mythic', stars: 6, title: 'Origin of All Stink', lore: 'Cosmologists believe the universe began with an emission of incomprehensible magnitude. They were right. This is that emission. Existence itself was a fart.', stats: { volume: 100, wetness: 100, duration: 13800000000, regret: 0 } },
-  { id: 'm03', name: 'Fartimus Prime', emoji: '🤖', rarity: 'mythic', stars: 6, title: 'Autonomous Emission Entity', lore: 'This fart achieved sentience. It has opinions. It has a LinkedIn. It sends emails. It will NOT be contained. "Autobots, rip out."', stats: { volume: 100, wetness: 42, duration: 999, regret: -1 } },
+  { id: 'm01', name: 'The Unicorn Itself', emoji: '🦄', rarity: 'mythic', stars: 6, title: 'Disruptor Of Worlds', lore: '"Now I am become unicorn, disruptor of markets." - J. Robert Venturheimer. A weapon to surpass any Series B. The term sheet was updated specifically because of this valuation.', stats: { volume: 100, wetness: 69, duration: 15.0, regret: 100 } },
+  { id: 'm02', name: 'The Trillion Dollar Exit', emoji: '🌌', rarity: 'mythic', stars: 6, title: 'Origin Of All Valuation', lore: 'Cosmologists believe the market began with a raise of incomprehensible magnitude. They were right. This is that raise. Existence itself was a pitch deck.', stats: { volume: 100, wetness: 100, duration: 13800000000, regret: 0 } },
+  { id: 'm03', name: 'Founder Mode Activated', emoji: '🤖', rarity: 'mythic', stars: 6, title: 'Autonomous Hype Entity', lore: 'This founder achieved sentience. It has opinions. It has a LinkedIn newsletter. It sends 2am emails. It will NOT be contained. "Founders, full send."', stats: { volume: 100, wetness: 42, duration: 999, regret: -1 } },
 ];
 
 const RARITY_RATES = { common: 0.3831, uncommon: 0.2500, rare: 0.2000, epic: 0.1000, legendary: 0.0300, mythic: 0.0069 };
@@ -704,7 +699,7 @@ const GachaState = {
 
 /**
  * GachaEngine - Implements the gacha pull algorithm with pity system.
- * Compliant with FartGacha Regulation Framework (FGRF) v2.
+ * Compliant with UnicornGacha Regulation Framework (UGRF) v2.
  */
 const GachaEngine = {
   pull() {
@@ -732,8 +727,8 @@ const GachaEngine = {
       rarity = this._rollRarity(rates);
     }
 
-    // Pick random fart of that rarity
-    const pool = FART_COLLECTION.filter(f => f.rarity === rarity);
+    // Pick random founder of that rarity
+    const pool = UNICORN_COLLECTION.filter(f => f.rarity === rarity);
     const fart = pool[Math.floor(Math.random() * pool.length)];
 
     // Reset pity on legendary+
@@ -753,10 +748,10 @@ const GachaEngine = {
         entry.ascension++;
         LogService.success(`ASCENSION! ${fart.name} is now Ascension ${entry.ascension}!`);
       }
-      LogService.debug(`Dupe: ${fart.name} (x${entry.count}) → +${tokens} Stink Tokens`);
+      LogService.debug(`Dupe: ${fart.name} (x${entry.count}) → +${tokens} Clout Tokens`);
     } else {
       GachaState.collection[fart.id] = { count: 1, ascension: 0, new: true };
-      LogService.success(`NEW FART: ${fart.name} (${fart.rarity.toUpperCase()}) added to Fartdex!`);
+      LogService.success(`NEW UNICORN: ${fart.name} (${fart.rarity.toUpperCase()}) added to UnicornDex!`);
     }
 
     return { fart, isDupe, tokensEarned: isDupe ? STINK_TOKEN_VALUES[fart.rarity] : 0 };
@@ -930,7 +925,7 @@ function showWin(result) {
       winLinesEl.appendChild(tag);
     });
 
-    LogService.success(`${result.winType}! ${result.winningLines.length} lines | Payout: ${result.payout} GasCoins (${result.multiplier.toFixed(2)}x)`);
+    LogService.success(`${result.winType}! ${result.winningLines.length} lines | Payout: ${result.payout} GlitterCoins (${result.multiplier.toFixed(2)}x)`);
   }
 }
 
@@ -986,11 +981,11 @@ function showEvent(event) {
     setTimeout(() => { gameState.doubleFlushActive = false; }, 15000);
   } else if (event.type === 'odor') {
     gameState.coins += 200;
-    LogService.success('ODOR BONUS: +200 GasCoins');
-    AudioEngine.speak('UNBELIEVABLE ODOR BONUS!');
+    LogService.success('HYPE BONUS: +200 GlitterCoins');
+    AudioEngine.speak('UNBELIEVABLE HYPE BONUS!');
     screenFlash('rgba(255, 102, 0, 0.2)');
   } else if (event.type === 'codebrown') {
-    AudioEngine.speak('CODE BROWN! ALL CHAMBERS ALIGNED! MAXIMUM EMISSION!');
+    AudioEngine.speak('CODE UNICORN! ALL CHAMBERS ALIGNED! MAXIMUM HYPE!');
   }
 }
 
@@ -998,7 +993,7 @@ async function handleSpin(btn, e) {
   if (gameState.spinning) return;
   if (gameState.coins < 10) {
     LogService.error('INSUFFICIENT GAS COINS. Deposit more fiber.');
-    openShop('Not enough GasCoins to spin! Need 10.');
+    openShop('Not enough GlitterCoins to spin! Need 10.');
     return;
   }
 
@@ -1027,7 +1022,7 @@ async function handleSpin(btn, e) {
   updateUI();
 
   // THE ACTUAL GAME LOGIC (one line that matters, wrapped in absurdity)
-  const result = await OdorOrchestrator.process_spin();
+  const result = await HypeOrchestrator.process_spin();
 
   // Double flush bonus
   if (gameState.doubleFlushActive) {
@@ -1047,10 +1042,10 @@ async function handleSpin(btn, e) {
     if (ShopState.ftbActive && ShopState.ftbSpinsRemaining > 0) {
       odorGain *= 2;
       ShopState.ftbSpinsRemaining--;
-      LogService.success(`FTB 2X ODOR: +${odorGain} odor (${ShopState.ftbSpinsRemaining} spins remaining)`);
+      LogService.success(`FTB 2X HYPE: +${odorGain} odor (${ShopState.ftbSpinsRemaining} spins remaining)`);
       if (ShopState.ftbSpinsRemaining === 0) {
         ShopState.ftbActive = false;
-        LogService.info('PromotionEngine: First Time Bonus expired. Purchase more GasCoins for continued benefits.');
+        LogService.info('PromotionEngine: First Time Bonus expired. Purchase more GlitterCoins for continued benefits.');
       }
     }
     gameState.odorLevel = Math.min(999, gameState.odorLevel + odorGain);
@@ -1099,8 +1094,8 @@ function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 // ═══════════════════════════════════════════
 
 function switchTab(tab) {
-  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
-    btn.classList.toggle('active', btn.textContent === tab.toUpperCase());
+  document.querySelectorAll('.tab-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.tab === tab);
   });
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.getElementById(`tab-${tab}`).classList.add('active');
@@ -1119,15 +1114,15 @@ function updateGachaUI() {
   document.getElementById('pity-count').textContent = `${GachaState.pity} / ${GachaState.pityHard}`;
   document.getElementById('pity-bar').style.width = `${(GachaState.pity / GachaState.pityHard) * 100}%`;
   document.getElementById('stink-tokens').textContent = GachaState.stinkTokens.toLocaleString();
-  document.getElementById('collected-count').textContent = `${collected} / ${FART_COLLECTION.length}`;
-  document.getElementById('fdex-count').textContent = `${collected} / ${FART_COLLECTION.length} Collected`;
+  document.getElementById('collected-count').textContent = `${collected} / ${UNICORN_COLLECTION.length}`;
+  document.getElementById('fdex-count').textContent = `${collected} / ${UNICORN_COLLECTION.length} Collected`;
 }
 
 async function gachaPull(count) {
   const cost = count === 1 ? 100 : 900;
   if (gameState.coins < cost) {
     LogService.error(`INSUFFICIENT GAS COINS for ${count}x pull. Need ${cost}.`);
-    openShop(`Not enough GasCoins for ${count}x pull! Need ${cost.toLocaleString()}.`);
+    openShop(`Not enough GlitterCoins for ${count}x pull! Need ${cost.toLocaleString()}.`);
     return;
   }
 
@@ -1135,8 +1130,8 @@ async function gachaPull(count) {
   updateUI();
 
   LogService.info(`GachaEngine: Initiating ${count}x pull sequence...`);
-  LogService.debug('Warming up RNG entropy pool from /dev/butt0...');
-  LogService.info('FartAcquisitionPipeline: Resonance calibration complete');
+  LogService.debug('Warming up RNG entropy pool from /dev/vibe0...');
+  LogService.info('UnicornAcquisitionPipeline: Resonance calibration complete');
 
   const overlay = document.getElementById('gacha-overlay');
   overlay.classList.add('active');
@@ -1175,11 +1170,11 @@ async function singlePullAnimation() {
   document.getElementById('reveal-rarity').style.color = RARITY_COLORS[fart.rarity];
   document.getElementById('reveal-lore').textContent = `"${fart.lore}"`;
   document.getElementById('reveal-stats').innerHTML = Object.entries(fart.stats).map(([k, v]) =>
-    `<div><span class="fart-stat-label">${k.toUpperCase()}</span><br><span class="fart-stat-value">${v}</span></div>`
+    `<div><span class="fart-stat-label">${STAT_LABELS[k] || k.toUpperCase()}</span><br><span class="fart-stat-value">${v}</span></div>`
   ).join('');
 
   if (result.isDupe) {
-    document.getElementById('reveal-dupe').textContent = `DUPLICATE \u2192 +${result.tokensEarned} Stink Tokens`;
+    document.getElementById('reveal-dupe').textContent = `DUPLICATE \u2192 +${result.tokensEarned} Clout Tokens`;
     document.getElementById('reveal-dupe').style.display = 'block';
   } else {
     document.getElementById('reveal-dupe').style.display = 'none';
@@ -1193,7 +1188,7 @@ async function singlePullAnimation() {
     spawnParticles([fart.emoji, '\u2B50', '\u2728', '\u{1F4AB}'], 25);
     AudioEngine.fart('jackpot');
     AudioEngine.announce('jackpot');
-    setTimeout(() => AudioEngine.speak(`MYTHIC PULL! ${fart.name}! THE DESTROYER OF WORLDS!`), 600);
+    setTimeout(() => AudioEngine.speak(`MYTHIC PULL! ${fart.name}! DISRUPTOR OF WORLDS!`), 600);
   } else if (fart.rarity === 'legendary') {
     screenFlash('rgba(255, 170, 0, 0.3)');
     spawnParticles([fart.emoji, '\u2B50', '\u{1F31F}'], 15);
@@ -1266,7 +1261,7 @@ async function multiPullAnimation() {
   const newCount = results.filter(r => !r.isDupe).length;
   const dupeTokens = results.reduce((sum, r) => sum + r.tokensEarned, 0);
   const summary = document.getElementById('multi-summary');
-  summary.innerHTML = `${newCount} NEW | ${10 - newCount} DUPES | +${dupeTokens} Stink Tokens`;
+  summary.innerHTML = `${newCount} NEW | ${10 - newCount} DUPES | +${dupeTokens} Clout Tokens`;
 
   // Effects for best pull
   if (bestRarity === 'mythic' || bestRarity === 'legendary') {
@@ -1324,8 +1319,8 @@ function renderFartdex() {
   grid.innerHTML = '';
 
   const filtered = fartdexFilter === 'all'
-    ? FART_COLLECTION
-    : FART_COLLECTION.filter(f => f.rarity === fartdexFilter);
+    ? UNICORN_COLLECTION
+    : UNICORN_COLLECTION.filter(f => f.rarity === fartdexFilter);
 
   filtered.forEach(fart => {
     const owned = GachaState.collection[fart.id];
@@ -1360,7 +1355,7 @@ function renderFartdex() {
     `;
 
     if (owned) {
-      card.title = `${fart.name}\n${fart.title}\n"${fart.lore}"\nVol:${fart.stats.volume} Wet:${fart.stats.wetness} Dur:${fart.stats.duration} Regret:${fart.stats.regret}`;
+      card.title = `${fart.name}\n${fart.title}\n"${fart.lore}"\nHype:${fart.stats.volume} Risk:${fart.stats.wetness} Runway:${fart.stats.duration} Regret:${fart.stats.regret}`;
     }
 
     grid.appendChild(card);
@@ -1388,11 +1383,11 @@ function startBannerTimer() {
 // ═══════════════════════════════════════════
 
 const SHOP_PACKAGES = [
-  { coins: 500, bonus: 500, stink: 0, price: '$0.99', label: '1,000 GasCoins', firstBuy: true },
-  { coins: 1000, bonus: 100, stink: 0, price: '$1.99', label: '1,100 GasCoins' },
-  { coins: 5000, bonus: 1000, stink: 0, price: '$4.99', label: '6,000 GasCoins' },
-  { coins: 25000, bonus: 10000, stink: 50, price: '$19.99', label: '35,000 GasCoins' },
-  { coins: 100000, bonus: 69000, stink: 500, price: '$99.99', label: '169,000 GasCoins' },
+  { coins: 500, bonus: 500, stink: 0, price: '$0.99', label: '1,000 GlitterCoins', firstBuy: true },
+  { coins: 1000, bonus: 100, stink: 0, price: '$1.99', label: '1,100 GlitterCoins' },
+  { coins: 5000, bonus: 1000, stink: 0, price: '$4.99', label: '6,000 GlitterCoins' },
+  { coins: 25000, bonus: 10000, stink: 50, price: '$19.99', label: '35,000 GlitterCoins' },
+  { coins: 100000, bonus: 69000, stink: 500, price: '$99.99', label: '169,000 GlitterCoins' },
 ];
 
 const ShopState = {
@@ -1404,7 +1399,7 @@ const ShopState = {
 };
 
 function openShop(reason) {
-  document.getElementById('shop-insufficient').textContent = reason || 'INSUFFICIENT GASCOINS';
+  document.getElementById('shop-insufficient').textContent = reason || 'INSUFFICIENT GLITTER COINS';
   document.getElementById('shop-main').style.display = 'block';
   document.getElementById('shop-processing').classList.remove('active');
   document.getElementById('shop-success').classList.remove('active');
@@ -1428,7 +1423,7 @@ async function buyPackage(index) {
   const pkg = SHOP_PACKAGES[index];
 
   LogService.info(`MicrotransactionEngine: Processing purchase of ${pkg.label} (${pkg.price})...`);
-  LogService.debug('PaymentGateway: Connecting to FartCoin blockchain...');
+  LogService.debug('PaymentGateway: Connecting to GlitterCoin blockchain...');
 
   // Hide main, show processing
   document.getElementById('shop-main').style.display = 'none';
@@ -1438,12 +1433,12 @@ async function buyPackage(index) {
   // Fake processing steps
   const steps = [
     'Contacting GasCoin Blockchain...',
-    'Verifying flatulence credentials...',
+    'Verifying founder credentials...',
     'Processing payment through ButtPay\u2122...',
-    'Converting fiat to GasCoins...',
-    'Minting emission tokens...',
-    'Validating sphincter signature...',
-    'Depositing to OdorWallet...',
+    'Converting fiat to GlitterCoins...',
+    'Minting hype tokens...',
+    'Validating vibe signature...',
+    'Depositing to HypeWallet...',
   ];
 
   for (const step of steps) {
@@ -1470,14 +1465,14 @@ async function buyPackage(index) {
 
   // Show success
   const success = document.getElementById('shop-success');
-  document.getElementById('success-text').textContent = `+${totalCoins.toLocaleString()} GASCOINS`;
+  document.getElementById('success-text').textContent = `+${totalCoins.toLocaleString()} GLITTER COINS`;
   document.getElementById('success-sub').textContent = pkg.stink > 0
-    ? `Thank you for supporting independent flatulence research. +${pkg.stink} Stink Tokens.`
-    : 'Thank you for supporting independent flatulence research.';
+    ? `Thank you for supporting independent hype research. +${pkg.stink} Clout Tokens.`
+    : 'Thank you for supporting independent hype research.';
   success.classList.add('active');
 
-  LogService.success(`PURCHASE COMPLETE: +${totalCoins.toLocaleString()} GasCoins deposited!`);
-  if (pkg.stink > 0) LogService.success(`BONUS: +${pkg.stink} Stink Tokens`);
+  LogService.success(`PURCHASE COMPLETE: +${totalCoins.toLocaleString()} GlitterCoins deposited!`);
+  if (pkg.stink > 0) LogService.success(`BONUS: +${pkg.stink} Clout Tokens`);
 
   AudioEngine.announce('win');
   screenFlash('rgba(57, 255, 20, 0.2)');
@@ -1495,7 +1490,7 @@ async function buyPackage(index) {
 function showFirstTimeBonus() {
   if (ShopState.ftbClaimed) return;
   document.getElementById('ftb-banner').classList.add('active');
-  LogService.success('EVENT: First Time Double Odor Bonus available!');
+  LogService.success('EVENT: First Time Double Hype Bonus available!');
   LogService.info('PromotionEngine: New player detected. Deploying welcome bribe.');
 }
 
@@ -1510,8 +1505,8 @@ function claimFirstTimeBonus() {
 
   document.getElementById('ftb-banner').classList.remove('active');
 
-  LogService.success('FIRST TIME BONUS CLAIMED: +500 GasCoins!');
-  LogService.success('2X ODOR MULTIPLIER active for next 10 spins!');
+  LogService.success('FIRST TIME BONUS CLAIMED: +500 GlitterCoins!');
+  LogService.success('2X HYPE MULTIPLIER active for next 10 spins!');
   LogService.info('DopamineFeedbackController: Welcome injection administered.');
   AudioEngine.announce('jackpot');
   AudioEngine.speak('Welcome bonus claimed! Double odor activated!');
@@ -1546,42 +1541,42 @@ function dismissFTB() {
  *   Gacha Pull:  25 XP
  *   Event:      100 XP
  *
- * 30 Tiers. Premium costs 2,000 GasCoins.
+ * 30 Tiers. Premium costs 2,000 GlitterCoins.
  * Season never actually ends.
  */
 
 const BP_TIERS = [
   // tier, xpNeeded, freeReward, premiumReward
   { tier: 1,  xp: 100,   free: { emoji: '\u{1FA99}', label: '50 Coins', type: 'coins', amount: 50 },         premium: { emoji: '\u{1FA99}', label: '200 Coins', type: 'coins', amount: 200 } },
-  { tier: 2,  xp: 150,   free: { emoji: '\u{1F4A8}', label: 'Fart SFX: Squeaky', type: 'cosmetic', amount: 0 }, premium: { emoji: '\u{1F3AB}', label: '1 Gacha Pull', type: 'pull', amount: 1 } },
-  { tier: 3,  xp: 200,   free: { emoji: '\u{1FA99}', label: '100 Coins', type: 'coins', amount: 100 },        premium: { emoji: '\u{1F49C}', label: '10 Stink Tokens', type: 'stink', amount: 10 } },
+  { tier: 2,  xp: 150,   free: { emoji: '\u{1F4A8}', label: 'Hype SFX: Squeaky', type: 'cosmetic', amount: 0 }, premium: { emoji: '\u{1F3AB}', label: '1 Gacha Pull', type: 'pull', amount: 1 } },
+  { tier: 3,  xp: 200,   free: { emoji: '\u{1FA99}', label: '100 Coins', type: 'coins', amount: 100 },        premium: { emoji: '\u{1F49C}', label: '10 Clout Tokens', type: 'stink', amount: 10 } },
   { tier: 4,  xp: 250,   free: null,                                                                     premium: { emoji: '\u{1FA99}', label: '300 Coins', type: 'coins', amount: 300 } },
-  { tier: 5,  xp: 350,   free: { emoji: '\u{1F3F7}\uFE0F', label: 'Title: Gas Cadet', type: 'title', amount: 0 },    premium: { emoji: '\u{1F3AB}', label: '3 Gacha Pulls', type: 'pull', amount: 3 } },
-  { tier: 6,  xp: 400,   free: { emoji: '\u{1FA99}', label: '150 Coins', type: 'coins', amount: 150 },        premium: { emoji: '\u{1F49C}', label: '25 Stink Tokens', type: 'stink', amount: 25 } },
+  { tier: 5,  xp: 350,   free: { emoji: '\u{1F3F7}\uFE0F', label: 'Title: Hype Cadet', type: 'title', amount: 0 },    premium: { emoji: '\u{1F3AB}', label: '3 Gacha Pulls', type: 'pull', amount: 3 } },
+  { tier: 6,  xp: 400,   free: { emoji: '\u{1FA99}', label: '150 Coins', type: 'coins', amount: 150 },        premium: { emoji: '\u{1F49C}', label: '25 Clout Tokens', type: 'stink', amount: 25 } },
   { tier: 7,  xp: 500,   free: { emoji: '\u{1F4A8}', label: 'Profile: Dry Squeak', type: 'cosmetic', amount: 0 }, premium: { emoji: '\u{1FA99}', label: '500 Coins', type: 'coins', amount: 500 } },
   { tier: 8,  xp: 550,   free: null,                                                                     premium: { emoji: '\u{1F3AB}', label: '1 Gacha Pull', type: 'pull', amount: 1 } },
-  { tier: 9,  xp: 650,   free: { emoji: '\u{1FA99}', label: '200 Coins', type: 'coins', amount: 200 },        premium: { emoji: '\u{1F49C}', label: '30 Stink Tokens', type: 'stink', amount: 30 } },
-  { tier: 10, xp: 800,   free: { emoji: '\u{1F3F7}\uFE0F', label: 'Title: Odor Lieutenant', type: 'title', amount: 0 }, premium: { emoji: '\u2622\uFE0F', label: 'Emission: Green Cloud', type: 'cosmetic', amount: 0 } },
+  { tier: 9,  xp: 650,   free: { emoji: '\u{1FA99}', label: '200 Coins', type: 'coins', amount: 200 },        premium: { emoji: '\u{1F49C}', label: '30 Clout Tokens', type: 'stink', amount: 30 } },
+  { tier: 10, xp: 800,   free: { emoji: '\u{1F3F7}\uFE0F', label: 'Title: Hype Lieutenant', type: 'title', amount: 0 }, premium: { emoji: '\u2622\uFE0F', label: 'Aura: Green Cloud', type: 'cosmetic', amount: 0 } },
   { tier: 11, xp: 900,   free: { emoji: '\u{1FA99}', label: '250 Coins', type: 'coins', amount: 250 },        premium: { emoji: '\u{1FA99}', label: '750 Coins', type: 'coins', amount: 750 } },
   { tier: 12, xp: 1000,  free: null,                                                                     premium: { emoji: '\u{1F3AB}', label: '5 Gacha Pulls', type: 'pull', amount: 5 } },
-  { tier: 13, xp: 1100,  free: { emoji: '\u{1F4A8}', label: 'SFX: Wet Reverb', type: 'cosmetic', amount: 0 },  premium: { emoji: '\u{1F49C}', label: '50 Stink Tokens', type: 'stink', amount: 50 } },
+  { tier: 13, xp: 1100,  free: { emoji: '\u{1F4A8}', label: 'SFX: Wet Reverb', type: 'cosmetic', amount: 0 },  premium: { emoji: '\u{1F49C}', label: '50 Clout Tokens', type: 'stink', amount: 50 } },
   { tier: 14, xp: 1200,  free: { emoji: '\u{1FA99}', label: '300 Coins', type: 'coins', amount: 300 },        premium: { emoji: '\u{1FA99}', label: '1000 Coins', type: 'coins', amount: 1000 } },
-  { tier: 15, xp: 1400,  free: { emoji: '\u{1F3F7}\uFE0F', label: 'Title: Fart Captain', type: 'title', amount: 0 }, premium: { emoji: '\u{1F31F}', label: 'Pity -10', type: 'pity', amount: 10 } },
-  { tier: 16, xp: 1500,  free: null,                                                                     premium: { emoji: '\u{1F49C}', label: '75 Stink Tokens', type: 'stink', amount: 75 } },
+  { tier: 15, xp: 1400,  free: { emoji: '\u{1F3F7}\uFE0F', label: 'Title: Founder Captain', type: 'title', amount: 0 }, premium: { emoji: '\u{1F31F}', label: 'Pity -10', type: 'pity', amount: 10 } },
+  { tier: 16, xp: 1500,  free: null,                                                                     premium: { emoji: '\u{1F49C}', label: '75 Clout Tokens', type: 'stink', amount: 75 } },
   { tier: 17, xp: 1700,  free: { emoji: '\u{1FA99}', label: '400 Coins', type: 'coins', amount: 400 },        premium: { emoji: '\u{1F3AB}', label: '3 Gacha Pulls', type: 'pull', amount: 3 } },
   { tier: 18, xp: 1900,  free: { emoji: '\u{1F4A8}', label: 'Profile: Thunderclap', type: 'cosmetic', amount: 0 }, premium: { emoji: '\u{1FA99}', label: '1500 Coins', type: 'coins', amount: 1500 } },
-  { tier: 19, xp: 2100,  free: null,                                                                     premium: { emoji: '\u{1F49C}', label: '100 Stink Tokens', type: 'stink', amount: 100 } },
-  { tier: 20, xp: 2400,  free: { emoji: '\u{1F3F7}\uFE0F', label: 'Title: Gas Commander', type: 'title', amount: 0 }, premium: { emoji: '\u2622\uFE0F', label: 'Aura: Toxic Glow', type: 'cosmetic', amount: 0 } },
+  { tier: 19, xp: 2100,  free: null,                                                                     premium: { emoji: '\u{1F49C}', label: '100 Clout Tokens', type: 'stink', amount: 100 } },
+  { tier: 20, xp: 2400,  free: { emoji: '\u{1F3F7}\uFE0F', label: 'Title: Hype Commander', type: 'title', amount: 0 }, premium: { emoji: '\u2622\uFE0F', label: 'Aura: Toxic Glow', type: 'cosmetic', amount: 0 } },
   { tier: 21, xp: 2700,  free: { emoji: '\u{1FA99}', label: '500 Coins', type: 'coins', amount: 500 },        premium: { emoji: '\u{1F3AB}', label: '5 Gacha Pulls', type: 'pull', amount: 5 } },
   { tier: 22, xp: 3000,  free: null,                                                                     premium: { emoji: '\u{1FA99}', label: '2000 Coins', type: 'coins', amount: 2000 } },
-  { tier: 23, xp: 3400,  free: { emoji: '\u{1F4A8}', label: 'SFX: Nuclear Bass', type: 'cosmetic', amount: 0 }, premium: { emoji: '\u{1F49C}', label: '150 Stink Tokens', type: 'stink', amount: 150 } },
+  { tier: 23, xp: 3400,  free: { emoji: '\u{1F4A8}', label: 'SFX: Nuclear Bass', type: 'cosmetic', amount: 0 }, premium: { emoji: '\u{1F49C}', label: '150 Clout Tokens', type: 'stink', amount: 150 } },
   { tier: 24, xp: 3800,  free: { emoji: '\u{1FA99}', label: '750 Coins', type: 'coins', amount: 750 },        premium: { emoji: '\u{1F3AB}', label: '10 Gacha Pulls', type: 'pull', amount: 10 } },
-  { tier: 25, xp: 4200,  free: { emoji: '\u{1F3F7}\uFE0F', label: 'Title: Emission Admiral', type: 'title', amount: 0 }, premium: { emoji: '\u{1F31F}', label: 'Pity -20', type: 'pity', amount: 20 } },
-  { tier: 26, xp: 4800,  free: null,                                                                     premium: { emoji: '\u{1F49C}', label: '250 Stink Tokens', type: 'stink', amount: 250 } },
+  { tier: 25, xp: 4200,  free: { emoji: '\u{1F3F7}\uFE0F', label: 'Title: Hype Admiral', type: 'title', amount: 0 }, premium: { emoji: '\u{1F31F}', label: 'Pity -20', type: 'pity', amount: 20 } },
+  { tier: 26, xp: 4800,  free: null,                                                                     premium: { emoji: '\u{1F49C}', label: '250 Clout Tokens', type: 'stink', amount: 250 } },
   { tier: 27, xp: 5500,  free: { emoji: '\u{1FA99}', label: '1000 Coins', type: 'coins', amount: 1000 },      premium: { emoji: '\u{1FA99}', label: '5000 Coins', type: 'coins', amount: 5000 } },
   { tier: 28, xp: 6200,  free: { emoji: '\u{1F4A8}', label: 'Profile: Supernova', type: 'cosmetic', amount: 0 }, premium: { emoji: '\u{1F3AB}', label: '10 Gacha Pulls', type: 'pull', amount: 10 } },
-  { tier: 29, xp: 7000,  free: null,                                                                     premium: { emoji: '\u{1F49C}', label: '500 Stink Tokens', type: 'stink', amount: 500 } },
-  { tier: 30, xp: 8000,  free: { emoji: '\u{1F3F7}\uFE0F', label: 'Title: LORD OF GAS', type: 'title', amount: 0 }, premium: { emoji: '\u{1F916}', label: 'FARTIMUS PRIME', type: 'guaranteed_mythic', amount: 0 } },
+  { tier: 29, xp: 7000,  free: null,                                                                     premium: { emoji: '\u{1F49C}', label: '500 Clout Tokens', type: 'stink', amount: 500 } },
+  { tier: 30, xp: 8000,  free: { emoji: '\u{1F3F7}\uFE0F', label: 'Title: LORD OF HYPE', type: 'title', amount: 0 }, premium: { emoji: '\u{1F916}', label: 'FOUNDER MODE ACTIVATED', type: 'guaranteed_mythic', amount: 0 } },
 ];
 
 const BattlePassState = {
@@ -1637,16 +1632,16 @@ const BattlePassEngine = {
     switch (reward.type) {
       case 'coins':
         gameState.coins += reward.amount;
-        LogService.success(`BP REWARD (T${tier} ${track}): +${reward.amount} GasCoins`);
+        LogService.success(`BP REWARD (T${tier} ${track}): +${reward.amount} GlitterCoins`);
         break;
       case 'stink':
         GachaState.stinkTokens += reward.amount;
-        LogService.success(`BP REWARD (T${tier} ${track}): +${reward.amount} Stink Tokens`);
+        LogService.success(`BP REWARD (T${tier} ${track}): +${reward.amount} Clout Tokens`);
         break;
       case 'pull':
         // Give coins equivalent (100 per pull)
         gameState.coins += reward.amount * 100;
-        LogService.success(`BP REWARD (T${tier} ${track}): ${reward.amount} Gacha Pull(s) \u2192 +${reward.amount * 100} GasCoins`);
+        LogService.success(`BP REWARD (T${tier} ${track}): ${reward.amount} Gacha Pull(s) \u2192 +${reward.amount * 100} GlitterCoins`);
         break;
       case 'pity':
         GachaState.pity = Math.max(0, GachaState.pity - reward.amount);
@@ -1654,7 +1649,7 @@ const BattlePassEngine = {
         break;
       case 'guaranteed_mythic':
         // Give a mythic from the collection
-        const mythics = FART_COLLECTION.filter(f => f.rarity === 'mythic');
+        const mythics = UNICORN_COLLECTION.filter(f => f.rarity === 'mythic');
         const pick = mythics[Math.floor(Math.random() * mythics.length)];
         if (!GachaState.collection[pick.id]) {
           GachaState.collection[pick.id] = { count: 1, ascension: 0, new: true };
@@ -1663,7 +1658,7 @@ const BattlePassEngine = {
           GachaState.stinkTokens += 500;
         }
         LogService.success(`BP REWARD (T${tier} ${track}): GUARANTEED MYTHIC \u2014 ${pick.name}!!!`);
-        AudioEngine.speak(`Battle Pass reward! Mythic fart acquired! ${pick.name}!`);
+        AudioEngine.speak(`Battle Pass reward! Mythic founder acquired! ${pick.name}!`);
         screenFlash('rgba(255, 68, 204, 0.4)');
         spawnParticles([pick.emoji, '\u2B50', '\u2728'], 20);
         break;
@@ -1767,7 +1762,7 @@ const BattlePassEngine = {
 function buyPremiumPass() {
   if (BattlePassState.isPremium) return;
   if (gameState.coins < 2000) {
-    openShop('Not enough GasCoins for Premium Pass! Need 2,000.');
+    openShop('Not enough GlitterCoins for Premium Pass! Need 2,000.');
     return;
   }
 
@@ -1778,7 +1773,7 @@ function buyPremiumPass() {
   LogService.success('PREMIUM BATTLE PASS PURCHASED!');
   LogService.info('BattlePassEngine: Unlocking all earned premium rewards retroactively...');
   AudioEngine.announce('jackpot');
-  AudioEngine.speak('Premium Battle Pass activated! Welcome to the inner sphincter circle!');
+  AudioEngine.speak('Premium Battle Pass activated! Welcome to the inner founder circle!');
   screenFlash('rgba(255, 170, 0, 0.3)');
   spawnParticles(['\u2B50', '\u{1F451}', '\u{1F3C6}', '\u{1F48E}'], 15);
 
@@ -1803,63 +1798,63 @@ function startBPTimer() {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  FART PET TAMAGOTCHI SYSTEM
-//  Train your farts. Conquer bathrooms. Master the Taco Bell.
+//  STARTUP PET TAMAGOTCHI SYSTEM
+//  Train your founder. Conquer funding rounds. Master the exit.
 // ═══════════════════════════════════════════════════════════════════
 
 const BATHROOM_LADDER = [
-  { id: 'subway',      name: 'Subway',           emoji: '🥖', boss: 'The Footlong Phantom',     difficulty: 1,  volReq: 15,  wetReq: 5,   durReq: 1,   regReq: 10,  reward: 100,   unlockTitle: 'Sandwich Stinker',     lore: '"Eat fresh" they said. You ate. You released. The $5 footlong is now $0.' },
-  { id: 'mcdonalds',   name: "McDonald's",       emoji: '🍟', boss: 'The McRipper',             difficulty: 2,  volReq: 25,  wetReq: 10,  durReq: 2,   regReq: 20,  reward: 200,   unlockTitle: 'Drive-Thru Devastator', lore: 'Ba da ba ba baaaa... I\'m lovin\' the smell of destruction in the morning.' },
-  { id: 'burgerking',  name: 'Burger King',       emoji: '🍔', boss: 'The Whopper Whopper',      difficulty: 3,  volReq: 35,  wetReq: 15,  durReq: 3,   regReq: 25,  reward: 350,   unlockTitle: 'Flame-Broiled Bomber',  lore: 'Have it your way. YOUR way involves chemical warfare.' },
-  { id: 'wendys',      name: "Wendy's",           emoji: '🥤', boss: 'The Baconator Blast',      difficulty: 4,  volReq: 45,  wetReq: 20,  durReq: 4,   regReq: 30,  reward: 500,   unlockTitle: 'Frosty Fumigator',      lore: 'Sir, this IS a Wendy\'s. And it will never be the same.' },
-  { id: 'arbys',       name: "Arby's",            emoji: '🥩', boss: 'The Meat Mountain Miasma', difficulty: 5,  volReq: 55,  wetReq: 30,  durReq: 5,   regReq: 40,  reward: 750,   unlockTitle: 'Curly Fry Contaminator', lore: 'We have the meats. You have the gas. An unholy alliance.' },
-  { id: 'kfc',         name: 'KFC',               emoji: '🍗', boss: 'The Colonel\'s Curse',     difficulty: 6,  volReq: 65,  wetReq: 35,  durReq: 7,   regReq: 50,  reward: 1000,  unlockTitle: 'Bucket Blaster',        lore: '11 herbs, 11 spices, 1 devastating emission. The Colonel spins in his grave.' },
-  { id: 'fiveguys',    name: 'Five Guys',          emoji: '🥜', boss: 'The Cajun Catastrophe',   difficulty: 7,  volReq: 75,  wetReq: 40,  durReq: 8,   regReq: 55,  reward: 1500,  unlockTitle: 'Peanut Polluter',       lore: 'All those free peanuts were a trap. Your body is now a weapon of mass destruction.' },
-  { id: 'chipotle',    name: 'Chipotle',           emoji: '🌯', boss: 'The Burrito Bomb',        difficulty: 8,  volReq: 82,  wetReq: 50,  durReq: 10,  regReq: 65,  reward: 2000,  unlockTitle: 'Guac Guardian',         lore: 'Extra guac was extra. Extra everything. Your bowels signed a peace treaty and immediately violated it.' },
-  { id: 'whitecastle', name: 'White Castle',       emoji: '🏰', boss: 'The Slider Siege Engine', difficulty: 9,  volReq: 90,  wetReq: 60,  durReq: 12,  regReq: 75,  reward: 3000,  unlockTitle: 'Crave Case Criminal',   lore: '30 sliders at 2 AM. Harold and Kumar had NOTHING on this bathroom visit.' },
-  { id: 'tacobell',    name: 'Taco Bell',          emoji: '🌮', boss: 'THE CHALUPA OVERLORD',    difficulty: 10, volReq: 100, wetReq: 69,  durReq: 15,  regReq: 100, reward: 10000, unlockTitle: 'LORD OF THE BELL',      lore: 'The final boss. The ultimate bathroom. You didn\'t just Live Mas — you DESTROYED Mas. The Baja Blast flows through you now. You are one with the sauce. The toilet will never recover.' },
+  { id: 'preseed',    name: 'Pre-Seed',       emoji: '🌱', boss: 'The Friends & Family Round',   difficulty: 1,  volReq: 15,  wetReq: 5,   durReq: 1,   regReq: 10,  reward: 100,   unlockTitle: 'Bootstrap Baron',      lore: '"Just believe in the vision," they said. Your uncle wired $5,000. The valuation is now $50M on paper.' },
+  { id: 'seed',       name: 'Seed Round',     emoji: '👼', boss: 'The Angel Gauntlet',           difficulty: 2,  volReq: 25,  wetReq: 10,  durReq: 2,   regReq: 20,  reward: 200,   unlockTitle: 'Seed Slayer',          lore: 'Ba da ba ba baaaa... I\'m lovin\' the smell of a signed SAFE note in the morning.' },
+  { id: 'seriesA',    name: 'Series A',       emoji: '📄', boss: 'The Term Sheet Trial',         difficulty: 3,  volReq: 35,  wetReq: 15,  durReq: 3,   regReq: 25,  reward: 350,   unlockTitle: 'Series A Survivor',    lore: 'Have it your way. YOUR way involves a liquidation preference stack.' },
+  { id: 'seriesB',    name: 'Series B',       emoji: '📈', boss: 'The Growth Metrics Inquisition', difficulty: 4,  volReq: 45,  wetReq: 20,  durReq: 4,   regReq: 30,  reward: 500,   unlockTitle: 'Growth Gladiator',     lore: 'Sir, this IS a growth-stage company. And the CAC will never be the same.' },
+  { id: 'seriesC',    name: 'Series C',       emoji: '📉', boss: 'The Down Round Demon',         difficulty: 5,  volReq: 55,  wetReq: 30,  durReq: 5,   regReq: 40,  reward: 750,   unlockTitle: 'Down Round Dodger',    lore: 'We have the growth. You have the burn rate. An unholy alliance.' },
+  { id: 'bridge',     name: 'Bridge Round',   emoji: '🌉', boss: 'The Bridge Round Beast',       difficulty: 6,  volReq: 65,  wetReq: 35,  durReq: 7,   regReq: 50,  reward: 1000,  unlockTitle: 'Bridge Builder',       lore: '11 term sheets, 11 revisions, 1 devastating dilution event. The board spins in their chairs.' },
+  { id: 'preipo',     name: 'Pre-IPO',        emoji: '🕵️', boss: 'The Diligence Dragon',         difficulty: 7,  volReq: 75,  wetReq: 40,  durReq: 8,   regReq: 55,  reward: 1500,  unlockTitle: 'Diligence Destroyer',  lore: 'All those data room requests were a trap. Your calendar is now a weapon of mass destruction.' },
+  { id: 'roadshow',   name: 'IPO Roadshow',   emoji: '🚌', boss: 'The Analyst Onslaught',        difficulty: 8,  volReq: 82,  wetReq: 50,  durReq: 10,  regReq: 65,  reward: 2000,  unlockTitle: 'Roadshow Ruler',       lore: '14 cities, 14 pitches, 1 slightly different deck each time. Your voice signed a peace treaty and immediately lost it.' },
+  { id: 'public',     name: 'Public Markets', emoji: '🔔', boss: 'The Short Seller Syndicate',   difficulty: 9,  volReq: 90,  wetReq: 60,  durReq: 12,  regReq: 75,  reward: 3000,  unlockTitle: 'Market Maker',         lore: 'Quarterly earnings at 2 AM. Analysts had NOTHING on this call.' },
+  { id: 'unicorn',    name: 'Unicorn Status', emoji: '🦄', boss: 'THE VALUATION OVERLORD',       difficulty: 10, volReq: 100, wetReq: 69,  durReq: 15,  regReq: 100, reward: 10000, unlockTitle: 'LORD OF THE CAP TABLE', lore: 'The final boss. The ultimate valuation. You didn\'t just raise a round — you DESTROYED the comps. The term sheet flows through you now. You are one with the cap table. The board will never recover.' },
 ];
 
 const PET_FOODS = [
-  { id: 'bean_burrito',   name: 'Bean Burrito',        emoji: '🌯', cost: 50,   statBoost: 'volume',   amount: 2,  mood: 5,   lore: 'The foundational training food. Reliable. Predictable. Gassy.' },
-  { id: 'dairy_shake',    name: 'Dairy Shake',         emoji: '🥛', cost: 75,   statBoost: 'wetness',  amount: 3,  mood: 3,   lore: 'Lactose is just a suggestion. Your fart disagrees.' },
+  { id: 'bean_burrito',   name: 'Bean Burrito',        emoji: '🌯', cost: 50,   statBoost: 'volume',   amount: 2,  mood: 5,   lore: 'The foundational training food. Reliable. Predictable. Buzzy.' },
+  { id: 'dairy_shake',    name: 'Dairy Shake',         emoji: '🥛', cost: 75,   statBoost: 'wetness',  amount: 3,  mood: 3,   lore: 'Runway is just a suggestion. Your burn rate disagrees.' },
   { id: 'fiber_bar',      name: 'Fiber Bar',           emoji: '🥖', cost: 60,   statBoost: 'duration', amount: 2,  mood: -2,  lore: 'Healthy AND weaponizable. Win-win.' },
-  { id: 'ghost_pepper',   name: 'Ghost Pepper',        emoji: '🌶️', cost: 120,  statBoost: 'volume',   amount: 5,  mood: -10, lore: 'Your fart will cry. YOU will cry. Everyone will cry.' },
+  { id: 'ghost_pepper',   name: 'Ghost Pepper',        emoji: '🌶️', cost: 120,  statBoost: 'volume',   amount: 5,  mood: -10, lore: 'Your investors will cry. YOU will cry. Everyone will cry.' },
   { id: 'sugar_free',     name: 'Sugar-Free Gummy',    emoji: '🍬', cost: 100,  statBoost: 'wetness',  amount: 5,  mood: -5,  lore: 'Read the Amazon reviews. You were warned.' },
   { id: 'kombucha',       name: 'Artisanal Kombucha',  emoji: '🍵', cost: 90,   statBoost: 'duration', amount: 4,  mood: 8,   lore: 'Probiotics working overtime. Your gut flora is having a rave.' },
   { id: 'protein_shake',  name: 'Mega Protein Shake',  emoji: '💪', cost: 150,  statBoost: 'regret',   amount: 5,  mood: 2,   lore: '80g protein. 0g mercy. The gains are gaseous now.' },
-  { id: 'taco_supreme',   name: 'Taco Supreme',        emoji: '🌮', cost: 200,  statBoost: 'all',      amount: 2,  mood: 10,  lore: 'The chosen food. Boosts ALL stats. Your fart achieves brief enlightenment.' },
+  { id: 'taco_supreme',   name: 'Taco Supreme',        emoji: '🌮', cost: 200,  statBoost: 'all',      amount: 2,  mood: 10,  lore: 'The chosen food. Boosts ALL stats. Your pitch achieves brief enlightenment.' },
 ];
 
 const PET_TRAINING = [
   { id: 'squat',      name: 'Squat & Squeeze',    emoji: '🏋️', cost: 30,  statBoost: 'volume',   amount: 1, cooldown: 10000,  lore: 'Core pressure training. Builds explosive force.' },
   { id: 'sauna',      name: 'Sauna Session',       emoji: '🧖', cost: 40,  statBoost: 'wetness',  amount: 1, cooldown: 15000,  lore: 'Heat and humidity conditioning. Moisture mastery.' },
-  { id: 'meditation', name: 'Gas Meditation',       emoji: '🧘', cost: 25,  statBoost: 'duration', amount: 1, cooldown: 8000,   lore: 'Breathe in... hold... slowly release. The art of sustained emission.' },
+  { id: 'meditation', name: 'Gas Meditation',       emoji: '🧘', cost: 25,  statBoost: 'duration', amount: 1, cooldown: 8000,   lore: 'Breathe in... hold... slowly release. The art of the sustained pitch.' },
   { id: 'spicy_roulette', name: 'Spicy Roulette',   emoji: '🎰', cost: 80,  statBoost: 'random',   amount: 3, cooldown: 30000,  lore: 'Eat something random and see what happens. High risk, high reward.' },
   { id: 'elevator_drill', name: 'Elevator Drill',   emoji: '🛗', cost: 60,  statBoost: 'regret',   amount: 2, cooldown: 20000,  lore: 'Practice deploying in enclosed spaces. Builds character and regret.' },
 ];
 
 // ═══ GEAR EVOLUTION SYSTEM ═══
-// Farts shift octaves as they evolve. Based on real-life fart physics.
-// Brad has personally hit 4th gear exactly once. Supersonic is theoretical.
+// Pitches shift octaves as they evolve. Based on real-life founder physics.
+// Most founders have personally hit 4th gear exactly once. Supersonic is theoretical.
 const GEARS = [
-  { gear: 1, name: '1st Gear',             emoji: '💨',  label: 'BASE TONE',           statMult: 1.0,  levelReq: 1,  powerReq: 0,    color: '#888888', lore: 'The default hum. Every fart starts here. Humble beginnings.' },
-  { gear: 2, name: '2nd Gear',             emoji: '💨💨', label: 'OCTAVE SHIFT',         statMult: 1.4,  levelReq: 5,  powerReq: 60,   color: '#39ff14', lore: 'The fart finds a second voice. A harmonic emerges. People notice.' },
-  { gear: 3, name: '3rd Gear',             emoji: '💨💨💨', label: 'TRIPLE HARMONIC',    statMult: 1.8,  levelReq: 12, powerReq: 150,  color: '#4488ff', lore: 'Extremely rare territory. Most farts never get here. The room clears. Dogs howl. Car alarms trigger.' },
-  { gear: 4, name: '4th Gear',             emoji: '💨💨💨💨', label: 'LEGENDARY OCTAVE', statMult: 2.5,  levelReq: 20, powerReq: 300,  color: '#ffaa00', lore: 'You\'ve done this once in your entire life. The fart transcends the physical plane. Witnesses require therapy.' },
-  { gear: 5, name: 'SUPERSONIC EMISSION',  emoji: '🔊💥', label: 'BEYOND SOUND',        statMult: 4.0,  levelReq: 30, powerReq: 500,  color: '#ff44cc', lore: 'The fart breaks the sound barrier. A sonic boom of flatulence. Windows shatter. Seismographs spike globally. Scientists weep. God flinches. This is the most powerful emission in recorded human history.' },
+  { gear: 1, name: 'Elevator Pitch',       emoji: '🎤',  label: 'BASE TONE',           statMult: 1.0,  levelReq: 1,  powerReq: 0,    color: '#888888', lore: 'The default pitch. Every founder starts here. Humble beginnings.' },
+  { gear: 2, name: 'The Pitch Deck',       emoji: '📊',  label: 'SLIDE SHIFT',         statMult: 1.4,  levelReq: 5,  powerReq: 60,   color: '#39ff14', lore: 'The pitch finds a second act. A deck emerges. People notice.' },
+  { gear: 3, name: 'Demo Day',             emoji: '🎬',  label: 'TRIPLE HARMONIC',     statMult: 1.8,  levelReq: 12, powerReq: 150,  color: '#4488ff', lore: 'Extremely rare territory. Most pitches never get here. The room leans in. VCs whisper. Term sheets materialize.' },
+  { gear: 4, name: 'Viral Tweet',          emoji: '🐦',  label: 'LEGENDARY OCTAVE',    statMult: 2.5,  levelReq: 20, powerReq: 300,  color: '#ffaa00', lore: 'You\'ve done this once in your entire career. The pitch transcends the deck. Investors require therapy.' },
+  { gear: 5, name: 'IPO BELL RING',        emoji: '🔔',  label: 'BEYOND SOUND',        statMult: 4.0,  levelReq: 30, powerReq: 500,  color: '#ff44cc', lore: 'The pitch breaks the sound barrier. A sonic boom of hype. Ticker tape falls. Analysts spike globally. Skeptics weep. The market flinches. This is the most powerful raise in recorded startup history.' },
 ];
 
 const PET_MOODS = [
-  { min: 80, name: 'EUPHORIC',    emoji: '🤩', bonus: 1.5,  desc: 'Your fart is THRIVING. Peak performance.' },
-  { min: 60, name: 'HAPPY',       emoji: '😊', bonus: 1.2,  desc: 'Content and gassy. Good vibes only.' },
-  { min: 40, name: 'NEUTRAL',     emoji: '😐', bonus: 1.0,  desc: 'Fine. Not great, not terrible. Like Chernobyl.' },
-  { min: 20, name: 'GRUMPY',      emoji: '😤', bonus: 0.8,  desc: 'Irritable bowel syndrome. Literally.' },
-  { min: 0,  name: 'DEPRESSED',   emoji: '😢', bonus: 0.5,  desc: 'Your fart has lost the will to emit. Feed it immediately.' },
+  { min: 80, name: 'EUPHORIC',    emoji: '🤩', bonus: 1.5,  desc: 'Your founder is THRIVING. Peak performance.' },
+  { min: 60, name: 'HAPPY',       emoji: '😊', bonus: 1.2,  desc: 'Well-funded and confident. Good vibes only.' },
+  { min: 40, name: 'NEUTRAL',     emoji: '😐', bonus: 1.0,  desc: 'Fine. Not great, not terrible. Like a flat round.' },
+  { min: 20, name: 'GRUMPY',      emoji: '😤', bonus: 0.8,  desc: 'Runway anxiety syndrome. Literally.' },
+  { min: 0,  name: 'DEPRESSED',   emoji: '😢', bonus: 0.5,  desc: 'Your founder has lost the will to pitch. Feed it immediately.' },
 ];
 
 const PetState = {
-  activePetId: null,     // id from FART_COLLECTION (e.g., 'c01')
+  activePetId: null,     // id from UNICORN_COLLECTION (e.g., 'c01')
   pets: {},              // fartId -> { level, xp, mood, trainedStats: {volume, wetness, duration, regret}, lastFed, lastTrained, bathroomsConquered: [], evolvedForm: null }
   highestBathroom: -1,   // index into BATHROOM_LADDER (-1 = none conquered)
   totalBattles: 0,
@@ -1872,7 +1867,7 @@ const PetEngine = {
       LogService.warn(`PetEngine: ${fartId} already adopted!`);
       return;
     }
-    const fart = FART_COLLECTION.find(f => f.id === fartId);
+    const fart = UNICORN_COLLECTION.find(f => f.id === fartId);
     if (!fart) return;
 
     const rarityBonus = { common: 0, uncommon: 2, rare: 5, epic: 10, legendary: 20, mythic: 50 };
@@ -1901,7 +1896,7 @@ const PetEngine = {
   },
 
   getPetFart(fartId) {
-    return FART_COLLECTION.find(f => f.id === fartId);
+    return UNICORN_COLLECTION.find(f => f.id === fartId);
   },
 
   getActivePet() {
@@ -1952,7 +1947,7 @@ const PetEngine = {
     const food = PET_FOODS.find(f => f.id === foodId);
     if (!food) return;
     if (gameState.coins < food.cost) {
-      LogService.warn(`PetEngine: Not enough GasCoins! Need ${food.cost}`);
+      LogService.warn(`PetEngine: Not enough GlitterCoins! Need ${food.cost}`);
       return;
     }
 
@@ -1986,7 +1981,7 @@ const PetEngine = {
     const training = PET_TRAINING.find(t => t.id === trainingId);
     if (!training) return;
     if (gameState.coins < training.cost) {
-      LogService.warn(`PetEngine: Not enough GasCoins! Need ${training.cost}`);
+      LogService.warn(`PetEngine: Not enough GlitterCoins! Need ${training.cost}`);
       return;
     }
 
@@ -2055,10 +2050,10 @@ const PetEngine = {
       LogService.success(`${GEARS[nextGearIndex - 1].name} → ${gearData.name}`);
       LogService.success(`"${gearData.lore}"`);
       LogService.success(`Stat multiplier: ${gearData.statMult}x`);
-      if (gearData.gear === 2) LogService.info('Frequency split detected — dual-tone emission confirmed');
+      if (gearData.gear === 2) LogService.info('Frequency split detected — dual-tone hype confirmed');
       if (gearData.gear === 3) LogService.warn('Harmonic instability rising — triple resonance cascade in progress');
       if (gearData.gear === 4) LogService.warn('CRITICAL: Acoustic threshold exceeded — decibel sensors maxed');
-      if (gearData.gear === 5) LogService.warn('ERROR: Measurement impossible — all instruments destroyed by emission');
+      if (gearData.gear === 5) LogService.warn('ERROR: Measurement impossible — all instruments destroyed by hype');
       LogService.success('═══════════════════════════════════════');
 
       if (gearData.gear >= 4) {
@@ -2079,8 +2074,8 @@ const PetEngine = {
       }
 
       if (gearData.gear === 5) {
-        AudioEngine.speak('SUPERSONIC EMISSION ACHIEVED! THE FART HAS BROKEN THE SOUND BARRIER! THIS IS NOT A DRILL!');
-        BattlePassEngine.addXP(2000, 'SUPERSONIC EMISSION');
+        AudioEngine.speak('SUPERSONIC HYPE ACHIEVED! THE PITCH HAS BROKEN THE SOUND BARRIER! THIS IS NOT A DRILL!');
+        BattlePassEngine.addXP(2000, 'SUPERSONIC HYPE');
       } else if (gearData.gear === 4) {
         AudioEngine.speak(`FOURTH GEAR! ${fart.name} HAS REACHED LEGENDARY OCTAVE! WITNESSES REQUIRE THERAPY!`);
         BattlePassEngine.addXP(1000, '4th Gear Evolution');
@@ -2131,8 +2126,8 @@ const PetEngine = {
     const roll = Math.random();
     const won = roll < rollChance;
 
-    LogService.info(`PetEngine: BATHROOM BATTLE — ${active.fart.name} vs ${bathroom.name} "${bathroom.boss}"`);
-    LogService.debug(`PetEngine: Stats: VOL=${stats.volume}/${bathroom.volReq} WET=${stats.wetness}/${bathroom.wetReq} DUR=${stats.duration}/${bathroom.durReq} REG=${stats.regret}/${bathroom.regReq}`);
+    LogService.info(`PetEngine: FUNDING ROUND BATTLE — ${active.fart.name} vs ${bathroom.name} "${bathroom.boss}"`);
+    LogService.debug(`PetEngine: Stats: HYPE=${stats.volume}/${bathroom.volReq} RISK=${stats.wetness}/${bathroom.wetReq} RUNWAY=${stats.duration}/${bathroom.durReq} REG=${stats.regret}/${bathroom.regReq}`);
     LogService.debug(`PetEngine: Power ratio: ${powerRatio.toFixed(2)} | Roll: ${roll.toFixed(3)} < ${rollChance.toFixed(3)} = ${won}`);
 
     if (won) {
@@ -2145,8 +2140,8 @@ const PetEngine = {
 
       this._checkLevelUp(active.id);
 
-      LogService.success(`BATHROOM CONQUERED! ${active.fart.name} defeated ${bathroom.boss} at ${bathroom.name}!`);
-      LogService.success(`Earned: ${bathroom.reward} GasCoins | Title: "${bathroom.unlockTitle}"`);
+      LogService.success(`ROUND CLOSED! ${active.fart.name} defeated ${bathroom.boss} at ${bathroom.name}!`);
+      LogService.success(`Earned: ${bathroom.reward} GlitterCoins | Title: "${bathroom.unlockTitle}"`);
 
       AudioEngine.fart(bathroomIndex >= 8 ? 'jackpot' : 'win');
       AudioEngine.announce(bathroomIndex >= 8 ? 'jackpot' : 'win');
@@ -2154,18 +2149,18 @@ const PetEngine = {
       spawnParticles([bathroom.emoji, '🏆', '💨', active.fart.emoji], bathroomIndex >= 8 ? 25 : 12);
 
       if (bathroomIndex === 9) {
-        // TACO BELL CONQUERED
+        // UNICORN STATUS ACHIEVED
         const lordsCount = this._countLordsOfTheBell();
         const totalPets = Object.keys(PetState.pets).length;
         LogService.success('═══════════════════════════════════════');
-        LogService.success('THE TACO BELL HAS BEEN MASTERED.');
-        LogService.success(`${active.fart.name} IS NOW LORD OF THE BELL.`);
-        LogService.success(`LORDS OF THE BELL: ${lordsCount} / ${totalPets} adopted farts`);
+        LogService.success('THE VALUATION HAS BEEN MASTERED.');
+        LogService.success(`${active.fart.name} IS NOW LORD OF THE CAP TABLE.`);
+        LogService.success(`LORDS OF THE CAP TABLE: ${lordsCount} / ${totalPets} adopted founders`);
         LogService.success('═══════════════════════════════════════');
-        AudioEngine.speak('LORD OF THE BELL! THE TACO BELL HAS BEEN MASTERED! ALL BATHROOMS BOW BEFORE YOU!');
+        AudioEngine.speak('LORD OF THE CAP TABLE! UNICORN STATUS ACHIEVED! ALL TERM SHEETS BOW BEFORE YOU!');
         screenFlash('rgba(255, 204, 0, 0.5)');
 
-        // Check for TRUE ENDING — all adopted farts have conquered the Bell
+        // Check for TRUE ENDING — all adopted founders have reached Unicorn Status
         if (lordsCount === totalPets && totalPets > 1) {
           setTimeout(() => this._trueEnding(totalPets), 2000);
         }
@@ -2173,13 +2168,13 @@ const PetEngine = {
         AudioEngine.speak(`${bathroom.name} conquered! ${active.fart.name} earned the title ${bathroom.unlockTitle}!`);
       }
 
-      // Battle Pass XP for bathroom conquests
-      BattlePassEngine.addXP(bathroom.difficulty * 50, `Bathroom: ${bathroom.name}`);
+      // Battle Pass XP for funding round conquests
+      BattlePassEngine.addXP(bathroom.difficulty * 50, `Funding Round: ${bathroom.name}`);
     } else {
       active.pet.mood = Math.max(0, active.pet.mood - 10);
       active.pet.xp += 5; // consolation XP
       LogService.warn(`DEFEATED! ${active.fart.name} couldn't handle ${bathroom.name}. ${bathroom.boss} wins!`);
-      LogService.info(`PetEngine: Train harder! Need more ${!volPass ? 'VOLUME ' : ''}${!wetPass ? 'WETNESS ' : ''}${!durPass ? 'DURATION ' : ''}${!regPass ? 'REGRET ' : ''}`);
+      LogService.info(`PetEngine: Train harder! Need more ${!volPass ? 'HYPE ' : ''}${!wetPass ? 'RISK ' : ''}${!durPass ? 'RUNWAY ' : ''}${!regPass ? 'REGRET ' : ''}`);
       AudioEngine.fart('normal');
     }
 
@@ -2188,7 +2183,7 @@ const PetEngine = {
   },
 
   _countLordsOfTheBell() {
-    return Object.values(PetState.pets).filter(p => p.bathroomsConquered.includes('tacobell')).length;
+    return Object.values(PetState.pets).filter(p => p.bathroomsConquered.includes('unicorn')).length;
   },
 
   _trueEnding(totalPets) {
@@ -2197,32 +2192,32 @@ const PetEngine = {
     LogService.success('║                                                              ║');
     LogService.success('║              T R U E   E N D I N G   A C H I E V E D         ║');
     LogService.success('║                                                              ║');
-    LogService.success(`║       ALL ${totalPets} FARTS HAVE CONQUERED THE TACO BELL.          ║`);
+    LogService.success(`║       ALL ${totalPets} FOUNDERS HAVE ACHIEVED UNICORN STATUS.        ║`);
     LogService.success('║                                                              ║');
     LogService.success('║   You are no longer a player. You are a LEGEND.              ║');
-    LogService.success('║   Every toilet in every fast food restaurant in America       ║');
+    LogService.success('║   Every term sheet in every boardroom in Silicon Valley       ║');
     LogService.success('║   trembles at the mention of your name.                      ║');
     LogService.success('║                                                              ║');
-    LogService.success('║   The CDC has been notified.                                 ║');
-    LogService.success('║   The Geneva Convention has been amended.                    ║');
-    LogService.success('║   Your LinkedIn now simply reads: "LORD OF ALL BELLS."       ║');
+    LogService.success('║   The SEC has been notified.                                 ║');
+    LogService.success('║   The comp table has been amended.                           ║');
+    LogService.success('║   Your LinkedIn now simply reads: "FOUNDER OF FOUNDERS."     ║');
     LogService.success('║                                                              ║');
     LogService.success('╚══════════════════════════════════════════════════════════════╝');
     LogService.success('');
 
     AudioEngine.fart('jackpot');
     AudioEngine.announce('jackpot');
-    AudioEngine.speak(`TRUE ENDING! ALL ${totalPets} FARTS HAVE MASTERED THE TACO BELL! YOU ARE THE LORD OF ALL BELLS! THE CDC HAS BEEN NOTIFIED!`);
+    AudioEngine.speak(`TRUE ENDING! ALL ${totalPets} FOUNDERS HAVE ACHIEVED UNICORN STATUS! YOU ARE THE FOUNDER OF FOUNDERS! THE SEC HAS BEEN NOTIFIED!`);
     screenFlash('rgba(255, 204, 0, 0.6)');
     setTimeout(() => screenFlash('rgba(255, 68, 204, 0.5)'), 500);
     setTimeout(() => screenFlash('rgba(57, 255, 20, 0.5)'), 1000);
-    spawnParticles(['🏆', '👑', '🌮', '💨', '🔔', '⭐', '💥', '🔥'], 50);
-    BattlePassEngine.addXP(10000, 'TRUE ENDING: LORD OF ALL BELLS');
+    spawnParticles(['🏆', '👑', '🦄', '💰', '🔔', '⭐', '💥', '🔥'], 50);
+    BattlePassEngine.addXP(10000, 'TRUE ENDING: FOUNDER OF FOUNDERS');
   },
 
   selectPet(fartId) {
     if (!PetState.pets[fartId]) {
-      LogService.warn('PetEngine: That fart is not adopted!');
+      LogService.warn('PetEngine: That card is not adopted!');
       return;
     }
     PetState.activePetId = fartId;
@@ -2243,7 +2238,7 @@ const PetEngine = {
         <div class="pet-empty">
           <div class="pet-empty-emoji">🥚</div>
           <div class="pet-empty-text">NO ACTIVE PET</div>
-          <div class="pet-empty-sub">Pull a fart from the Gacha, then adopt it from the Fartdex!</div>
+          <div class="pet-empty-sub">Pull a card from the Gacha, then adopt it from the UnicornDex!</div>
         </div>`;
       return;
     }
@@ -2285,9 +2280,9 @@ const PetEngine = {
             <span class="pet-xp-text">${pet.xp}/${xpNeeded} XP</span>
           </div>
           <div class="pet-stats">
-            <div class="pet-stat"><span class="ps-icon">🔊</span><span class="ps-label">VOL</span><span class="ps-value">${stats.volume}</span></div>
-            <div class="pet-stat"><span class="ps-icon">💧</span><span class="ps-label">WET</span><span class="ps-value">${stats.wetness}</span></div>
-            <div class="pet-stat"><span class="ps-icon">⏱️</span><span class="ps-label">DUR</span><span class="ps-value">${stats.duration}</span></div>
+            <div class="pet-stat"><span class="ps-icon">🔊</span><span class="ps-label">HYPE</span><span class="ps-value">${stats.volume}</span></div>
+            <div class="pet-stat"><span class="ps-icon">💧</span><span class="ps-label">RISK</span><span class="ps-value">${stats.wetness}</span></div>
+            <div class="pet-stat"><span class="ps-icon">⏱️</span><span class="ps-label">RWAY</span><span class="ps-value">${stats.duration}</span></div>
             <div class="pet-stat"><span class="ps-icon">😬</span><span class="ps-label">REG</span><span class="ps-value">${stats.regret}</span></div>
             <div class="pet-stat power"><span class="ps-icon">⚡</span><span class="ps-label">PWR</span><span class="ps-value">${power}</span></div>
           </div>
@@ -2323,7 +2318,7 @@ const PetEngine = {
           </div>
         </div>
 
-        <div class="pet-roster-title">YOUR FART ROSTER</div>
+        <div class="pet-roster-title">YOUR FOUNDER ROSTER</div>
         <div class="pet-roster">
           ${Object.keys(PetState.pets).map(id => {
             const f = this.getPetFart(id);
@@ -2349,7 +2344,7 @@ const PetEngine = {
       lordsEl.innerHTML = totalPets > 0 ? `
         <div class="lords-tracker${allCleared ? ' all-cleared' : ''}">
           <span class="lords-icon">${allCleared ? '👑' : '🌮'}</span>
-          <span class="lords-label">LORDS OF THE BELL</span>
+          <span class="lords-label">LORDS OF THE CAP TABLE</span>
           <span class="lords-count">${lords} / ${totalPets}</span>
           ${allCleared ? '<span class="lords-complete">TRUE ENDING ACHIEVED</span>' : ''}
         </div>
@@ -2369,7 +2364,7 @@ const PetEngine = {
             <div class="bt-info">
               <div class="bt-name">${b.name}</div>
               <div class="bt-boss">${b.boss}</div>
-              <div class="bt-reqs">VOL:${b.volReq} WET:${b.wetReq} DUR:${b.durReq} REG:${b.regReq}</div>
+              <div class="bt-reqs">HYPE:${b.volReq} RISK:${b.wetReq} RWAY:${b.durReq} REG:${b.regReq}</div>
             </div>
             <div class="bt-reward">${b.reward} GC</div>
             ${!conquered && canAttempt ? `<button class="bt-fight-btn" onclick="PetEngine.attemptBathroom(${i})">FIGHT</button>` : ''}
@@ -2381,10 +2376,10 @@ const PetEngine = {
   },
 };
 
-// Hook into gacha: auto-adopt pulled farts
+// Hook into gacha: auto-adopt pulled founders
 function adoptFromFartdex(fartId) {
   if (!GachaState.collection[fartId]) {
-    LogService.warn('PetEngine: You haven\'t pulled this fart yet!');
+    LogService.warn('PetEngine: You haven\'t pulled this card yet!');
     return;
   }
   PetEngine.adoptPet(fartId);
@@ -2396,36 +2391,36 @@ function adoptFromFartdex(fartId) {
 
 async function bootSequence() {
   const bootMessages = [
-    ['info', 'Bootstrapping FartVibe 6 Enterprise Runtime...'],
-    ['debug', 'Loading emission profiles from /etc/flatulence/profiles.d/...'],
-    ['info', 'OdorOrchestrator v6.0.0-rc.420 initialized'],
-    ['debug', 'Mounting ButtStateManager on /dev/butt0...'],
-    ['info', 'ButtState: alignment=82%, coherence=1.000'],
-    ['debug', 'FlatulenceEngine: 6 emission profiles loaded'],
-    ['info', 'FlushMultiplierService: base_mult=1.0x, efficiency=23%'],
+    ['info', 'Bootstrapping Unicorn Warehouse Enterprise Runtime...'],
+    ['debug', 'Loading hype profiles from /etc/buzzword/profiles.d/...'],
+    ['info', 'HypeOrchestrator v6.0.0-rc.420 initialized'],
+    ['debug', 'Mounting FounderStateManager on /dev/vibe0...'],
+    ['info', 'FounderState: alignment=82%, coherence=1.000'],
+    ['debug', 'BuzzwordEngine: 6 hype profiles loaded'],
+    ['info', 'BurnMultiplierService: base_mult=1.0x, efficiency=23%'],
     ['debug', 'Calibrating DopamineFeedbackController...'],
     ['info', 'DopamineFeedbackController: excitement=0, queue=empty'],
-    ['warn', 'GasLeakDetector: background sniffing enabled'],
-    ['debug', 'Connecting to ButtCluster (nodes: cheek-left, cheek-right, center)...'],
-    ['info', 'ButtCluster: 3/3 nodes healthy'],
-    ['debug', 'Initializing AudioPipeline: WebAudio fart synthesis engine'],
-    ['info', 'OdorPipeline: all stages nominal'],
-    ['debug', 'GachaEngine: Loading FartAcquisitionPipeline...'],
-    ['info', `GachaEngine: ${FART_COLLECTION.length} farts catalogued across ${RARITY_ORDER.length} rarity tiers`],
+    ['warn', 'RunwayLeakDetector: background auditing enabled'],
+    ['debug', 'Connecting to FounderCluster (nodes: cofounder-a, cofounder-b, advisor)...'],
+    ['info', 'FounderCluster: 3/3 nodes healthy'],
+    ['debug', 'Initializing AudioPipeline: WebAudio hype synthesis engine'],
+    ['info', 'HypePipeline: all stages nominal'],
+    ['debug', 'GachaEngine: Loading UnicornAcquisitionPipeline...'],
+    ['info', `GachaEngine: ${UNICORN_COLLECTION.length} founders catalogued across ${RARITY_ORDER.length} rarity tiers`],
     ['debug', 'GachaEngine: Pity system armed (hard pity: 90, soft pity: 75)'],
-    ['info', 'GachaEngine: Banner "NUCLEAR CHEEK CLAPPER" loaded (mythic rate: 0.69%)'],
-    ['warn', 'GachaEngine: Stink Token economy initialized. No refunds.'],
-    ['debug', 'MicrotransactionEngine: Loading GasCoin Exchange rates...'],
-    ['info', 'MicrotransactionEngine: 5 packages loaded. ButtPay\u2122 gateway connected.'],
+    ['info', 'GachaEngine: Banner "SERIES Z MEGA ROUND" loaded (mythic rate: 0.69%)'],
+    ['warn', 'GachaEngine: Clout Token economy initialized. No refunds.'],
+    ['debug', 'MicrotransactionEngine: Loading Glitter Exchange rates...'],
+    ['info', 'MicrotransactionEngine: 5 packages loaded. FounderPay\u2122 gateway connected.'],
     ['debug', 'PromotionEngine: First Time Bonus armed. Targeting new users...'],
-    ['info', 'BattlePassEngine: Season 1 "THE GREAT UNBOTTLING" loaded (30 tiers)'],
+    ['info', 'BattlePassEngine: Season 1 "THE GREAT BOOTSTRAPPING" loaded (30 tiers)'],
     ['debug', 'BattlePassEngine: Dual-track rewards initialized (Free + Premium)'],
-    ['warn', 'BattlePassEngine: Premium pass available for 2,000 GasCoins. Season never actually ends.'],
-    ['info', 'PetEngine: FartPet Tamagotchi subsystem initializing...'],
-    ['debug', `PetEngine: ${BATHROOM_LADDER.length} fast food bathrooms loaded (Subway → Taco Bell)`],
+    ['warn', 'BattlePassEngine: Premium pass available for 2,000 GlitterCoins. Season never actually ends.'],
+    ['info', 'PetEngine: StartupPet Tamagotchi subsystem initializing...'],
+    ['debug', `PetEngine: ${BATHROOM_LADDER.length} funding rounds loaded (Pre-Seed → Unicorn)`],
     ['info', `PetEngine: ${PET_FOODS.length} food items | ${PET_TRAINING.length} training exercises catalogued`],
-    ['warn', 'PetEngine: THE BATHROOM LADDER AWAITS. TRAIN YOUR FART. CONQUER THE BELL.'],
-    ['success', '\u2550\u2550\u2550 FARTVIBE 6 ONLINE \u2550\u2550\u2550 ALL FARTS ARE OFF \u2550\u2550\u2550'],
+    ['warn', 'PetEngine: THE FUNDING LADDER AWAITS. TRAIN YOUR FOUNDER. CONQUER THE EXIT.'],
+    ['success', '\u2550\u2550\u2550 UNICORN WAREHOUSE ONLINE \u2550\u2550\u2550 FULL SEND ACTIVATED \u2550\u2550\u2550'],
   ];
 
   for (const [level, msg] of bootMessages) {
@@ -2439,30 +2434,30 @@ function ambientLogs() {
   const messages = [
     ['debug', 'ButtStateManager: periodic alignment check... OK'],
     ['debug', `GasBuffer: ${Math.floor(Math.random() * 100)}% utilized`],
-    ['info', `OdorPipeline: throughput ${(Math.random() * 100).toFixed(1)} emissions/sec`],
-    ['debug', 'FlatulenceEngine: idle cycle complete'],
+    ['info', `HypePipeline: throughput ${(Math.random() * 100).toFixed(1)} pitches/sec`],
+    ['debug', 'BuzzwordEngine: idle cycle complete'],
     ['debug', `FlushMultiplier: efficiency drift ${(Math.random() * 0.1).toFixed(4)}`],
     ['info', `DopamineFeedback: ambient excitement=${DopamineFeedbackController.excitementLevel}`],
     ['debug', 'GasLeakDetector: sniff cycle... clear'],
     ['debug', `ButtCluster: heartbeat OK (latency: ${Math.floor(Math.random() * 5)}ms)`],
     ['warn', 'ButtStateManager: minor coherence drift detected'],
-    ['debug', `OdorOrchestrator: ${OdorOrchestrator.cycleCount} cycles processed`],
-    ['info', `GasRouter: rerouting through backup sphincter`],
-    ['debug', 'EmissionProfileCache: LRU eviction (wet_blast_v2)'],
+    ['debug', `HypeOrchestrator: ${HypeOrchestrator.cycleCount} cycles processed`],
+    ['info', `GasRouter: rerouting through backup pipeline`],
+    ['debug', 'HypeProfileCache: LRU eviction (loud_pivot_v2)'],
     ['warn', 'FlushMultiplierService: efficiency below threshold'],
     ['debug', `Pressure gauge: ${(FlatulenceEngine.pressure * 100).toFixed(1)} kPa`],
     ['debug', `GachaEngine: pity counter at ${GachaState.pity}/${GachaState.pityHard}`],
-    ['info', `FartAcquisitionPipeline: ${Object.keys(GachaState.collection).length}/${FART_COLLECTION.length} farts catalogued`],
+    ['info', `FartAcquisitionPipeline: ${Object.keys(GachaState.collection).length}/${UNICORN_COLLECTION.length} farts catalogued`],
     ['debug', `StinkTokenEconomy: ${GachaState.stinkTokens} tokens in circulation`],
     ['warn', 'GachaEngine: banner expiration approaching (not really)'],
-    ['debug', 'Fartdex: index integrity check... PASS'],
+    ['debug', 'UnicornDex: index integrity check... PASS'],
     ['info', `BattlePass: Tier ${BattlePassState.tier}/${BP_TIERS.length} | ${BattlePassState.xp} XP banked`],
     ['debug', `BattlePass: Premium=${BattlePassState.isPremium ? 'ACTIVE' : 'NOT PURCHASED (yet)'}`],
     ['warn', 'BattlePass: Season 1 ending soon (it is not)'],
-    ['debug', `PetEngine: ${Object.keys(PetState.pets).length} farts in roster`],
+    ['debug', `PetEngine: ${Object.keys(PetState.pets).length} founders in roster`],
     ['info', `PetEngine: Bathroom progress: ${PetState.highestBathroom + 1}/${BATHROOM_LADDER.length} conquered`],
     ['debug', 'PetEngine: Tamagotchi mood decay cycle... processing'],
-    ['warn', 'PetEngine: Your fart is hungry. Feed it or suffer the consequences.'],
+    ['warn', 'PetEngine: Your founder is hungry. Feed it or suffer the consequences.'],
     ['info', `PetEngine: ${PetState.totalBattles} bathroom battles fought (${PetState.totalWins} wins)`],
   ];
 
