@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { LayoutGrid } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { projects } from '../data/projects';
 
 export function Projects({ vibe }: { vibe: 'tech' | 'normal' | 'brainrot' }) {
     return (
@@ -16,60 +17,52 @@ export function Projects({ vibe }: { vibe: 'tech' | 'normal' | 'brainrot' }) {
                     <div className="space-y-4">
                         <div className={`flex items-center gap-3 font-black tracking-[0.5em] text-xs transition-colors ${vibe === 'brainrot' ? 'text-white animate-bounce' : 'text-violet'}`}>
                             <LayoutGrid size={18} />
-                            <span className="uppercase">{vibe === 'brainrot' ? "MOG_LOGS::BRAINROT" : "Portfolio::Registry"}</span>
+                            <span className="uppercase">{vibe === 'brainrot' ? "UNICORN_LOGS::FERAL" : "Portfolio::Registry"}</span>
                         </div>
-                        <h2 className={`text-6xl md:text-8xl font-black tracking-tighter transition-all ${vibe === 'brainrot' ? 'text-rainbow scale-110 drop-shadow-[0_0_30px_rgba(255,0,247,0.5)]' : 'glitch-effect'}`}>
-                            {vibe === 'brainrot' ? "SKIBIDI" : "PROJ"}<span className={vibe === 'brainrot' ? 'text-white' : 'text-violet'}>{vibe === 'brainrot' ? "_WINS" : "ECTS"}</span>
+                        <h2 className={`text-6xl md:text-8xl font-black tracking-tighter transition-all ${vibe === 'brainrot' ? 'text-rainbow scale-110 drop-shadow-[0_0_30px_rgba(255,110,199,0.5)]' : 'glitch-effect'}`}>
+                            {vibe === 'brainrot' ? "UNICORN" : "PROJ"}<span className={vibe === 'brainrot' ? 'text-white' : 'text-violet'}>{vibe === 'brainrot' ? "_WINS" : "ECTS"}</span>
                         </h2>
                     </div>
 
                     <p className={`max-w-md font-mono text-sm leading-relaxed tracking-tighter transition-all ${vibe === 'brainrot' ? 'text-white font-black uppercase text-lg animate-vibrate-slow' : 'text-ethereal/60'}`}>
                         {vibe === 'brainrot'
-                            ? "WE ONLY SHIP ABSOLUTE WINS. 👹 IF IT DOESN'T MOG THE OPPS, IT'S NOT IN THE REGISTRY. LOCK IN OR GET LEFT. 👺🔥"
-                            : "Explorations in recursive intelligence, industrial structuralism, and continuity-first application design. Each entry represents a distinct node in the developmental loop."
+                            ? "WE ONLY SHIP ABSOLUTE WINS. 🦄 IF IT DOESN'T SPARKLE, IT'S NOT IN THE REGISTRY. FULL SEND OR GET LEFT. ✨🔥"
+                            : "Real builds for the ethical AI lab, the creative studio, and the applied incubator. Each entry is a distinct thing we actually shipped."
                         }
                     </p>
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                    {[
-                        { to: "/projects/t-scan", num: "01", title: vibe === 'brainrot' ? "SKIBIDI_SCAN" : "T-Scan", desc: vibe === 'brainrot' ? "MOGGING THE TRANSFORMERS. 👹" : "Mechanistic interpretability mapping on Llama 3.2 3B.", tag: vibe === 'brainrot' ? "GYATT_RESEARCH" : "Research Component" },
-                        { to: "/projects/t-scan-2", num: "01b", title: vibe === 'brainrot' ? "NO_TRUTH_CIRCUIT 💀" : "No Truth Circuit", desc: vibe === 'brainrot' ? "DOSE-RESPONSE REAL. ATTRACTOR UNDEFEATED. 66% STILL LYING. 👺" : "176-run mechanistic interpretability sweep on Gemma3-4B-IT. Distributed truth subspace confirmed causally real — 2.5× dose-response — but the deception attractor survives full subspace ablation.", tag: vibe === 'brainrot' ? "DOSE_RESPONSE_WIN" : "Alignment Research" },
-                        { to: "/projects/shared-workbench", num: "02", title: vibe === 'brainrot' ? "RIZZ_BENCH" : "Workbench", desc: vibe === 'brainrot' ? "CRACKED RUNTIME FOR THE GOATS. 👺" : "A state-authoritative runtime for LLM collaboration.", tag: vibe === 'brainrot' ? "AURA_CORE" : "Infrastructure" },
-                        { to: "/projects/bob", num: "03", title: vibe === 'brainrot' ? "BOB_THE_MOGGER" : "Bob", desc: vibe === 'brainrot' ? "ZERO ILLEGAL MOVES OR WE RIOT. 👹" : "Zero-hallucination MTG AI with a deterministic rules engine and schema-constrained LLM strategy.", tag: vibe === 'brainrot' ? "EDGE_LORD" : "Constraint Engine" },
-                        { to: "/projects/halcyon", num: "04", title: vibe === 'brainrot' ? "HALCYON_GYATT" : "Halcyon", desc: vibe === 'brainrot' ? "DUAL VECTOR EMOTIONAL GYATT MEMORY. 👺" : "Persistent AI agent with dual-vector emotional memory — content and affective embeddings via Qdrant.", tag: vibe === 'brainrot' ? "RIZZ_LOGIC" : "Emotive Memory" },
-                        { to: "/projects/iris", num: "05", title: vibe === 'brainrot' ? "IRIS_MAXING" : "Iris", desc: vibe === 'brainrot' ? "RECURSIVE SOUL ENGINE LOCKING IN. 👹" : "Continuous AI runtime for architectural transparency and emotive depth.", tag: vibe === 'brainrot' ? "AURA_CORE" : "Autonomous Entity" },
-                        { to: "/projects/bossbot", num: "06", title: vibe === 'brainrot' ? "BOSS_MOGGER" : "BossBot", desc: vibe === 'brainrot' ? "LOCAL-FIRST MANAGERIAL GYATT FOR FREELANCERS. HUE BULB LOCKED IN. 👹" : "Local-first career dashboard and managerial runtime for freelancers, job seekers, and self-directed builders.", tag: vibe === 'brainrot' ? "MIDDLE_MANAGEMENT" : "Career Operating System" },
-                        { to: "/research", num: "07", title: vibe === 'brainrot' ? "BRAINROT_DEEP" : "Theory::Design", desc: vibe === 'brainrot' ? "MOGGING THE FUTURE. NO CAP. 👹" : "Guardrails, ethics, and the future of AI alignment.", tag: vibe === 'brainrot' ? "BASED_ETHICS" : "Philosophical Inquiry" }
-                    ].map((proj, i) => (
-                        <motion.div
-                            key={proj.to}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 + (i * 0.1) }}
-                            viewport={{ once: true }}
-                        >
-                            <Link
-                                to={proj.to}
-                                className={`group relative aspect-video glass-panel border transition-all block overflow-hidden p-8 text-center hover:scale-105 ${vibe === 'brainrot' ? 'border-violet-neon bg-violet/40 shadow-[0_0_40px_rgba(255,0,247,0.3)]' : 'celestial-border bg-slate/20 hover:bg-violet/5'}`}
+                    {projects.length === 0 ? (
+                        <p className={`col-span-full text-center py-12 font-mono text-sm ${vibe === 'brainrot' ? 'text-white font-black uppercase text-lg' : 'text-ethereal/40'}`}>
+                            {vibe === 'brainrot' ? "THE STAMPEDE IS COMING. HOLD THE LINE. 🦄" : "Project registry coming soon."}
+                        </p>
+                    ) : (
+                        projects.map((proj, i) => (
+                            <motion.div
+                                key={proj.slug}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.2 + (i * 0.1) }}
+                                viewport={{ once: true }}
                             >
-                                <div className={`absolute inset-0 transition-opacity ${vibe === 'brainrot' ? 'lisa-frank-bg opacity-20' : 'bg-gradient-to-br from-violet/5 to-transparent opacity-0 group-hover:opacity-100'}`} />
-                                <div className={`absolute top-4 left-4 font-serif text-[60px] italic select-none leading-none transition-all ${vibe === 'brainrot' ? 'text-white/20 animate-pulse' : 'text-violet/10'}`}>{proj.num}</div>
-                                <div className="space-y-6 relative z-10">
-                                    <h3 className={`text-4xl font-serif italic transition-all ${vibe === 'brainrot' ? 'text-rainbow drop-shadow-md' : 'text-ethereal group-hover:text-violet'}`}>{proj.title}</h3>
-                                    <p className={`text-sm font-sans tracking-wide line-clamp-2 max-w-[280px] transition-all ${vibe === 'brainrot' ? 'text-white font-black uppercase' : 'text-ethereal/60'}`}>{proj.desc}</p>
-                                    <div className="pt-4 flex items-center justify-center gap-3">
-                                        <div className={`h-[1px] w-4 ${vibe === 'brainrot' ? 'bg-white' : 'bg-violet/30'}`} />
-                                        <span className={`text-[10px] font-sans tracking-[0.2em] uppercase transition-colors ${vibe === 'brainrot' ? 'text-white font-bold' : 'text-violet/60'}`}>{proj.tag}</span>
-                                        <div className={`h-[1px] w-4 ${vibe === 'brainrot' ? 'bg-white' : 'bg-violet/30'}`} />
+                                <Link
+                                    to={`/projects/${proj.slug}`}
+                                    className={`group relative aspect-video glass-panel border transition-all block overflow-hidden p-8 text-center hover:scale-105 ${vibe === 'brainrot' ? 'border-violet-neon bg-violet/40 shadow-[0_0_40px_rgba(255,110,199,0.3)]' : 'celestial-border bg-slate/20 hover:bg-violet/5'}`}
+                                >
+                                    <div className={`absolute inset-0 transition-opacity ${vibe === 'brainrot' ? 'lisa-frank-bg opacity-20' : 'bg-gradient-to-br from-violet/5 to-transparent opacity-0 group-hover:opacity-100'}`} />
+                                    <div className={`absolute top-4 left-4 font-serif text-[60px] select-none leading-none transition-all ${vibe === 'brainrot' ? 'text-white/20 animate-pulse' : 'text-violet/10'}`}>{String(i + 1).padStart(2, '0')}</div>
+                                    <div className="space-y-6 relative z-10">
+                                        <h3 className={`text-4xl font-serif transition-all ${vibe === 'brainrot' ? 'text-rainbow drop-shadow-md' : 'text-ethereal group-hover:text-violet'}`}>{proj.title}</h3>
+                                        <p className={`text-sm font-sans tracking-wide line-clamp-2 max-w-[280px] transition-all ${vibe === 'brainrot' ? 'text-white font-black uppercase' : 'text-ethereal/60'}`}>{proj.tagline}</p>
                                     </div>
-                                </div>
-                                {vibe === 'brainrot' && (
-                                    <div className="absolute bottom-2 right-2 text-2xl animate-bounce">👹</div>
-                                )}
-                            </Link>
-                        </motion.div>
-                    ))}
+                                    {vibe === 'brainrot' && (
+                                        <div className="absolute bottom-2 right-2 text-2xl animate-bounce">🦄</div>
+                                    )}
+                                </Link>
+                            </motion.div>
+                        ))
+                    )}
                 </div>
             </div>
 

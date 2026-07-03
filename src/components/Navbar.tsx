@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Box, Github } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { projects } from '../data/projects';
 
 export function Navbar({ vibe }: { vibe: 'tech' | 'normal' | 'brainrot' }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,30 +38,23 @@ export function Navbar({ vibe }: { vibe: 'tech' | 'normal' | 'brainrot' }) {
                                     className={`absolute top-full right-0 mt-4 w-64 p-2 shadow-2xl z-50 overflow-hidden ${vibe === 'brainrot' ? 'lisa-frank-bg border-2 border-white rounded-none' : 'glass-panel rounded'}`}
                                 >
                                     <div className="space-y-1">
-                                        {[
-                                            { path: '/projects/t-scan', label: vibe === 'brainrot' ? 'SKIBIDI_SCAN' : 'T-Scan Research', id: '01' },
-                                            { path: '/projects/t-scan-2', label: vibe === 'brainrot' ? 'NO_TRUTH_CIRCUIT 💀' : 'T-Scan 2: No Truth Circuit', id: '01b' },
-                                            { path: '/projects/halcyon', label: vibe === 'brainrot' ? 'HALCYON_GYATT' : 'Halcyon Logic', id: '02' },
-                                            { path: '/projects/shared-workbench', label: vibe === 'brainrot' ? 'RIZZ_BENCH' : 'Shared Workbench', id: '03' },
-                                            { path: '/projects/bob', label: vibe === 'brainrot' ? 'BOB_THE_MOGGER' : 'Bob: Visual Shell', id: '04' },
-                                            { path: '/projects/iris', label: vibe === 'brainrot' ? 'IRIS_MAXING' : 'Iris Runtime', id: '05' }
-                                        ].map((project) => (
-                                            <Link
-                                                key={project.path}
-                                                to={project.path}
-                                                className={`flex items-center justify-between px-4 py-3 rounded transition-all group/item ${vibe === 'brainrot' ? 'hover:bg-white/20' : 'hover:bg-violet/10'}`}
-                                                onClick={() => setIsMenuOpen(false)}
-                                            >
-                                                <span className={`text-[10px] font-inter tracking-tighter transition-colors ${vibe === 'brainrot' ? 'text-white/40 group-hover/item:text-white' : 'text-violet/40 group-hover/item:text-violet/60'}`}>{project.id}</span>
-                                                <span className={`text-sm font-inter transition-colors ${vibe === 'brainrot' ? 'text-white font-black uppercase' : 'text-ethereal/80 group-hover/item:text-ethereal'}`}>{project.label}</span>
-                                            </Link>
-                                        ))}
-                                    </div>
-                                    <div className={`mt-4 p-4 border-t ${vibe === 'brainrot' ? 'border-white/20' : 'border-ethereal/5'}`}>
-                                        <Link to="/research" className={`text-[9px] font-inter tracking-[0.3em] uppercase transition-all flex items-center gap-2 ${vibe === 'brainrot' ? 'text-rainbow font-black scale-110 animate-bounce' : 'text-white hover:text-violet'}`}>
-                                            <div className={`w-1 h-1 rounded-full animate-pulse ${vibe === 'brainrot' ? 'bg-white shadow-[0_0_10px_white]' : 'bg-white'}`} />
-                                            {vibe === 'brainrot' ? "AURA_RESEARCH" : "Theory & Design"}
-                                        </Link>
+                                        {projects.length === 0 ? (
+                                            <div className={`px-4 py-3 text-sm ${vibe === 'brainrot' ? 'text-white/60 font-black uppercase' : 'text-ethereal/40'}`}>
+                                                {vibe === 'brainrot' ? "STAMPEDE LOADING..." : "More coming soon."}
+                                            </div>
+                                        ) : (
+                                            projects.map((project, i) => (
+                                                <Link
+                                                    key={project.slug}
+                                                    to={`/projects/${project.slug}`}
+                                                    className={`flex items-center justify-between px-4 py-3 rounded transition-all group/item ${vibe === 'brainrot' ? 'hover:bg-white/20' : 'hover:bg-violet/10'}`}
+                                                    onClick={() => setIsMenuOpen(false)}
+                                                >
+                                                    <span className={`text-[10px] font-inter tracking-tighter transition-colors ${vibe === 'brainrot' ? 'text-white/40 group-hover/item:text-white' : 'text-violet/40 group-hover/item:text-violet/60'}`}>{String(i + 1).padStart(2, '0')}</span>
+                                                    <span className={`text-sm font-inter transition-colors ${vibe === 'brainrot' ? 'text-white font-black uppercase' : 'text-ethereal/80 group-hover/item:text-ethereal'}`}>{project.title}</span>
+                                                </Link>
+                                            ))
+                                        )}
                                     </div>
                                 </motion.div>
                             )}

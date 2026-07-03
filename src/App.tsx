@@ -1,21 +1,14 @@
 import { GridBackground } from './components/ui/GridBackground';
 import { Hero } from './components/Hero';
-import { BossBotSpotlight } from './components/BossBotSpotlight';
 import { Philosophy } from './components/Philosophy';
 import { System } from './components/System';
 import { Architect } from './components/Architect';
 import { Navbar } from './components/Navbar';
 import { Projects } from './components/Projects';
+import { ProjectPage } from './components/ProjectPage';
+import { projects } from './data/projects';
 import { Linkedin, Twitter, Facebook } from 'lucide-react';
-import { TScan } from './pages/TScan';
-import { TScan2 } from './pages/TScan2';
-import { SharedWorkbench } from './pages/SharedWorkbench';
-import { Bob } from './pages/Bob';
-import { Halcyon } from './pages/Halcyon';
-import { Research } from './pages/Research';
-import { Iris } from './pages/Iris';
-import { BossBot } from './pages/BossBot';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 function Home({ vibe, setVibe, onTriggerRipple }: {
@@ -26,13 +19,28 @@ function Home({ vibe, setVibe, onTriggerRipple }: {
     return (
         <main className={`pt-20 transition-all duration-500 ${vibe === 'brainrot' ? 'intense-glitter' : ''}`}>
             <Hero vibe={vibe} setVibe={setVibe} onTriggerRipple={onTriggerRipple} />
-            <BossBotSpotlight vibe={vibe} />
             <Projects vibe={vibe} />
             <Philosophy vibe={vibe} />
             <System vibe={vibe} />
             <Architect vibe={vibe} />
         </main>
     );
+}
+
+function ProjectRoute() {
+    const { slug } = useParams<{ slug: string }>();
+    const project = projects.find((p) => p.slug === slug);
+
+    if (!project) {
+        return (
+            <main className="pt-40 pb-24 px-8 text-center space-y-4">
+                <h1 className="text-4xl font-serif text-ethereal">Not here yet.</h1>
+                <p className="text-ethereal/60">This project doesn't exist — or hasn't been added yet.</p>
+            </main>
+        );
+    }
+
+    return <ProjectPage project={project} />;
 }
 
 export default function App() {
@@ -78,14 +86,7 @@ export default function App() {
 
             <Routes>
                 <Route path="/" element={<Home vibe={vibe} setVibe={setVibe} onTriggerRipple={() => triggerRipple()} />} />
-                <Route path="/projects/t-scan" element={<TScan />} />
-                <Route path="/projects/t-scan-2" element={<TScan2 />} />
-                <Route path="/projects/shared-workbench" element={<SharedWorkbench />} />
-                <Route path="/projects/bob" element={<Bob />} />
-                <Route path="/projects/halcyon" element={<Halcyon />} />
-                <Route path="/projects/iris" element={<Iris />} />
-                <Route path="/projects/bossbot" element={<BossBot />} />
-                <Route path="/research" element={<Research vibe={vibe} setVibe={setVibe} />} />
+                <Route path="/projects/:slug" element={<ProjectRoute />} />
             </Routes>
 
             <footer className="py-12 text-center border-t border-violet/10 bg-void/80 backdrop-blur-md relative z-10 space-y-6">

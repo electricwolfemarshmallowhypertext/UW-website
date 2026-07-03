@@ -106,8 +106,36 @@
 }
 
 .text-violet-neon {
-  color: #a78bfa;
-  text-shadow: 0 0 10px #8b5cf6, 0 0 20px #8b5cf6, 0 0 30px #8b5cf6;
+  color: #ff6ec7;
+  text-shadow: 0 0 10px #ff2fb0, 0 0 20px #ff2fb0, 0 0 30px #ff2fb0;
+}
+
+.border-violet-neon {
+  border-color: #ff6ec7;
+}
+
+@keyframes vibrate {
+  0% { transform: translate(0); }
+  25% { transform: translate(-2px, 2px); }
+  50% { transform: translate(2px, -2px); }
+  75% { transform: translate(-2px, -2px); }
+  100% { transform: translate(2px, 2px); }
+}
+
+.animate-vibrate {
+  animation: vibrate 0.05s linear infinite;
+}
+
+.animate-vibrate-slow {
+  animation: vibrate 0.15s linear infinite;
+}
+
+.font-impact {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.text-shadow-sm {
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
 }
 
 .text-rainbow {
